@@ -1,16 +1,16 @@
 <%--
   Created by IntelliJ IDEA.
   User: lenovo
-  Date: 2019/12/10
-  Time: 23:06
+  Date: 2019/12/14
+  Time: 11:08
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>Title</title>
 </head>
 <body>
-<jsp:forward page="register.jsp"/>
+
 </body>
 </html>

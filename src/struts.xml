@@ -5,7 +5,16 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-    <package name="strutsBean" extends="struts-default" namespace="/">
+    <!-- 指定全局国际化资源文件 -->
+    <constant name="struts.custom.i18n.resources" value="cn.edu.zjut.local.message"/>
+    <!-- 开启动态方法调用 -->
+    <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
+    <constant name="struts.devMode" value="false"/>
 
+    <package name="strutsBean" extends="struts-default" namespace="/">
+        <action name="register" class="userAction" method="register">
+            <result name="fail">/register.jsp</result>
+            <result name="skip">/register.jsp</result>
+        </action>
     </package>
 </struts>
