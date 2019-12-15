@@ -14,7 +14,7 @@
     <package name="strutsBean" extends="struts-default" namespace="/">
         <action name="register" class="userAction" method="register">
             <result name="fail">/register.jsp</result>
-            <result name="skip">/register.jsp</result>
+            <result name="skip">/skip.jsp</result>
         </action>
 
         <action name="active" class="userAction" method="active">

@@ -26,7 +26,7 @@
 <body>
 <div class="register">
     <h4 align="center">用户注册</h4>
-    <form id="form1" role="form" action="<%=path%>/register.action" method="post">
+    <form id="form1" role="form" action="<%=basePath%>register.action" method="post">
         <%--<label for="username">用户名：</label>--%>
         <input id="username" type="text" class="form-control" name="username" style="height: 40px;margin-top: 20px; "
                placeholder="请输入用户名"><s:fielderror fieldName="username"/>
