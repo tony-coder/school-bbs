@@ -13,12 +13,18 @@ import java.sql.Timestamp;
  */
 
 public class UserAction extends BaseAction {
-    //    private User user;
+    //private User user;
+
+    //注册信息
     private String username;
     private String password;
     private String email;
     private String sex;
 
+    //激活信息
+    private String activeCode;
+
+    //Spring 注入
     private UserService userService;
     private MailUtil mailUtil;
 
@@ -63,6 +69,14 @@ public class UserAction extends BaseAction {
         this.sex = sex;
     }
 
+    public String getActiveCode() {
+        return activeCode;
+    }
+
+    public void setActiveCode(String activeCode) {
+        this.activeCode = activeCode;
+    }
+
     public void setUserService(UserService userService) {
         this.userService = userService;
     }
@@ -103,5 +117,23 @@ public class UserAction extends BaseAction {
 
         //注册完成后跳转至中转页面，等待用户邮箱验证
         return "skip";
+    }
+
+    public String active() throws Exception {
+        //激活码为空，则返回首页
+        if (activeCode == null) {
+            return "index";
+        }
+        int result = userService.activeUser(activeCode);
+        if (result == 0) {
+            getRequest().put("message", "该激活码已失效请重新注册");
+            return "error";
+        } else if (result == -1) {
+            getRequest().put("message", "该账户已激活，请勿重复激活");
+            return "error";
+        } else {
+            getRequest().put("message", "恭喜您！账户激活成功，五秒钟后自动跳转，无法跳转请点击下面按钮");
+            return "success";
+        }
     }
 }

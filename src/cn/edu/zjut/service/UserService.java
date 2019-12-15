@@ -3,8 +3,10 @@ package cn.edu.zjut.service;
 import cn.edu.zjut.po.User;
 
 /**
- * @author
+ * @author 鲍锋雄
+ * 用户服务接口
  */
+
 public interface UserService {
     /**
      * 用户注册
@@ -21,6 +23,14 @@ public interface UserService {
      * @return 0：用户不存在 1：用户名已存在，2：用户邮箱已存在
      */
     public int isExist(User user);
+
+    /**
+     * 激活用户
+     *
+     * @param code
+     * @return
+     */
+    public int activeUser(String code);
 
 
 }

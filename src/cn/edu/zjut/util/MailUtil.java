@@ -33,7 +33,7 @@ public class MailUtil {
 //    private static final String MAIL_ORGANIZATION_QRCODE = "https://www.xxxx.com/xxxx/xxx.jpg";//网站二维码图片
 
     private static final String HOST_IP = "localhost";
-    private static final String PROJECT_NAME = "BBS";
+    private static final String PROJECT_NAME = "school_bbs";
     private static final String PORT = "8080";
 
     /**
@@ -67,7 +67,7 @@ public class MailUtil {
         //获取服务器地址
         String warning = "<br/><br/>本邮件为系统邮件，请勿回复";
 
-        message.setContent(info + "http://" + HOST_IP + ":" + PORT + "/" + PROJECT_NAME + "/active.action?code=" + code + warning, "text/html;charset=utf-8");
+        message.setContent(info + "http://" + HOST_IP + ":" + PORT + "/" + PROJECT_NAME + "/active.action?activeCode=" + code + warning, "text/html;charset=utf-8");
 //        message.setText("<h1>hello</h1>");//纯文本
         message.saveChanges();
 

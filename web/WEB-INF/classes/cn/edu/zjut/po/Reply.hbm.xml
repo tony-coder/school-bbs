@@ -4,10 +4,9 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
-    <class name="cn.edu.zjut.po.BestTopic" table="best_topic" schema="school_bbs">
+    <class name="cn.edu.zjut.po.Reply" table="reply" schema="school_bbs">
         <id name="id">
             <column name="id" sql-type="int(11)"/>
-            <generator class="identity"/>
         </id>
 <!--        <property name="topicId">-->
 <!--            <column name="topic_id" sql-type="int(11)"/>-->
@@ -15,11 +14,11 @@
 <!--        <property name="userId">-->
 <!--            <column name="user_id" sql-type="int(11)"/>-->
 <!--        </property>-->
-        <property name="createTime">
-            <column name="create_time" sql-type="datetime" not-null="true"/>
+        <property name="content">
+            <column name="content" sql-type="text" not-null="true"/>
         </property>
-        <property name="state">
-            <column name="state" sql-type="int(4)" not-null="true"/>
+        <property name="replyTime">
+            <column name="reply_time" sql-type="datetime" not-null="true"/>
         </property>
         <many-to-one name="topicByTopicId" class="cn.edu.zjut.po.Topic">
             <column name="topic_id"/>

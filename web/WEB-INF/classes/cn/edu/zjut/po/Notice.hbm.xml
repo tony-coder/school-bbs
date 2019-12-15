@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.edu.zjut.po.Notice" table="notice" schema="school_bbs">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+<!--        <property name="userId">-->
+<!--            <column name="user_id" sql-type="int(11)"/>-->
+<!--        </property>-->
+        <property name="title">
+            <column name="title" sql-type="varchar(255)"/>
+        </property>
+        <property name="content">
+            <column name="content" sql-type="text" not-null="true"/>
+        </property>
+        <property name="createTime">
+            <column name="create_time" sql-type="datetime" not-null="true"/>
+        </property>
+        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User" fetch="select" not-null="true">
+            <column name="user_id"/>
+        </many-to-one>
+    </class>
+</hibernate-mapping>

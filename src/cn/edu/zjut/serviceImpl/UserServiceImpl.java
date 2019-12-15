@@ -30,4 +30,19 @@ public class UserServiceImpl implements UserService {
         else
             return 0;
     }
+
+    @Override
+    public int activeUser(String code) {
+        User user = userDao.findByActiveCode(code);
+        if (user == null) {
+            return 0;  //无效激活码
+        }
+        if (user.getHasActive() == 0) {  //用户未激活
+            user.setHasActive(1);
+            userDao.update(user);  //更新用户状态为激活
+            return 1;  //激活成功
+        } else {
+            return -1;  //用户已经激活
+        }
+    }
 }

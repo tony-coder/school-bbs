@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.edu.zjut.po.User" table="user" schema="school_bbs">
+        <id name="id" type="java.lang.Integer">
+            <column name="id"/>
+            <generator class="identity"/>
+        </id>
+        <property name="username" type="java.lang.String">
+            <column name="username" not-null="true" length="30"/>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" not-null="true" length="50"/>
+        </property>
+        <property name="sex" type="java.lang.String">
+            <column name="sex" length="5"/>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="50" not-null="true"/>
+        </property>
+        <property name="userAvatarUrl" type="java.lang.String">
+            <column name="userAvatarURL"/>
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time"/>
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time"/>
+        </property>
+        <property name="level" type="java.lang.Integer">
+            <column name="level" not-null="true"/>
+        </property>
+        <property name="activeCode" type="java.lang.String">
+            <column name="active_code" length="128"/>
+        </property>
+        <property name="hasActive" type="java.lang.Integer">
+            <column name="hasActive"/>
+        </property>
+        <property name="signature" type="java.lang.String">
+            <column name="signature"/>
+        </property>
+        <property name="privilege" type="java.lang.Integer">
+            <column name="privilege"/>
+        </property>
+        <set name="bestTopicsById" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="user_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.edu.zjut.po.BestTopic"/>
+        </set>
+        <set name="blackListsById" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="user_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.edu.zjut.po.BlackList"/>
+        </set>
+        <set name="noticesById" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="user_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.edu.zjut.po.Notice"/>
+        </set>
+        <set name="repliesById" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="user_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.edu.zjut.po.Reply"/>
+        </set>
+        <set name="topicsById" inverse="true" cascade="all" lazy="false">
+            <key>
+                <column name="user_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.edu.zjut.po.Topic"/>
+        </set>
+    </class>
+</hibernate-mapping>

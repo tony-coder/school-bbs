@@ -41,6 +41,18 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
         }
     }
 
+    @Override
+    public void update(User user) {
+        log.debug("update User instance");
+        try {
+            getSession().update(user);
+            log.debug("update successful");
+        } catch (RuntimeException e) {
+            log.error("update failed", e);
+            throw e;
+        }
+    }
+
     /**
      * 根据指定属性查询用户
      *
@@ -98,4 +110,15 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
         }
     }
 
+    @Override
+    public User findByActiveCode(String code) {
+        log.debug("finding User instance by activeCode");
+        List<User> users = findByProperty("activeCode", code);
+        if (users != null && users.size() > 0) {
+            return users.get(0);
+        } else {
+            return null;
+        }
+    }
+    
 }

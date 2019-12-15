@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="cn.edu.zjut.po.SubSection" table="sub_section" schema="school_bbs">
+        <id name="id">
+            <column name="id" sql-type="int(11)"/>
+        </id>
+<!--        <property name="mainSectionId">-->
+<!--            <column name="main_section_id" sql-type="int(11)"/>-->
+<!--        </property>-->
+        <property name="title">
+            <column name="title" sql-type="varchar(50)" length="50"/>
+        </property>
+        <many-to-one name="mainSectionByMainSectionId" class="cn.edu.zjut.po.MainSection">
+            <column name="main_section_id"/>
+        </many-to-one>
+        <set name="topicsById" inverse="true">
+            <key>
+                <column name="section_id"/>
+            </key>
+            <one-to-many not-found="ignore" class="cn.edu.zjut.po.Topic"/>
+        </set>
+    </class>
+</hibernate-mapping>
