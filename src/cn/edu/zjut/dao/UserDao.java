@@ -11,7 +11,7 @@ import java.util.List;
 
 public interface UserDao {
 
-    public List findByHql(String hql);
+    public List<User> findByHql(String hql);
 
     public void save(User user);
     
