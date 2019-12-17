@@ -32,5 +32,20 @@ public interface UserService {
      */
     public int activeUser(String code);
 
+    /**
+     * 查询用户
+     *
+     * @param user
+     * @return -3:用户不存在 -2:用户未激活 -1:用户名 密码不匹配 正数:成功登录
+     */
+    public int login(User user);
+
+    /**
+     * 根据用户ID 查询用户
+     *
+     * @param id
+     * @return
+     */
+    public User findById(Integer id);
 
 }
