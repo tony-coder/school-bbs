@@ -12,7 +12,7 @@
     <constant name="struts.devMode" value="false"/>
 
     <package name="strutsBean" extends="struts-default" namespace="/">
-        <action name="login" class="cn.edu.zjut.action.LoginAction" method="execute">
+        <action name="login" class="userAction" method="login">
             <result name="success">/index.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
