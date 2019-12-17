@@ -12,6 +12,11 @@
     <constant name="struts.devMode" value="false"/>
 
     <package name="strutsBean" extends="struts-default" namespace="/">
+        <action name="login" class="cn.edu.zjut.action.LoginAction" method="execute">
+            <result name="success">/index.jsp</result>
+            <result name="login">/login.jsp</result>
+        </action>
+            
         <action name="register" class="userAction" method="register">
             <result name="fail">/register.jsp</result>
             <result name="skip">/skip.jsp</result>
