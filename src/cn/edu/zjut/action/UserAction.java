@@ -136,4 +136,31 @@ public class UserAction extends BaseAction {
             return "success";
         }
     }
+    
+    public String login() throws Exception {
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        int result = userService.login(user);
+        if (result >= 0){//如果用户名密码都正确，登录成功
+            //将用户id，和姓名写入session
+            getSession().put("username", username);
+            getSession().put("userId", result);
+            return "success";
+        }
+        switch (result) {
+            case -1:
+                addFieldError("password", "用户名或密码不正确");//迷惑行为，不能直接说密码不正确
+                return "login";
+            case -2:
+                addFieldError("username","账户未激活，请验证激活后进行登录");
+                return "login";
+            case -3:
+                addFieldError("username", "该用户不存在");
+                return "login";
+            default:
+                break;
+        }
+        return "login";
+    }
 }
