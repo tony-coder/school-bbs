@@ -15,9 +15,7 @@
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-        <property name="sessionFactory">
-            <ref bean="sessionFactory"/>
-        </property>
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <!-- 定义增强处理拦截方法 -->

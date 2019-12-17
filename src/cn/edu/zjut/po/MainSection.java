@@ -6,6 +6,7 @@ import java.util.Objects;
 public class MainSection {
     private int id;
     private String title;
+    private String description;
     private Collection<SubSection> subSectionsById;
 
     public int getId() {
@@ -22,6 +23,14 @@ public class MainSection {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

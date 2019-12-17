@@ -1,38 +1,34 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-mapping PUBLIC
-    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
 
     <class name="cn.edu.zjut.po.Topic" table="topic" schema="school_bbs">
-        <id name="id">
+        <id name="id" type="java.lang.Integer">
             <column name="id" sql-type="int(11)"/>
+            <generator class="identity"/>
         </id>
-<!--        <property name="sectionId">-->
-<!--            <column name="section_id" sql-type="int(11)"/>-->
-<!--        </property>-->
-<!--        <property name="userId">-->
-<!--            <column name="user_id" sql-type="int(11)"/>-->
-<!--        </property>-->
-        <property name="title">
+
+        <property name="title" type="java.lang.String">
             <column name="title" sql-type="varchar(255)"/>
         </property>
-        <property name="content">
+        <property name="content" type="java.lang.String">
             <column name="content" sql-type="text"/>
         </property>
-        <property name="createTime">
+        <property name="createTime" type="timestamp">
             <column name="create_time" sql-type="datetime" not-null="true"/>
         </property>
-        <property name="updateTime">
+        <property name="updateTime" type="timestamp">
             <column name="update_time" sql-type="datetime" not-null="true"/>
         </property>
-        <property name="click">
+        <property name="click" type="java.lang.Integer">
             <column name="click" sql-type="int(11)"/>
         </property>
-        <property name="replyNum">
+        <property name="replyNum" type="java.lang.Integer">
             <column name="reply_num" sql-type="int(11)" not-null="true"/>
         </property>
-        <property name="type">
+        <property name="type" type="java.lang.Integer">
             <column name="type" sql-type="int(11)" not-null="true"/>
         </property>
         <many-to-one name="subSectionBySectionId" class="cn.edu.zjut.po.SubSection">

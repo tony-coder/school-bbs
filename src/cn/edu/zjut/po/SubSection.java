@@ -7,6 +7,7 @@ public class SubSection {
     private int id;
     private int mainSectionId;
     private String title;
+    private String description;
     private MainSection mainSectionByMainSectionId;
     private Collection<Topic> topicsById;
 
@@ -32,6 +33,14 @@ public class SubSection {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
