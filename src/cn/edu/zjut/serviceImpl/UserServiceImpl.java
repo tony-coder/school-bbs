@@ -4,6 +4,8 @@ import cn.edu.zjut.dao.UserDao;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.UserService;
 
+import java.util.List;
+
 /**
  * @author 鲍锋雄
  * UserService接口实现类
@@ -44,5 +46,26 @@ public class UserServiceImpl implements UserService {
         } else {
             return -1;  //用户已经激活
         }
+    }
+
+    @Override
+    public int login(User user) {
+        //根据用户名查找用户
+        String hql = "from user where username='"+ user.getUsername() +"'";
+        List<User> users = userDao.findByHql(hql);
+        if (users != null && users.size() > 0){     //判断查询是否有返回值
+            if (users.get(0).getHasActive() ==0)
+                return -2;                      //如果用户未激活，返回 -2
+            if (users.get(0).getPassword().equals(user.getPassword()))
+                return users.get(0).getId();    //用户名 密码匹配，返回 用户ID
+            return -1;          //用户名 密码不匹配，返回 -1
+        }else
+            return -3;       //无返回值说明用户不存在，返回 -3
+    }
+
+    @Override
+    public User findById(Integer id) {
+        User user = userDao.findById(id);
+        return user;
     }
 }
