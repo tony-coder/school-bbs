@@ -17,7 +17,7 @@ public interface UserService {
     public void register(User user);
 
     /**
-     * 用户是否已经存在
+     * 用户是否已经存在，防止相同信息重复注册
      *
      * @param user
      * @return 0：用户不存在 1：用户名已存在，2：用户邮箱已存在
