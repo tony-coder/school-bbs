@@ -10,10 +10,11 @@
     <!-- 开启动态方法调用 -->
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.devMode" value="false"/>
+    <constant name="struts.ui.theme" value="simple"/>
 
     <package name="strutsBean" extends="struts-default" namespace="/">
         <action name="login" class="userAction" method="login">
-            <result name="success">/index.jsp</result>
+            <result name="success">/loginSuccess.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
             
