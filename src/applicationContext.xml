@@ -89,8 +89,12 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean name="userDAO" class="cn.edu.zjut.daoImpl.UserDaoImpl" parent="baseDAO"/>
+    <bean name="topicDAO" class="cn.edu.zjut.daoImpl.TopicDaoImpl" parent="baseDAO"/>
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
+    </bean>
+    <bean name="TopicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
+        <property name="topicDao" ref="topicDAO"/>
     </bean>
     <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
     <bean name="baseAction" class="cn.edu.zjut.action.BaseAction"/>
