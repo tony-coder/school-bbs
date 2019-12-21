@@ -24,6 +24,9 @@ public class UserAction extends BaseAction {
     //激活信息
     private String activeCode;
 
+    //用户权限
+    private int privilege;
+
     //Spring 注入
     private UserService userService;
     private MailUtil mailUtil;
@@ -85,6 +88,15 @@ public class UserAction extends BaseAction {
         this.mailUtil = mailUtil;
     }
 
+
+    public int getPrivilege() {
+        return privilege;
+    }
+
+    public void setPrivilege(int privilege) {
+        this.privilege = privilege;
+    }
+
     public String register() throws Exception {
         User user = new User();
         user.setUsername(username);
@@ -141,13 +153,26 @@ public class UserAction extends BaseAction {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
-        int result = userService.login(user);
-        if (result >= 0){//如果用户名密码都正确，登录成功
-            //将用户id，和姓名写入session
-            getSession().put("username", username);
-            getSession().put("userId", result);
-            return "success";
+        user.setPrivilege(privilege);
+        int result = 0;
+        if(user.getPrivilege()==0){
+            result = userService.login(user);
+            if (result >= 0){//如果用户名密码都正确，登录成功
+                //将用户id，和姓名写入session
+                getSession().put("username", username);
+                getSession().put("userId", result);
+                return "success";
+            }
+        }else{
+            result = userService.adminLogin(user);
+            if (result >= 0){//如果用户名密码都正确，登录成功
+                //将用户id，和姓名写入session
+                getSession().put("username", username);
+                getSession().put("userId", result);
+                return "success";
+            }
         }
+
         switch (result) {
             case -1:
                 addFieldError("password", "用户名或密码不正确");//迷惑行为，不能直接说密码不正确

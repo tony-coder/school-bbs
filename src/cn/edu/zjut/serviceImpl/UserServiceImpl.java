@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public int login(User user) {
         //根据用户名查找用户
-        String hql = "from user where username='"+ user.getUsername() +"'";
+        String hql = "from User where username='"+ user.getUsername() +"'";
         List<User> users = userDao.findByHql(hql);
         if (users != null && users.size() > 0){     //判断查询是否有返回值
             if (users.get(0).getHasActive() ==0)
@@ -61,6 +61,19 @@ public class UserServiceImpl implements UserService {
             return -1;          //用户名 密码不匹配，返回 -1
         }else
             return -3;       //无返回值说明用户不存在，返回 -3
+    }
+
+    @Override
+    public int adminLogin(User user) {
+        String hql = "from User where username='"+ user.getUsername() +"' and privilege = 1";
+        List<User> admins = userDao.findByHql(hql);
+        if (admins != null && admins.size() > 0){
+            if (admins.get(0).getPassword().equals(user.getPassword()))
+                return admins.get(0).getId();
+            return -1;
+        }else{
+            return -3;
+        }
     }
 
     @Override

@@ -42,10 +42,10 @@
         <div style="margin-top: 10px;margin-left: 10px;">
             <div style="float: left;margin-bottom: 10px">性别:</div>
             <div style="float:left;margin-left: 100px;margin-bottom: 10px">
-                男<label><input type="radio" name="sex" value="男"></label>
+                <label><input type="radio" name="sex" value="男">男</label>
             </div>
             <div style="float: right;margin-right: 100px;margin-bottom: 10px">
-                女<label><input type="radio" name="sex" value="女"></label>
+                <label><input type="radio" name="sex" value="女">女</label>
             </div>
         </div>
         <%--<label for="email">请输入邮箱：</label>--%>

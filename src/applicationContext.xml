@@ -44,7 +44,7 @@
         <property name="url"
                   value="jdbc:mysql://localhost:3306/school_bbs?serverTimezone=Asia/Shanghai"/>
         <property name="username" value="root"/>
-        <property name="password" value="Bfx1997@_"/>
+        <property name="password" value="Bfx1997@"/>
     </bean>
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
