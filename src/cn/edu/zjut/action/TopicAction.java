@@ -30,7 +30,7 @@ public class TopicAction extends BaseAction {
 //            System.out.println("id"+topicId);
             Topic topic = topicService.getTopicById(topicId);
             if (topic == null)
-                return ERROR;
+                return "error";
             getRequest().put("topic", topic);
             return "success";
         }

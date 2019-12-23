@@ -25,7 +25,8 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
             return queryObject.list();
         } catch (RuntimeException re) {
             log.error("find by hql failed", re);
-            throw re;
+            return null;
+            //throw re;
         }
     }
 
@@ -70,7 +71,8 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
             return list;
         } catch (RuntimeException re) {
             log.error("find by property failed", re);
-            throw re;
+            return null;
+            //throw re;
         }
     }
 
@@ -84,7 +86,8 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
             return (User) queryObject.list().get(0);
         } catch (RuntimeException re) {
             log.error("find by id failed", re);
-            throw re;
+            return null;
+            //throw re;
         }
     }
 

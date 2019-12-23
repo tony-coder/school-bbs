@@ -19,8 +19,9 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
             return (Topic) queryObject.list().get(0);
         } catch (RuntimeException re) {
             log.error("find topic by id failed", re);
-//            throw re;
             return null;
+            //throw re;
         }
     }
+
 }

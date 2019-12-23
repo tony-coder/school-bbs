@@ -17,7 +17,7 @@
             <result name="success">/loginSuccess.jsp</result>
             <result name="login">/login.jsp</result>
         </action>
-            
+
         <action name="register" class="userAction" method="register">
             <result name="fail">/register.jsp</result>
             <result name="skip">/skip.jsp</result>
@@ -26,6 +26,11 @@
         <action name="active" class="userAction" method="active">
             <result name="index">/index.jsp</result>
             <result name="success">/skip_login.jsp</result>
+            <result name="error"></result>
+        </action>
+
+        <action name="topicDetail" class="topicAction" method="postDetail">
+            <result name="success">/page/topic.jsp</result>
             <result name="error"></result>
         </action>
     </package>
