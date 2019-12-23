@@ -1,3 +1,4 @@
+<%@ page import="cn.edu.zjut.po.Topic" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
@@ -19,30 +20,46 @@
 <body>
 <%--<jsp:include page="/pages/header.jsp"/>--%>
 <table class="tb" cellspacing="0" cellpadding="3">
-
-    <form method="post" action="#">
-        <tr>
-            <th>文章标题</th>
-            <td>
-                <input required type="text" id="textfile" name="title" value="title"/>
-                <s:fielderror fieldName="limit"/>
-                <span>你最多可以输入30个字符</span>
-            </td>
-        </tr>
-        <tr>
-            <th>文章内容</th>
-            <td>
-                <%--<textarea type="text" class="" name="content" id="ueditor"></textarea>--%>
-                <script id="ueditor" name="content" type="text/plain" style="height: 500px">test</script>
-            </td>
-        </tr>
-        <tr>
-            <th></th>
-            <td>
-                <input type="submit" value="提交"/>
-            </td>
-        </tr>
-    </form>
+    <%Topic topic = (Topic) request.getAttribute("topic");%>
+    <% if (topic == null) { %>
+    <form method="post" action="<%=path%>/publish.action"><% }else{ %> <%--新建帖子--%>
+        <form method="post" action="<%=path%>/updatepost.action?postId=<%=topic.getId()%>"><% }%>  <%--更新帖子--%>
+            <tr>
+                <th>文章标题</th>
+                <td>
+                    <%--<s:if test="%{#request.topic == null}">
+                        <input required type="text" id="textfile" name="title"/> &lt;%&ndash;新建帖子&ndash;%&gt;
+                    </s:if>
+                    <s:else>
+                        <input required type="text" id="textfile" name="title" value="<%=topic.getTitle()%>"/> &lt;%&ndash;更新帖子&ndash;%&gt;
+                    </s:else>--%>
+                    <% if (topic == null) { %>
+                    <input required type="text" id="textfile" name="title"/> <%--新建帖子--%>
+                    <% } else { %>
+                    <input required type="text" id="textfile" name="title" value="<%=topic.getTitle()%>"/> <%--更新帖子--%>
+                    <% }%>
+                    <s:fielderror fieldName="limit"/>
+                    <span>你最多可以输入30个字符</span>
+                </td>
+            </tr>
+            <tr>
+                <th>文章内容</th>
+                <td>
+                    <% if (topic == null) {%>
+                    <%--<textarea type="text" class="" name="content" id="ueditor"></textarea>--%>
+                    <script id="ueditor" name="content" type="text/plain" style="height: 500px"></script>  <%--新建帖子--%>
+                    <% } else { %>
+                    <script id="ueditor" name="content" type="text/plain" style="height: 500px"><%=topic.getContent()%></script>  <%--更新帖子--%>
+                    <% }%>
+                </td>
+            </tr>
+            <tr>
+                <th></th>
+                <td>
+                    <input type="submit" value="提交"/>
+                </td>
+            </tr>
+        </form>
 </table>
 
 <script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"></script>

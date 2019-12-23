@@ -13,17 +13,14 @@ import java.sql.Timestamp;
  */
 
 public class UserAction extends BaseAction {
-    //private User user;
-
     //注册信息
-    private String username;
-    private String password;
-    private String email;
-    private String sex;
-
+    private User user;
+//    private String username;
+//    private String password;
+//    private String email;
+//    private String sex;
     //激活信息
     private String activeCode;
-
     //用户权限
     private int privilege;
 
@@ -31,46 +28,45 @@ public class UserAction extends BaseAction {
     private UserService userService;
     private MailUtil mailUtil;
 
-//    public User getUser() {
-//        return user;
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+//    public String getUsername() {
+//        return username;
 //    }
 //
-//    public void setUser(User user) {
-//        this.user = user;
+//    public void setUsername(String username) {
+//        this.username = username;
 //    }
-
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
+//
+//    public String getPassword() {
+//        return password;
+//    }
+//
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public String getEmail() {
+//        return email;
+//    }
+//
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
+//
+//    public String getSex() {
+//        return sex;
+//    }
+//
+//    public void setSex(String sex) {
+//        this.sex = sex;
+//    }
 
     public String getActiveCode() {
         return activeCode;
@@ -88,7 +84,6 @@ public class UserAction extends BaseAction {
         this.mailUtil = mailUtil;
     }
 
-
     public int getPrivilege() {
         return privilege;
     }
@@ -98,11 +93,11 @@ public class UserAction extends BaseAction {
     }
 
     public String register() throws Exception {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        user.setEmail(email);
-        user.setSex(sex);
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setPassword(password);
+//        user.setEmail(email);
+//        user.setSex(sex);
 
         switch (userService.isExist(user)) {
             case 1:
@@ -148,26 +143,26 @@ public class UserAction extends BaseAction {
             return "success";
         }
     }
-    
+
     public String login() throws Exception {
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
+//        User user = new User();
+//        user.setUsername(username);
+//        user.setPassword(password);
         user.setPrivilege(privilege);
         int result = 0;
-        if(user.getPrivilege()==0){
+        if (user.getPrivilege() == 0) {
             result = userService.login(user);
-            if (result >= 0){//如果用户名密码都正确，登录成功
+            if (result >= 0) {//如果用户名密码都正确，登录成功
                 //将用户id，和姓名写入session
-                getSession().put("username", username);
+                getSession().put("username", user.getUsername());
                 getSession().put("userId", result);
                 return "success";
             }
-        }else{
+        } else {
             result = userService.adminLogin(user);
-            if (result >= 0){//如果用户名密码都正确，登录成功
+            if (result >= 0) {//如果用户名密码都正确，登录成功
                 //将用户id，和姓名写入session
-                getSession().put("username", username);
+                getSession().put("username", user.getUsername());
                 getSession().put("userId", result);
                 return "success";
             }
@@ -178,7 +173,7 @@ public class UserAction extends BaseAction {
                 addFieldError("password", "用户名或密码不正确");//迷惑行为，不能直接说密码不正确
                 return "login";
             case -2:
-                addFieldError("username","账户未激活，请验证激活后进行登录");
+                addFieldError("username", "账户未激活，请验证激活后进行登录");
                 return "login";
             case -3:
                 addFieldError("username", "该用户不存在");

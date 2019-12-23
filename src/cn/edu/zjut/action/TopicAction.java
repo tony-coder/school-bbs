@@ -4,7 +4,7 @@ import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.service.TopicService;
 
 /**
- * 发帖管理action
+ * 帖子管理action
  */
 
 public class TopicAction extends BaseAction {

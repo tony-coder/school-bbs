@@ -28,28 +28,30 @@
     <h4 align="center">用户注册</h4>
     <form id="form1" role="form" action="<%=basePath%>register.action" method="post">
         <%--<label for="username">用户名：</label>--%>
-        <input id="username" type="text" class="form-control" name="username" style="height: 40px;margin-top: 20px; "
+        <input id="username" type="text" class="form-control" name="user.username"
+               style="height: 40px;margin-top: 20px; "
                placeholder="请输入用户名"><s:fielderror fieldName="username"/>
         <%--<label for="password">密码：</label>--%>
-        <input id="password" type="password" class="form-control" name="password" style="height: 40px;margin-top: 20px;"
+        <input id="password" type="password" class="form-control" name="user.password"
+               style="height: 40px;margin-top: 20px;"
                placeholder="请输入密码"><s:fielderror fieldName="password"/>
 
         <%--<label for="confirm_password">确认密码：</label>--%>
-        <input id="repassword" type="password" class="form-control" name="repassword"
+        <input id="repassword" type="password" class="form-control" name="user.repassword"
                style="height: 40px;margin-top: 20px;"
                placeholder="请重复密码"><s:fielderror fieldName="repassword"/>
 
         <div style="margin-top: 10px;margin-left: 10px;">
             <div style="float: left;margin-bottom: 10px">性别:</div>
             <div style="float:left;margin-left: 100px;margin-bottom: 10px">
-                <label><input type="radio" name="sex" value="男">男</label>
+                <label><input type="radio" name="user.sex" value="男">男</label>
             </div>
             <div style="float: right;margin-right: 100px;margin-bottom: 10px">
-                <label><input type="radio" name="sex" value="女">女</label>
+                <label><input type="radio" name="user.sex" value="女">女</label>
             </div>
         </div>
         <%--<label for="email">请输入邮箱：</label>--%>
-        <input id="email" type="email" class="form-control" name="email" style="height: 40px;margin-top: 20px;"
+        <input id="email" type="email" class="form-control" name="user.email" style="height: 40px;margin-top: 20px;"
                placeholder="请输入邮箱"><s:fielderror fieldName="email"/>
         <div style="height: 80px;width: 100%;margin-top: 20px;margin-left: 30px;">
             <!--<div style="float:left;width: 100%;padding: 20px;">-->
@@ -81,35 +83,35 @@
     $(function () {
         $("#form1").validate({
             rules: {
-                username: {
+                "user.username": {
                     required: true
                 },
-                email: {
+                "user.email": {
                     required: true,
                     email: true
                 },
-                password: {
+                "user.password": {
                     required: true,
                     rangelength: [6, 20]
                 },
-                repassword: {
+                "user.repassword": {
                     required: true,
                     equalTo: "#password"
                 }
             },
             messages: {
-                username: {
+                "user.username": {
                     required: "必填"
                 },
-                email: {
+                "user.email": {
                     required: "必填",
                     email: "E-Mail格式不正确"
                 },
-                password: {
+                "user.password": {
                     required: "不能为空",
                     rangelength: $.validator.format("密码最小长度:{0}, 最大长度:{1}。")
                 },
-                repassword: {
+                "user.repassword": {
                     required: "不能为空",
                     equalTo: "两次密码输入不一致"
                 }
