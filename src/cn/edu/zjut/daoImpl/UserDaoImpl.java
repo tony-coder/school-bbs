@@ -17,7 +17,7 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
     private Log log = LogFactory.getLog(UserDaoImpl.class);
 
     @Override
-    public List<User> findByHql(String hql) {
+    public List findByHql(String hql) {
         log.debug("finding User instance by hql");
         try {
             String queryString = hql;
@@ -26,7 +26,6 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
         } catch (RuntimeException re) {
             log.error("find by hql failed", re);
             return null;
-            //throw re;
         }
     }
 
@@ -123,5 +122,5 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
             return null;
         }
     }
-    
+
 }

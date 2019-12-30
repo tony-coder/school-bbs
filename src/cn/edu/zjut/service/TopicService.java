@@ -10,4 +10,11 @@ public interface TopicService {
      * @return
      */
     public Topic getTopicById(int topicId);
+
+    /**
+     * 向帖子表中增加一条记录
+     *
+     * @param topic
+     */
+    public void pushlish(Topic topic);
 }

@@ -7,6 +7,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.query.Query;
 
+import java.util.List;
+
 public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
     private Log log = LogFactory.getLog(UserDaoImpl.class);
     @Override
@@ -22,6 +24,21 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
             return null;
             //throw re;
         }
+    }
+
+    @Override
+    public List<Topic> findByHql(String hql) {
+        return null;
+    }
+
+    @Override
+    public void save(Topic topic) {
+
+    }
+
+    @Override
+    public void update(Topic topic) {
+
     }
 
 }

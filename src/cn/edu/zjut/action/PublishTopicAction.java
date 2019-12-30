@@ -19,6 +19,8 @@ public class PublishTopicAction extends BaseAction {
     private int subSectionId;
     private int topicId;
 
+    private Topic topic;
+
     //Spring注入
     private TopicService topicService;
 

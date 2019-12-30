@@ -15,4 +15,9 @@ public class TopicServiceImpl implements TopicService {
     public Topic getTopicById(int topicId) {
         return topicDao.getTopicById(topicId);
     }
+
+    @Override
+    public void pushlish(Topic topic) {
+
+    }
 }

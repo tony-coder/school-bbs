@@ -90,13 +90,21 @@
     </bean>
     <bean name="userDAO" class="cn.edu.zjut.daoImpl.UserDaoImpl" parent="baseDAO"/>
     <bean name="topicDAO" class="cn.edu.zjut.daoImpl.TopicDaoImpl" parent="baseDAO"/>
+    <bean name="mainSectionDao" class="cn.edu.zjut.daoImpl.MainSectionDaoImpl" parent="baseDAO"/>
+
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
     </bean>
     <bean name="TopicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
         <property name="topicDao" ref="topicDAO"/>
     </bean>
+    <bean name="mainSectionService" class="cn.edu.zjut.serviceImpl.MainSectionServiceImpl">
+        <property name="mainSectionDao" ref="mainSectionDao"/>
+    </bean>
+
     <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
+
+    <!--Action-->
     <bean name="baseAction" class="cn.edu.zjut.action.BaseAction"/>
     <bean name="userAction" class="cn.edu.zjut.action.UserAction" parent="baseAction" scope="prototype">
         <property name="userService" ref="userService"/>

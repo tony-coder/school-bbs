@@ -1,4 +1,11 @@
 <%@ page import="cn.edu.zjut.po.Topic" %>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
+<%@ page import="cn.edu.zjut.po.MainSection" %>
+<%@ page import="java.util.List" %>
+<%@ page import="cn.edu.zjut.service.MainSectionService" %>
+<%@ page import="cn.edu.zjut.po.SubSection" %>
+<%@ page import="java.util.Set" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
@@ -11,6 +18,11 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";  //获取web应用根目录路径
+
+    ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
+    MainSectionService mainSectionService = (MainSectionService) ctx.getBean("mainSectionService");
+    List<MainSection> mainSections = mainSectionService.getAllMainSection();  //获取所有主板库
+    //for (MainSection mainSection : mainSections) {
 %>
 <html>
 <head>
@@ -23,7 +35,8 @@
     <%Topic topic = (Topic) request.getAttribute("topic");%>
     <% if (topic == null) { %>
     <form method="post" action="<%=path%>/publish.action"><% }else{ %> <%--新建帖子--%>
-        <form method="post" action="<%=path%>/updatepost.action?postId=<%=topic.getId()%>"><% }%>  <%--更新帖子--%>
+        <form method="post" action="<%=path%>/updatepost.action?postId=<%=topic.getId()%>">
+            <% }%>  <%--更新帖子--%>
             <tr>
                 <th>文章标题</th>
                 <td>
@@ -47,10 +60,47 @@
                 <td>
                     <% if (topic == null) {%>
                     <%--<textarea type="text" class="" name="content" id="ueditor"></textarea>--%>
-                    <script id="ueditor" name="content" type="text/plain" style="height: 500px"></script>  <%--新建帖子--%>
+                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"></script>
+                    <%--新建帖子--%>
                     <% } else { %>
-                    <script id="ueditor" name="content" type="text/plain" style="height: 500px"><%=topic.getContent()%></script>  <%--更新帖子--%>
+                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"><%=topic.getContent()%>
+                    </script>
+                    <%--更新帖子--%>
                     <% }%>
+                </td>
+            </tr>
+            <tr>
+                <th>选择版块</th>
+                <td>
+                    <div id="change" style="float:left">
+                        <!-- <a class="btn-select" id="big_btn_select"> -->
+                        <select id="mainSection" name="mainSection" onchange="onselected(this)">
+                            <%for (MainSection mainSection : mainSections) {%>
+                            <option value=<%=mainSection.getId()%>><%=mainSection.getTitle() %>
+                            </option>
+                            <%}%>
+                        </select>
+                        <%
+                            int i = 0;
+                            for (MainSection mainSection : mainSections) {  //不做处理的话会使得所有的下拉框都显示出来
+                                if (i == 0) {
+                        %>
+                        <select name="subSection" id="<%=mainSection.getId()%>">
+                                <%}else{%>
+                            <select name="sub" id="<%=mainSection.getId()%>" style="display: none;">
+                                <%
+                                    }
+                                    Set<SubSection> subSections = (Set<SubSection>) mainSection.getSubSectionsById();
+                                    for (SubSection subSection : subSections) {
+                                %>
+                                <option value="<%=subSection.getId()%>"><%=subSection.getTitle()%>
+                                </option>
+                                <%}%>
+                            </select>
+                                <%i++;}%>
+                    </div>
+
+                    <span style="float:right;line-height:35px;">请选择所要发帖的版块</span>
                 </td>
             </tr>
             <tr>
@@ -77,6 +127,27 @@
     $(function () {
         $("#signupForm").validate();
     });
+</script>
+
+<script type="text/javascript">
+    /*实现动态更新子版块*/
+    function onselected(obj) {
+
+        var mainSection = document.getElementById("mainSection");
+        //console.log("size:" + mainSection.length);
+        for (var i = 0; i < mainSection.length; i++) {
+            //console.log("main:" + mainForum[i].value);
+            var sub = document.getElementById(mainSection[i].value);
+            sub.style.display = "none";
+            sub.name = "sub"
+            //console.log("sub value:" + sub.value);
+        }
+        var value = obj.value;
+        //console.log("select value:" + value);
+        var subSection = document.getElementById(value);
+        subSection.style.display = "";
+        subSection.name = "subSection"
+    }
 </script>
 </body>
 </html>

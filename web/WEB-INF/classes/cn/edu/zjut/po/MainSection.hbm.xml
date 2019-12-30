@@ -17,7 +17,7 @@
             <column name="info" length="255"/>
         </property>
 
-        <set name="subSectionsById" inverse="true">
+        <set name="subSectionsById" inverse="true" lazy="false">
             <key>
                 <column name="main_section_id"/>
             </key>
