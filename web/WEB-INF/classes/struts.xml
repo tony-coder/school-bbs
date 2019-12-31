@@ -33,5 +33,9 @@
             <result name="success">/page/topic.jsp</result>
             <result name="error"></result>
         </action>
+        
+        <action name="publish" class="publishTopicAction" method="publish">
+            <result name="success">/page/mypost.jsp</result>
+        </action>
     </package>
 </struts>

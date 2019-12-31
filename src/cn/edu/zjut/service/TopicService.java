@@ -16,5 +16,5 @@ public interface TopicService {
      *
      * @param topic
      */
-    public void pushlish(Topic topic);
+    public void publish(Topic topic);
 }
