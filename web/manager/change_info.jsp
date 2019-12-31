@@ -7,27 +7,32 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    System.out.println(session.getAttribute("username"));
-    System.out.println(session.getAttribute("userId"));
-//    if (session.getAttribute("username") == null){
-//        response.sendRedirect(path+"/manage/admin.jsp");
-//        return ;
-//    }
+    if (session.getAttribute("username") == null){
+        response.sendRedirect(path+"/manage/admin.jsp");
+        return ;
+    }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
     <base href="<%=basePath%>">
+
+    <title>My JSP 'change-admin.jsp' starting page</title>
+
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/titlebar.css" rel="stylesheet">
     <!--
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    -->
-
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+      <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+       -->
+    <script src="../js/jquery.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -38,12 +43,12 @@
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <%--<li role="presentation" ><a href="<%=path%>/manage/notice.jsp">发布公告</a></li>--%>
-                <%--<li role="presentation" class="active"><a href="<%=path%>/manage/change-admin.jsp">资料修改</a></li>--%>
-                <%--<li role="presentation"><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>--%>
-                <%--<li role="presentation"><a href="<%=path%>/manage/bestpost.jsp">精华帖请求</a></li>--%>
-                <%--<li role="presentation"><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>--%>
-                <%--<li role="presentation"><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>--%>
+                <li role="presentation" ><a href="<%=path%>/manage/notice.jsp">发布公告</a></li>
+                <li role="presentation" class="active"><a href="<%=path%>/manage/change-admin.jsp">资料修改</a></li>
+                <li role="presentation"><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>
+                <li role="presentation"><a href="<%=path%>/manage/bestpost.jsp">精华帖请求</a></li>
+                <li role="presentation"><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>
+                <li role="presentation"><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>
             </ul>
         </div>
 
@@ -56,20 +61,19 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form id="form1" action="" method="post" enctype="multipart/form-data">
+                    <form id="form1" action="<%=path%>/adminupdate.action" method="post" enctype="multipart/form-data">
 
                         <div class="column">
                             <%
                                 ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
                                 AdminServiceImpl adminService = (AdminServiceImpl)context.getBean("adminService");
                                 User admin = adminService.getAdminById((Integer)session.getAttribute("userId"));
-                                System.out.println(admin.getUsername());
                             %>
 
-                            <%--<div class="form-group">--%>
-                            <%--<img alt="@zhangjianhao" class="avatar left" height="70" src="<%=path+"/"+admin.getUserAvatarUrl() %>" width="70" />--%>
-                            <%--请上传你的头像<br/>--%>
-                            <%--</div>--%>
+                            <div class="form-group">
+                                <img alt="@zhangjianhao" class="avatar left" height="70" src="<%=path+"/"+admin.getUserAvatarUrl() %>" width="70" />
+                                请上传你的头像<br/>
+                            </div>
                             <input type="file" id="inputfile" accept="image/*" name="photoImg"><br/>
 
                             <div class="form-group">
@@ -80,14 +84,14 @@
                             <div class="form-group">
                                 <label for="name">性 别</label><br/>
                                 <%if (admin.getSex().equals("男")){%>
-                                <input type="radio" name="sex" value="男" checked="checked"/>男
-                                &nbsp &nbsp<input type="radio" name="sex" value="女">女
+                                    <input type="radio" name="sex" value="男" checked="checked"/>男
+                                    &nbsp &nbsp<input type="radio" name="sex" value="女">女
                                 <%} else if (admin.getSex().equals("女")){%>
-                                <input type="radio" name="sex" value="男" />男
-                                &nbsp &nbsp<input type="radio" name="sex" value="女" checked="checked"/>女
+                                    <input type="radio" name="sex" value="男" />男
+                                    &nbsp &nbsp<input type="radio" name="sex" value="女" checked="checked"/>女
                                 <%} else {%>
-                                <input type="radio" name="sex" value="男" />男
-                                &nbsp &nbsp<input type="radio" name="sex" value="女"/>女
+                                    <input type="radio" name="sex" value="男" />男
+                                    &nbsp &nbsp<input type="radio" name="sex" value="女"/>女
                                 <%} %>
                             </div>
 

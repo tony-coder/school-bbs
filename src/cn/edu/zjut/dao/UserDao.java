@@ -4,10 +4,6 @@ import cn.edu.zjut.po.User;
 
 import java.util.List;
 
-/**
- * @author 鲍锋雄
- * 用户数据库接口
- */
 
 public interface UserDao {
 

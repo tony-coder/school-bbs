@@ -18,6 +18,7 @@
             <result name="login">/login.jsp</result>
         </action>
 
+        <action name="updateAdmin" class="adminAction"
         <action name="register" class="userAction" method="register">
             <result name="fail">/register.jsp</result>
             <result name="skip">/skip.jsp</result>

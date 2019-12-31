@@ -9,10 +9,6 @@ import org.hibernate.query.Query;
 
 import java.util.List;
 
-/**
- * @author 鲍锋雄
- * UserDao接口实现类
- */
 public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
     private Log log = LogFactory.getLog(UserDaoImpl.class);
 
@@ -53,13 +49,6 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
         }
     }
 
-    /**
-     * 根据指定属性查询用户
-     *
-     * @param property
-     * @param value
-     * @return
-     */
     public List findByProperty(String property, Object value) {
         log.debug("finding User instance with property: " + property + ", value: " + value);
         try {
