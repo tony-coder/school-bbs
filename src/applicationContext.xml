@@ -27,6 +27,7 @@
             <tx:method name="del*" propagation="REQUIRED"/>
             <tx:method name="register*" propagation="REQUIRED"/>  <!-- 注意，不添加的话没有存储更新权限 -->
             <tx:method name="activeUser*" propagation="REQUIRED"/>
+            <tx:method name="publish*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
@@ -111,6 +112,9 @@
         <property name="mailUtil" ref="mailUntil"/>
     </bean>
     <bean name="topicAction" class="cn.edu.zjut.action.TopicAction" parent="baseAction" scope="prototype">
+        <property name="topicService" ref="TopicService"/>
+    </bean>
+    <bean name="publishTopicAction" class="cn.edu.zjut.action.PublishTopicAction" parent="baseAction" scope="prototype">
         <property name="topicService" ref="TopicService"/>
     </bean>
 </beans>

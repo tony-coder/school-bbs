@@ -17,7 +17,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void pushlish(Topic topic) {
-
+    public void publish(Topic topic) {
+        topicDao.save(topic);
     }
 }

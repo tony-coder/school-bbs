@@ -21,7 +21,7 @@
 
     ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
     MainSectionService mainSectionService = (MainSectionService) ctx.getBean("mainSectionService");
-    List<MainSection> mainSections = mainSectionService.getAllMainSection();  //获取所有主板库
+    List<MainSection> mainSections = mainSectionService.getAllMainSection();  //获取所有主板块
     //for (MainSection mainSection : mainSections) {
 %>
 <html>
@@ -47,9 +47,9 @@
                         <input required type="text" id="textfile" name="title" value="<%=topic.getTitle()%>"/> &lt;%&ndash;更新帖子&ndash;%&gt;
                     </s:else>--%>
                     <% if (topic == null) { %>
-                    <input required type="text" id="textfile" name="title"/> <%--新建帖子--%>
+                    <input required type="text" id="textfile" name="topic.title"/> <%--新建帖子--%>
                     <% } else { %>
-                    <input required type="text" id="textfile" name="title" value="<%=topic.getTitle()%>"/> <%--更新帖子--%>
+                    <input required type="text" id="textfile" name="topic.title" value="<%=topic.getTitle()%>"/> <%--更新帖子--%>
                     <% }%>
                     <s:fielderror fieldName="limit"/>
                     <span>你最多可以输入30个字符</span>
@@ -60,11 +60,10 @@
                 <td>
                     <% if (topic == null) {%>
                     <%--<textarea type="text" class="" name="content" id="ueditor"></textarea>--%>
-                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"></script>
+                    <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"></script>
                     <%--新建帖子--%>
                     <% } else { %>
-                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"><%=topic.getContent()%>
-                    </script>
+                    <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><%=topic.getContent()%> </script>
                     <%--更新帖子--%>
                     <% }%>
                 </td>
@@ -74,7 +73,7 @@
                 <td>
                     <div id="change" style="float:left">
                         <!-- <a class="btn-select" id="big_btn_select"> -->
-                        <select id="mainSection" name="mainSection" onchange="onselected(this)">
+                        <select id="topic.subSectionBySectionId.mainSectionId" name="mainSection" onchange="onselected(this)">
                             <%for (MainSection mainSection : mainSections) {%>
                             <option value=<%=mainSection.getId()%>><%=mainSection.getTitle() %>
                             </option>
@@ -85,7 +84,7 @@
                             for (MainSection mainSection : mainSections) {  //不做处理的话会使得所有的下拉框都显示出来
                                 if (i == 0) {
                         %>
-                        <select name="subSection" id="<%=mainSection.getId()%>">
+                        <select name="topic.subSectionBySectionId.id" id="<%=mainSection.getId()%>">
                                 <%}else{%>
                             <select name="sub" id="<%=mainSection.getId()%>" style="display: none;">
                                 <%
@@ -121,7 +120,6 @@
     var ue = UE.getEditor('ueditor', {});
 </script>
 
-</body>
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 <script type="text/javascript">
     $(function () {

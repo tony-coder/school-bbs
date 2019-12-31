@@ -11,6 +11,7 @@ import java.util.List;
 
 public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
     private Log log = LogFactory.getLog(UserDaoImpl.class);
+
     @Override
     public Topic getTopicById(int topicId) {
         log.debug("finding Topic instance by id");
@@ -33,12 +34,26 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
 
     @Override
     public void save(Topic topic) {
-
+        log.debug("saving Topic instance");
+        try {
+            getSession().save(topic);
+            log.debug("save successful");
+        } catch (RuntimeException e) {
+            log.error("save failed", e);
+            throw e;
+        }
     }
 
     @Override
     public void update(Topic topic) {
-
+        log.debug("update Topic instance");
+        try {
+            getSession().update(topic);
+            log.debug("update successful");
+        } catch (RuntimeException e) {
+            log.error("update failed", e);
+            throw e;
+        }
     }
 
 }
