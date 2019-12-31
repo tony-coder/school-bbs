@@ -154,16 +154,19 @@ public class UserAction extends BaseAction {
             result = userService.login(user);
             if (result >= 0) {//如果用户名密码都正确，登录成功
                 //将用户id，和姓名写入session
-                getSession().put("username", user.getUsername());
-                getSession().put("userId", result);
+                /*getSession().put("username", user.getUsername());
+                getSession().put("userId", result);*/
+                //将用户信息写入session
+                getSession().put("user", user);
                 return "success";
             }
         } else {
             result = userService.adminLogin(user);
             if (result >= 0) {//如果用户名密码都正确，登录成功
                 //将用户id，和姓名写入session
-                getSession().put("username", user.getUsername());
-                getSession().put("userId", result);
+                /*getSession().put("username", user.getUsername());
+                getSession().put("userId", result);*/
+                getSession().put("user", user);
                 return "success";
             }
         }
