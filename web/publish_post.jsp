@@ -34,9 +34,10 @@
 <table class="tb" cellspacing="0" cellpadding="3">
     <%Topic topic = (Topic) request.getAttribute("topic");%>
     <% if (topic == null) { %>
-    <form method="post" action="<%=path%>/publish.action"><% }else{ %> <%--新建帖子--%>
-        <form method="post" action="<%=path%>/updatepost.action?postId=<%=topic.getId()%>">
+    <form method="post" action="<%=path%>/publish.action" onsubmit="return onUpdateContent();"><% }else{ %> <%--新建帖子--%>
+        <form method="post" action="<%=path%>/updatepost.action?postId=<%=topic.getId()%>" onsubmit="return onUpdateContent();">
             <% }%>  <%--更新帖子--%>
+            <input type="hidden" name="topic.content" id="content">
             <tr>
                 <th>文章标题</th>
                 <td>
@@ -60,10 +61,10 @@
                 <td>
                     <% if (topic == null) {%>
                     <%--<textarea type="text" class="" name="content" id="ueditor"></textarea>--%>
-                    <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"></script>
+                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"></script>
                     <%--新建帖子--%>
                     <% } else { %>
-                    <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><%=topic.getContent()%> </script>
+                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"><%=topic.getContent()%> </script>
                     <%--更新帖子--%>
                     <% }%>
                 </td>
@@ -118,6 +119,15 @@
 <script type="text/javascript">
     //实例化编辑器
     var ue = UE.getEditor('ueditor', {});
+
+    /*获取输入区的内容*/
+    function onUpdateContent() {
+        var content = document.getElementById("content");
+        content.value = UE.getEditor("ueditor").getContentTxt();
+        // alert(content.value);
+        return true;
+    }
+
 </script>
 
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>

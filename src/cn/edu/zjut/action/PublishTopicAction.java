@@ -32,18 +32,21 @@ public class PublishTopicAction extends BaseAction {
     public String publish() throws Exception {
         //int userId = (Integer) getSession().get("userId"); //获取用户
         // 测试
-        User user1;
-
-
-        //getSession().put("user", user1);
+       /* User user1 = new User();
+        user1.setId(17);
+        user1.setUsername("test");
+        user1.setEmail("");
+        user1.setLevel(1);
+        getSession().put("user", user1);*/
 
         User user = (User) getSession().get("user");  //获取用户
+
         /*int level = blackListBiz.getLevel(userId);
         if (level<=3&&level>0){
             this.addFieldError("limit", "您已被管理员限制发帖");
             return "publish";
         }*/
-
+        String content=(String) getRequest().get("topic.content");
         topic.setUserId(user.getId());
         topic.setUserByUserId(user);
 
