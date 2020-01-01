@@ -1,24 +1,17 @@
 package cn.edu.zjut.action;
 
 import cn.edu.zjut.po.User;
+import cn.edu.zjut.service.AdminService;
 import cn.edu.zjut.service.UserService;
 import cn.edu.zjut.util.MailUtil;
 import cn.edu.zjut.util.Utils;
 
 import java.sql.Timestamp;
 
-/**
- * @author 鲍锋雄
- * 用户控制action
- */
 
 public class UserAction extends BaseAction {
     //注册信息
     private User user;
-//    private String username;
-//    private String password;
-//    private String email;
-//    private String sex;
     //激活信息
     private String activeCode;
     //用户权限
@@ -36,37 +29,6 @@ public class UserAction extends BaseAction {
         this.user = user;
     }
 
-//    public String getUsername() {
-//        return username;
-//    }
-//
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public String getPassword() {
-//        return password;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-//
-//    public String getEmail() {
-//        return email;
-//    }
-//
-//    public void setEmail(String email) {
-//        this.email = email;
-//    }
-//
-//    public String getSex() {
-//        return sex;
-//    }
-//
-//    public void setSex(String sex) {
-//        this.sex = sex;
-//    }
 
     public String getActiveCode() {
         return activeCode;
@@ -145,17 +107,14 @@ public class UserAction extends BaseAction {
     }
 
     public String login() throws Exception {
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword(password);
         user.setPrivilege(privilege);
         int result = 0;
         if (user.getPrivilege() == 0) {
             result = userService.login(user);
             if (result >= 0) {//如果用户名密码都正确，登录成功
                 //将用户id，和姓名写入session
-                /*getSession().put("username", user.getUsername());
-                getSession().put("userId", result);*/
+//                getSession().put("username", user.getUsername());
+//                getSession().put("userId", result);
                 //将用户信息写入session
                 getSession().put("user", user);
                 return "success";
@@ -163,9 +122,7 @@ public class UserAction extends BaseAction {
         } else {
             result = userService.adminLogin(user);
             if (result >= 0) {//如果用户名密码都正确，登录成功
-                //将用户id，和姓名写入session
-                /*getSession().put("username", user.getUsername());
-                getSession().put("userId", result);*/
+                user = userService.findById(result);
                 getSession().put("user", user);
                 return "success";
             }

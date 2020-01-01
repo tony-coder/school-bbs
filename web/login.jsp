@@ -17,10 +17,8 @@
     <h4 align="center">用户登录</h4>
     <form id="form1" role="form" action="login" method="post">
 
-        <!--<label for="name">用户名:</label>-->
         <input id="username" required type="text" class="form-control" name="user.username" style="height: 40px; margin-top: 30px;" placeholder="请输入用户名"/>
         <s:fielderror fieldName="username"/>
-        <!--<label for="name"></label>-->
         <input type="password" required class="form-control" name="user.password" style="height: 40px;margin-top: 30px;" placeholder="请输入密码"/>
         <s:fielderror fieldName="password"/>
         <div style="margin-top: 30px;">

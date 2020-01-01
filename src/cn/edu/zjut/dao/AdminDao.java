@@ -9,7 +9,9 @@ public interface AdminDao {
 
     void updateAdmin(User user);
 
-    int exist(User user);
+    boolean existEmail(User user);
+
+    boolean existUsername(User user);
 
     int getAdminIdByUsername(String username);
 

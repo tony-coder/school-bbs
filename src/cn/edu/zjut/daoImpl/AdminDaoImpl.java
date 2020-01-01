@@ -17,9 +17,9 @@ public class AdminDaoImpl extends BaseHibernateDAO implements AdminDao {
 
     public List findByProperty(String propertyName, Object value){
         try{
-            String queryString = "from User as admin where admin."+propertyName+"= ?";
+            String queryString = "from User as admin where admin."+ propertyName + "= ?1";
             Query queryObject = getSession().createQuery(queryString);
-            queryObject.setParameter(0,value);
+            queryObject.setParameter(1,value);
             List list = queryObject.list();
             return list;
         }catch(RuntimeException re){
@@ -28,6 +28,14 @@ public class AdminDaoImpl extends BaseHibernateDAO implements AdminDao {
         }
     }
 
+
+    public List findByUsername(Object username){
+        return findByProperty("username",username);
+    }
+
+    public List findByEmail(Object email){
+        return findByProperty("email",email);
+    }
 
     @Override
     public User getAdminById(Integer id) {
@@ -54,9 +62,22 @@ public class AdminDaoImpl extends BaseHibernateDAO implements AdminDao {
     }
 
     @Override
-    public int exist(User user) {
-        return 0;
+    public boolean existEmail(User user) {
+        if(findByEmail(user.getEmail()).size()>0){
+            return true;
+        }
+        return false;
     }
+
+    @Override
+    public boolean existUsername(User user) {
+        if(findByUsername(user.getUsername()).size()>0){
+            return true;
+        }
+        return false;
+    }
+
+
 
     @Override
     public int getAdminIdByUsername(String username) {

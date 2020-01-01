@@ -90,11 +90,17 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean name="userDAO" class="cn.edu.zjut.daoImpl.UserDaoImpl" parent="baseDAO"/>
+    <bean name="adminDao" class="cn.edu.zjut.daoImpl.AdminDaoImpl" parent="baseDAO"/>
     <bean name="topicDAO" class="cn.edu.zjut.daoImpl.TopicDaoImpl" parent="baseDAO"/>
     <bean name="mainSectionDao" class="cn.edu.zjut.daoImpl.MainSectionDaoImpl" parent="baseDAO"/>
 
+    <!--Service-->
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
+    </bean>
+
+    <bean name="adminService" class="cn.edu.zjut.serviceImpl.AdminServiceImpl">
+        <property name="adminDAO" ref="adminDao"/>
     </bean>
     <bean name="TopicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
         <property name="topicDao" ref="topicDAO"/>
@@ -110,6 +116,9 @@
     <bean name="userAction" class="cn.edu.zjut.action.UserAction" parent="baseAction" scope="prototype">
         <property name="userService" ref="userService"/>
         <property name="mailUtil" ref="mailUntil"/>
+    </bean>
+    <bean name="adminAction" class="cn.edu.zjut.action.AdminAction" parent="baseAction" scope="prototype">
+        <property name="adminService" ref="adminService"/>
     </bean>
     <bean name="topicAction" class="cn.edu.zjut.action.TopicAction" parent="baseAction" scope="prototype">
         <property name="topicService" ref="TopicService"/>

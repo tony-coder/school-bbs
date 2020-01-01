@@ -7,10 +7,6 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-    if (session.getAttribute("username") == null){
-        response.sendRedirect(path+"/manage/admin.jsp");
-        return ;
-    }
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -25,14 +21,10 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/titlebar.css" rel="stylesheet">
-    <!--
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-      <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-       -->
-    <script src="../js/jquery.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/titlebar.css" rel="stylesheet">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -61,49 +53,40 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form id="form1" action="<%=path%>/adminupdate.action" method="post" enctype="multipart/form-data">
+                    <form id="form1" action="update" method="post" enctype="multipart/form-data">
 
                         <div class="column">
-                            <%
-                                ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-                                AdminServiceImpl adminService = (AdminServiceImpl)context.getBean("adminService");
-                                User admin = adminService.getAdminById((Integer)session.getAttribute("userId"));
-                            %>
 
                             <div class="form-group">
-                                <img alt="@zhangjianhao" class="avatar left" height="70" src="<%=path+"/"+admin.getUserAvatarUrl() %>" width="70" />
+                                <img alt="@zhangjianhao" class="avatar left" height="70" src="<%=path%><s:property value="#session.user.getUserAvatarUrl()"/>" width="70" />
                                 请上传你的头像<br/>
                             </div>
                             <input type="file" id="inputfile" accept="image/*" name="photoImg"><br/>
 
                             <div class="form-group">
                                 <label for="name">用户名</label>
-                                <input id="username" type="text" class="form-control" id="name" width="200px" height="80px" placeholder="请输入名称" name="username" value="<%=admin.getUsername()%>"><s:fielderror fieldName="username"></s:fielderror>
+                                <input id="username" type="text" class="form-control" id="name" width="200px" height="80px" placeholder="请输入名称" name="user.username" value="<s:property value="#session.user.getUsername()"/>"><s:fielderror fieldName="username"/>
                             </div>
 
                             <div class="form-group">
                                 <label for="name">性 别</label><br/>
-                                <%if (admin.getSex().equals("男")){%>
-                                    <input type="radio" name="sex" value="男" checked="checked"/>男
-                                    &nbsp &nbsp<input type="radio" name="sex" value="女">女
-                                <%} else if (admin.getSex().equals("女")){%>
-                                    <input type="radio" name="sex" value="男" />男
-                                    &nbsp &nbsp<input type="radio" name="sex" value="女" checked="checked"/>女
-                                <%} else {%>
-                                    <input type="radio" name="sex" value="男" />男
-                                    &nbsp &nbsp<input type="radio" name="sex" value="女"/>女
-                                <%} %>
+                                <s:if test='%{#session.user.sex=="男"}'>
+                                    <s:radio name="user.sex" list="%{#{'1':'男','0':'女'}}" value="1"/>
+                                </s:if>
+                                <s:else>
+                                    <s:radio name="user.sex" list="%{#{'1':'男','0':'女'}}" />
+                                </s:else>
                             </div>
 
 
                             <dl class="form-group">
                                 <dt><label for="user_profile_blog">邮箱</label></dt>
-                                <dd><input id="email" type="email" class="form-control" id="user_profile_blog" name="email" size="30" value="<%=admin.getEmail()%>" /></dd>
-                                <s:fielderror fieldName="email"></s:fielderror>
+                                <dd><input id="email" type="email" class="form-control" id="user_profile_blog" name="user.email" size="30" value="<s:property value="#session.user.getEmail()"/>"/></dd>
+                                <s:fielderror fieldName="email"/>
                             </dl>
                             <dl class="form-group">
                                 <dt><label for="user_profile_company">密码</label></dt>
-                                <dd><input id="password" class="form-control" name="password" size="30" type="password" width="200px" /></dd>
+                                <dd><input id="password" class="form-control" name="user.password" size="30" type="password" width="200px" /></dd>
                             </dl>
                             <dl class="form-group">
                                 <dt><label for="user_profile_location">重复密码</label></dt>
@@ -126,32 +109,32 @@
     $(function(){
         $("#form1").validate({
             rules:{
-                username:{
+                "user.username":{
                     required:true
                 },
-                email:{
+                "user.email":{
                     required:true,
                     email:true
                 },
-                password:{
+                "user.password":{
                     rangelength:[6,20]
                 },
-                confirm_password:{
+                "user.confirm_password":{
                     equalTo:"#password"
                 }
             },
             messages:{
-                username:{
+                "user.username":{
                     required:"必填"
                 },
-                email:{
+                "user.email":{
                     required:"必填",
                     email:"E-Mail格式不正确"
                 },
-                password:{
+                "user.password":{
                     rangelength: $.validator.format("密码最小长度:{0}, 最大长度:{1}。")
                 },
-                confirm_password:{
+                "user.confirm_password":{
                     equalTo:"两次密码输入不一致"
                 }
             }

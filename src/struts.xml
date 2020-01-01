@@ -18,7 +18,6 @@
             <result name="login">/login.jsp</result>
         </action>
 
-        <action name="updateAdmin" class="adminAction"
         <action name="register" class="userAction" method="register">
             <result name="fail">/register.jsp</result>
             <result name="skip">/skip.jsp</result>
@@ -28,6 +27,10 @@
             <result name="index">/index.jsp</result>
             <result name="success">/skip_login.jsp</result>
             <result name="error"></result>
+        </action>
+
+        <action name="update" class="adminAction" method="update">
+            <result name="success">/manager/change_info.jsp</result>
         </action>
 
         <action name="topicDetail" class="topicAction" method="postDetail">
