@@ -3,6 +3,8 @@ package cn.edu.zjut.action;
 import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.service.TopicService;
 
+import java.util.List;
+
 /**
  * 帖子管理action
  */
@@ -36,4 +38,5 @@ public class TopicAction extends BaseAction {
         }
         return "error";
     }
+
 }

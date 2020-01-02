@@ -14,7 +14,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>My JSP 'change-admin.jsp' starting page</title>
+    <title>管理员修改个人信息</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">

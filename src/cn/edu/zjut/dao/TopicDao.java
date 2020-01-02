@@ -18,4 +18,6 @@ public interface TopicDao {
 
 //    public Topic findById(int id);
 
+    List<Topic> search(String keywords);
+
 }

@@ -41,5 +41,10 @@
         <action name="publish" class="publishTopicAction" method="publish">
             <result name="success">/page/mypost.jsp</result>
         </action>
+
+        <action name="searchTopic" class="searchAction" method="execute">
+            <result name="success">/page/headers.jsp</result>
+            <result name="error">/page/headers.jsp</result>
+        </action>
     </package>
 </struts>

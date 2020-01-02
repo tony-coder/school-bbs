@@ -1,6 +1,9 @@
 package cn.edu.zjut.service;
 
+import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.po.User;
+
+import java.util.List;
 
 /**
  * @author 鲍锋雄
@@ -55,5 +58,6 @@ public interface UserService {
      * @return
      */
     public User findById(Integer id);
+
 
 }

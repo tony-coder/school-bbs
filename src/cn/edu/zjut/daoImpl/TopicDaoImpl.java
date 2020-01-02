@@ -56,4 +56,13 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         }
     }
 
+    @Override
+    public List<Topic> search(String keywords) {
+        String queryString = "from Topic as topic where topic.title like '%"+keywords+"%'";
+        Query queryObject = getSession().createQuery(queryString);
+//        queryObject.setParameter("title",keywords);
+        List list = queryObject.list();
+        return list;
+    }
+
 }

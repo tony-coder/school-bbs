@@ -2,6 +2,8 @@ package cn.edu.zjut.service;
 
 import cn.edu.zjut.po.Topic;
 
+import java.util.List;
+
 public interface TopicService {
     /**
      * 获取指定Id的帖子
@@ -17,4 +19,7 @@ public interface TopicService {
      * @param topic
      */
     public void publish(Topic topic);
+
+
+    List<Topic> searchTopics(String keywords);
 }

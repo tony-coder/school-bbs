@@ -126,4 +126,7 @@
     <bean name="publishTopicAction" class="cn.edu.zjut.action.PublishTopicAction" parent="baseAction" scope="prototype">
         <property name="topicService" ref="TopicService"/>
     </bean>
+    <bean name="searchAction" class="cn.edu.zjut.action.SearchAction" parent="baseAction" scope="prototype">
+        <property name="topicService" ref="TopicService"/>
+    </bean>
 </beans>
