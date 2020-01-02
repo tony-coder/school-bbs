@@ -23,10 +23,9 @@ public class SearchAction extends BaseAction{
     }
 
     public String execute() throws Exception {
-//        keywords = new String(keywords.getBytes("iso8859-1"),"utf-8");
         System.out.println(keywords);
-        List<Topic> posts = topicService.searchTopics(keywords);
-        getRequest().put("posts", posts);
+        List<Topic> topics = topicService.searchTopics(keywords);
+        getRequest().put("topics", topics);
         return SUCCESS;
     }
 }
