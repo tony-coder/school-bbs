@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.0.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- 定义增强处理拦截方法 -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="add*" propagation="REQUIRED"/>  <!-- 如果存在一个事务，则支持当前事务。否则开启一个新的事务 -->
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="del*" propagation="REQUIRED"/>
+            <tx:method name="register*" propagation="REQUIRED"/>  <!-- 注意，不添加的话没有存储更新权限 -->
+            <tx:method name="activeUser*" propagation="REQUIRED"/>
+            <tx:method name="publish*" propagation="REQUIRED"/>
+            <tx:method name="*" read-only="true"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 定义事务拦截切面 -->
+    <aop:config proxy-target-class="true">
+        <aop:pointcut id="allServiceMethod"
+                      expression="execution(* cn.edu.zjut.serviceImpl.*.*(..))"/> <!-- 切入点 service包中的所有类的所有方法 -->
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="allServiceMethod"/>
+    </aop:config>
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName"
+                  value="com.mysql.cj.jdbc.Driver"/>
+        <property name="url"
+                  value="jdbc:mysql://localhost:3306/school_bbs?serverTimezone=Asia/Shanghai"/>
+        <property name="username" value="zjut"/>
+        <property name="password" value="zjut123456@"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">
+                    org.hibernate.dialect.MySQLDialect
+                </prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+
+                <!-- 显示Hibernate持久化操作所生成的SQL -->
+                <prop key="hibernate.show_sql">true</prop>
+                <!-- 将SQL脚本进行格式化后再输出 -->
+                <prop key="hibernate.format_sql">true</prop>
+                <!-- 指定连接池里最大连接数 -->
+                <prop key="hibernate.c3p0.max_size">20</prop>
+                <!-- 指定连接池里最小连接数 -->
+                <prop key="hibernate.c3p0.min_size">1</prop>
+                <!-- 指定连接池里连接的超时时长 -->
+                <prop key="hibernate.c3p0.timeout">1800</prop>
+                <!-- 指定连接池里最大缓存多少个Statement对象 -->
+                <prop key="hibernate.c3p0.max_statements">50</prop>
+            </props>
+        </property>
+        <property name="mappingResources">
+            <list>
+                <value>cn/edu/zjut/po/BestTopic.hbm.xml</value>
+                <value>cn/edu/zjut/po/BlackList.hbm.xml</value>
+                <value>cn/edu/zjut/po/LoginLog.hbm.xml</value>
+                <value>cn/edu/zjut/po/MainSection.hbm.xml</value>
+                <value>cn/edu/zjut/po/Notice.hbm.xml</value>
+                <value>cn/edu/zjut/po/Reply.hbm.xml</value>
+                <value>cn/edu/zjut/po/SubSection.hbm.xml</value>
+                <value>cn/edu/zjut/po/Topic.hbm.xml</value>
+                <value>cn/edu/zjut/po/User.hbm.xml</value>
+            </list>
+        </property>
+    </bean>
+
+    <bean name="baseDAO" class="cn.edu.zjut.db.BaseHibernateDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean name="userDAO" class="cn.edu.zjut.daoImpl.UserDaoImpl" parent="baseDAO"/>
+    <bean name="adminDao" class="cn.edu.zjut.daoImpl.AdminDaoImpl" parent="baseDAO"/>
+    <bean name="topicDAO" class="cn.edu.zjut.daoImpl.TopicDaoImpl" parent="baseDAO"/>
+    <bean name="mainSectionDao" class="cn.edu.zjut.daoImpl.MainSectionDaoImpl" parent="baseDAO"/>
+
+    <!--Service-->
+    <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
+        <property name="userDao" ref="userDAO"/>
+    </bean>
+
+    <bean name="adminService" class="cn.edu.zjut.serviceImpl.AdminServiceImpl">
+        <property name="adminDAO" ref="adminDao"/>
+    </bean>
+
+    <bean name="topicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
+        <property name="topicDao" ref="topicDAO"/>
+    </bean>
+    <bean name="mainSectionService" class="cn.edu.zjut.serviceImpl.MainSectionServiceImpl">
+        <property name="mainSectionDao" ref="mainSectionDao"/>
+    </bean>
+
+    <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
+
+    <!--Action-->
+    <bean name="baseAction" class="cn.edu.zjut.action.BaseAction"/>
+    <bean name="userAction" class="cn.edu.zjut.action.UserAction" parent="baseAction" scope="prototype">
+        <property name="userService" ref="userService"/>
+        <property name="mailUtil" ref="mailUntil"/>
+    </bean>
+    <bean name="adminAction" class="cn.edu.zjut.action.AdminAction" parent="baseAction" scope="prototype">
+        <property name="adminService" ref="adminService"/>
+    </bean>
+    <bean name="topicAction" class="cn.edu.zjut.action.TopicAction" parent="baseAction" scope="prototype">
+        <property name="topicService" ref="topicService"/>
+        <property name="userService" ref="userService"/>
+    </bean>
+    <bean name="publishTopicAction" class="cn.edu.zjut.action.PublishTopicAction" parent="baseAction" scope="prototype">
+        <property name="topicService" ref="topicService"/>
+        <property name="mainSectionService" ref="mainSectionService"/>
+    </bean>
+</beans>

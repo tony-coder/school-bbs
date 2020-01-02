@@ -102,7 +102,8 @@
     <bean name="adminService" class="cn.edu.zjut.serviceImpl.AdminServiceImpl">
         <property name="adminDAO" ref="adminDao"/>
     </bean>
-    <bean name="TopicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
+
+    <bean name="topicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
         <property name="topicDao" ref="topicDAO"/>
     </bean>
     <bean name="mainSectionService" class="cn.edu.zjut.serviceImpl.MainSectionServiceImpl">
@@ -121,10 +122,12 @@
         <property name="adminService" ref="adminService"/>
     </bean>
     <bean name="topicAction" class="cn.edu.zjut.action.TopicAction" parent="baseAction" scope="prototype">
-        <property name="topicService" ref="TopicService"/>
+        <property name="topicService" ref="topicService"/>
+        <property name="userService" ref="userService"/>
     </bean>
     <bean name="publishTopicAction" class="cn.edu.zjut.action.PublishTopicAction" parent="baseAction" scope="prototype">
-        <property name="topicService" ref="TopicService"/>
+        <property name="topicService" ref="topicService"/>
+        <property name="mainSectionService" ref="mainSectionService"/>
     </bean>
     <bean name="searchAction" class="cn.edu.zjut.action.SearchAction" parent="baseAction" scope="prototype">
         <property name="topicService" ref="TopicService"/>

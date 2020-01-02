@@ -1,10 +1,14 @@
 package cn.edu.zjut.action;
 
+import cn.edu.zjut.po.MainSection;
+import cn.edu.zjut.po.SubSection;
 import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.po.User;
+import cn.edu.zjut.service.MainSectionService;
 import cn.edu.zjut.service.TopicService;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * 发帖action
@@ -16,6 +20,7 @@ public class PublishTopicAction extends BaseAction {
 
     //Spring注入
     private TopicService topicService;
+    private MainSectionService mainSectionService;
 
     public Topic getTopic() {
         return topic;
@@ -29,15 +34,19 @@ public class PublishTopicAction extends BaseAction {
         this.topicService = topicService;
     }
 
+    public void setMainSectionService(MainSectionService mainSectionService) {
+        this.mainSectionService = mainSectionService;
+    }
+
     public String publish() throws Exception {
         //int userId = (Integer) getSession().get("userId"); //获取用户
         // 测试
-       /* User user1 = new User();
+        User user1 = new User();
         user1.setId(17);
         user1.setUsername("test");
         user1.setEmail("");
         user1.setLevel(1);
-        getSession().put("user", user1);*/
+        getSession().put("user", user1);
 
         User user = (User) getSession().get("user");  //获取用户
 
@@ -46,8 +55,7 @@ public class PublishTopicAction extends BaseAction {
             this.addFieldError("limit", "您已被管理员限制发帖");
             return "publish";
         }*/
-        String content=(String) getRequest().get("topic.content");
-        topic.setUserId(user.getId());
+
         topic.setUserByUserId(user);
 
         topic.setType(0);  //设置帖子类型，默认为普通帖
@@ -55,8 +63,42 @@ public class PublishTopicAction extends BaseAction {
         topic.setCreateTime(new Timestamp(System.currentTimeMillis()));
         topic.setUpdateTime(new Timestamp(System.currentTimeMillis()));
 
-        topicService.publish(topic);
+        if (!topicService.publish(topic))
+            return "error";  //发布失败
 
         return "success";
+    }
+
+    public String updateTopic() throws Exception {
+        String title = topic.getTitle();
+        String content = topic.getContent();
+        MainSection mainSection = topic.getSubSectionBySectionId().getMainSectionByMainSectionId();
+        SubSection subSection = topic.getSubSectionBySectionId();
+        /*int mainSectionId = topic.getSubSectionBySectionId().getMainSectionId();
+        int subSectionId = topic.*/
+        topic = topicService.getTopicById(topic.getId());
+        topic.setTitle(title);
+        topic.setContent(content);
+        /*topic.setSectionId(subSectionId);
+        topic.getSubSectionBySectionId().setMainSectionId(mainSectionId);*/
+        topic.setSubSectionBySectionId(subSection);
+        topic.getSubSectionBySectionId().setMainSectionByMainSectionId(mainSection);
+
+        if (topicService.updateTopic(topic))
+            return "success";
+
+        return "error";
+    }
+
+    public String initPublishPostPage() throws Exception {
+        List<MainSection> mainSections = mainSectionService.getAllMainSection();  //获取所有主板块
+        int topicId = topic.getId();
+        if (topicId > 0) {
+            Topic topic = topicService.getTopicById(topicId);
+            getRequest().put("topic", topic);
+            getRequest().put("mainSections", mainSections);
+            return "success";
+        }
+        return "error";
     }
 }

@@ -73,4 +73,16 @@ public class SubSection {
     public void setTopicsById(Collection<Topic> topicsById) {
         this.topicsById = topicsById;
     }
+
+    @Override
+    public String toString() {
+        return "SubSection{" +
+                "id=" + id +
+                ", mainSectionId=" + mainSectionId +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", mainSectionByMainSectionId=" + mainSectionByMainSectionId +
+                ", topicsById=" + topicsById +
+                '}';
+    }
 }
