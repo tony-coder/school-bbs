@@ -4,6 +4,8 @@ import cn.edu.zjut.dao.TopicDao;
 import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.service.TopicService;
 
+import java.util.List;
+
 public class TopicServiceImpl implements TopicService {
     TopicDao topicDao;
 
@@ -17,7 +19,32 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void publish(Topic topic) {
-        topicDao.save(topic);
+    public boolean publish(Topic topic) {
+        try {
+            topicDao.save(topic);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updateTopic(Topic topic) {
+        try {
+            topicDao.update(topic);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize) {
+        return topicDao.getTopicByUserId(userId,pageIndex, pageSize);
+    }
+
+    @Override
+    public List<Topic> getLatestTopic() {
+        return null;
     }
 }

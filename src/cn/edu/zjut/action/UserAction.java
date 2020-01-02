@@ -55,11 +55,6 @@ public class UserAction extends BaseAction {
     }
 
     public String register() throws Exception {
-//        User user = new User();
-//        user.setUsername(username);
-//        user.setPassword(password);
-//        user.setEmail(email);
-//        user.setSex(sex);
 
         switch (userService.isExist(user)) {
             case 1:

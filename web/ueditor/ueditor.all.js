@@ -16914,7 +16914,7 @@ UE.plugins['fiximgclick'] = (function () {
                     resizer = me.resizer = document.createElement('div');
 
                 cover.id = me.editor.ui.id + '_imagescale_cover';
-                cover.style.cssText = 'position:absolute;display:none;z-index:' + (me.editor.options.zIndex) + ';filter:alpha(opacity=0); opacity:0;background:#CCC;';
+                cover.style.cssText = 'position:absolute;display:none;z-index:' + (me.editor.options.zIndex) + ';filters:alpha(opacity=0); opacity:0;background:#CCC;';
                 domUtils.on(cover, 'mousedown click', function () {
                     me.hide();
                 });
@@ -21630,7 +21630,7 @@ UE.plugins['table'] = function () {
             'onresizestart':'return false',
             'ondragstart':'return false',
             'onselectstart':'return false',
-            style:"background-color:blue;position:absolute;padding:0;margin:0;background-image:none;border:0px none;opacity:0;filter:alpha(opacity=0)"
+            style:"background-color:blue;position:absolute;padding:0;margin:0;background-image:none;border:0px none;opacity:0;filters:alpha(opacity=0)"
         });
         editor.body.appendChild(dragLine);
     }
@@ -21659,12 +21659,12 @@ UE.plugins['table'] = function () {
         switch (state) {
             case "h":
                 css = 'height:' + height + 'px;top:' + (tablePos.y + (caption.length > 0 ? caption[0].offsetHeight : 0)) + 'px;left:' + (cellPos.x + cell.offsetWidth);
-                dragLine.style.cssText = css + 'px;position: absolute;display:block;background-color:blue;width:1px;border:0; color:blue;opacity:.3;filter:alpha(opacity=30)';
+                dragLine.style.cssText = css + 'px;position: absolute;display:block;background-color:blue;width:1px;border:0; color:blue;opacity:.3;filters:alpha(opacity=30)';
                 break;
             case "v":
                 css = 'width:' + width + 'px;left:' + tablePos.x + 'px;top:' + (cellPos.y + cell.offsetHeight );
                 //必须加上border:0和color:blue，否则低版ie不支持背景色显示
-                dragLine.style.cssText = css + 'px;overflow:hidden;position: absolute;display:block;background-color:blue;height:1px;border:0;color:blue;opacity:.2;filter:alpha(opacity=20)';
+                dragLine.style.cssText = css + 'px;overflow:hidden;position: absolute;display:block;background-color:blue;height:1px;border:0;color:blue;opacity:.2;filters:alpha(opacity=20)';
                 break;
             default:
         }
@@ -24468,7 +24468,7 @@ UE.plugin.register('simpleupload', function (){
         var w = containerBtn.offsetWidth || 20,
             h = containerBtn.offsetHeight || 20,
             btnIframe = document.createElement('iframe'),
-            btnStyle = 'display:block;width:' + w + 'px;height:' + h + 'px;overflow:hidden;border:0;margin:0;padding:0;position:absolute;top:0;left:0;filter:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;cursor:pointer;';
+            btnStyle = 'display:block;width:' + w + 'px;height:' + h + 'px;overflow:hidden;border:0;margin:0;padding:0;position:absolute;top:0;left:0;filters:alpha(opacity=0);-moz-opacity:0;-khtml-opacity: 0;opacity: 0;cursor:pointer;';
 
         domUtils.on(btnIframe, 'load', function(){
 
@@ -29196,7 +29196,7 @@ UE.ui = baidu.editor.ui = {};
                     minEditorHeight = editor.options.minFrameHeight + toolbarBox.offsetHeight + bottombar.offsetHeight;
                 }
 
-                scalelayer.style.cssText = "position:absolute;left:0;display:;top:0;background-color:#41ABFF;opacity:0.4;filter: Alpha(opacity=40);width:" + editorHolder.offsetWidth + "px;height:"
+                scalelayer.style.cssText = "position:absolute;left:0;display:;top:0;background-color:#41ABFF;opacity:0.4;filters: Alpha(opacity=40);width:" + editorHolder.offsetWidth + "px;height:"
                     + editorHolder.offsetHeight + "px;z-index:" + (editor.options.zIndex + 1);
 
                 domUtils.on(doc, "mousemove", move);

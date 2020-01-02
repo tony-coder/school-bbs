@@ -81,7 +81,7 @@
     width: 100%;
     height: 30px;
     opacity: 0;
-    /*filter: alpha(opacity: 0;);*/
+    /*filters: alpha(opacity: 0;);*/
     font: 14px/20px "Microsoft YaHei";
     color: #000;
 }

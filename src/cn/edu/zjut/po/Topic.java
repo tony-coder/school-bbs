@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Topic {
     private int id;
-    private int sectionId;
-    private int userId;
+//    private int sectionId;  //subSection
+//    private int userId;
     private String title;
     private String content;
     private Timestamp createTime;
@@ -28,7 +28,7 @@ public class Topic {
         this.id = id;
     }
 
-    public int getSectionId() {
+  /*  public int getSectionId() {
         return sectionId;
     }
 
@@ -42,7 +42,7 @@ public class Topic {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -106,8 +106,6 @@ public class Topic {
         if (o == null || getClass() != o.getClass()) return false;
         Topic topic = (Topic) o;
         return id == topic.id &&
-                sectionId == topic.sectionId &&
-                userId == topic.userId &&
                 click == topic.click &&
                 Objects.equals(title, topic.title) &&
                 Objects.equals(content, topic.content) &&
@@ -119,7 +117,7 @@ public class Topic {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, sectionId, userId, title, content, createTime, updateTime, click, replyNum, type);
+        return Objects.hash(id, title, content, createTime, updateTime, click, replyNum, type);
     }
 
     public Collection<BestTopic> getBestTopicsById() {

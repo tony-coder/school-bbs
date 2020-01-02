@@ -33,7 +33,7 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
     }
 
     @Override
-    public void save(Topic topic) {
+    public void save(Topic topic) throws Exception {
         log.debug("saving Topic instance");
         try {
             getSession().save(topic);
@@ -45,7 +45,7 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
     }
 
     @Override
-    public void update(Topic topic) {
+    public void update(Topic topic) throws Exception {
         log.debug("update Topic instance");
         try {
             getSession().update(topic);
@@ -54,6 +54,17 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
             log.error("update failed", e);
             throw e;
         }
+    }
+
+    @Override
+    public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize) {
+        String queryString = "from Topic topic where topic.userByUserId.id= :id";
+        Query queryObject = getSession().createQuery(queryString);
+        queryObject.setInteger("id", userId);
+        int startIndex = (pageIndex - 1) * pageSize;
+        queryObject.setFirstResult(startIndex);
+        queryObject.setMaxResults(pageSize);
+        return queryObject.list();
     }
 
 }

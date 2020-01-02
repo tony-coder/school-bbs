@@ -10,9 +10,11 @@ public interface TopicDao {
 
     public List<Topic> findByHql(String hql);
 
-    public void save(Topic topic);
+    public void save(Topic topic) throws Exception;
 
-    public void update(Topic topic);
+    public void update(Topic topic) throws Exception;
+
+    public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize);
 
 //    public void delete(User user);
 

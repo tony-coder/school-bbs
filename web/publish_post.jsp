@@ -1,9 +1,5 @@
-<%@ page import="cn.edu.zjut.po.Topic" %>
-<%@ page import="org.springframework.context.ApplicationContext" %>
-<%@ page import="org.springframework.context.support.ClassPathXmlApplicationContext" %>
 <%@ page import="cn.edu.zjut.po.MainSection" %>
 <%@ page import="java.util.List" %>
-<%@ page import="cn.edu.zjut.service.MainSectionService" %>
 <%@ page import="cn.edu.zjut.po.SubSection" %>
 <%@ page import="java.util.Set" %>
 <%@ taglib prefix="s" uri="/struts-tags" %>
@@ -19,10 +15,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";  //获取web应用根目录路径
 
-    ApplicationContext ctx = new ClassPathXmlApplicationContext("applicationContext.xml");
-    MainSectionService mainSectionService = (MainSectionService) ctx.getBean("mainSectionService");
-    List<MainSection> mainSections = mainSectionService.getAllMainSection();  //获取所有主板块
-    //for (MainSection mainSection : mainSections) {
+    List<MainSection> mainSections = (List<MainSection>) request.getAttribute("mainSections");  //获取所有主板块
 %>
 <html>
 <head>
@@ -32,26 +25,27 @@
 <body>
 <%--<jsp:include page="/pages/header.jsp"/>--%>
 <table class="tb" cellspacing="0" cellpadding="3">
-    <%Topic topic = (Topic) request.getAttribute("topic");%>
-    <% if (topic == null) { %>
-    <form method="post" action="<%=path%>/publish.action" onsubmit="return onUpdateContent();"><% }else{ %> <%--新建帖子--%>
-        <form method="post" action="<%=path%>/updatepost.action?postId=<%=topic.getId()%>" onsubmit="return onUpdateContent();">
-            <% }%>  <%--更新帖子--%>
+    <%--    <%Topic topic = (Topic) request.getAttribute("topic");%>--%>
+    <s:if test="%{#request.topic == null}">
+    <form method="post" action="<%=path%>/publish.action" onsubmit="return onUpdateContent();"><%--新建帖子--%>
+        </s:if>
+        <s:else>
+        <form method="post" action="<%=path%>/updateTopic.action?topic.id=<s:property value="#request.topic.id"/>"
+              onsubmit="return onUpdateContent();"> <%--更新帖子--%>
+            </s:else>
+
             <input type="hidden" name="topic.content" id="content">
             <tr>
                 <th>文章标题</th>
                 <td>
-                    <%--<s:if test="%{#request.topic == null}">
-                        <input required type="text" id="textfile" name="title"/> &lt;%&ndash;新建帖子&ndash;%&gt;
+                    <s:if test="%{#request.topic == null}">
+                        <input required type="text" id="textfile" name="topic.title"/> <%--新建帖子--%>
                     </s:if>
                     <s:else>
-                        <input required type="text" id="textfile" name="title" value="<%=topic.getTitle()%>"/> &lt;%&ndash;更新帖子&ndash;%&gt;
-                    </s:else>--%>
-                    <% if (topic == null) { %>
-                    <input required type="text" id="textfile" name="topic.title"/> <%--新建帖子--%>
-                    <% } else { %>
-                    <input required type="text" id="textfile" name="topic.title" value="<%=topic.getTitle()%>"/> <%--更新帖子--%>
-                    <% }%>
+                        <input required type="text" id="textfile" name="topic.title"
+                               value="<s:property value="#request.topic.title"/>"/> <%--更新帖子--%>
+                    </s:else>
+
                     <s:fielderror fieldName="limit"/>
                     <span>你最多可以输入30个字符</span>
                 </td>
@@ -59,14 +53,14 @@
             <tr>
                 <th>文章内容</th>
                 <td>
-                    <% if (topic == null) {%>
-                    <%--<textarea type="text" class="" name="content" id="ueditor"></textarea>--%>
-                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"></script>
-                    <%--新建帖子--%>
-                    <% } else { %>
-                    <script id="ueditor" name="content" type="text/plain" style="height: 300px"><%=topic.getContent()%> </script>
-                    <%--更新帖子--%>
-                    <% }%>
+                    <s:if test="%{#request.topic == null}">
+                        <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"></script>
+                    </s:if>
+                    <s:else>
+                        <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><s:property
+                                value="#request.topic.content"/></script>
+                    </s:else>
+
                 </td>
             </tr>
             <tr>
@@ -74,7 +68,8 @@
                 <td>
                     <div id="change" style="float:left">
                         <!-- <a class="btn-select" id="big_btn_select"> -->
-                        <select id="topic.subSectionBySectionId.mainSectionId" name="mainSection" onchange="onselected(this)">
+                        <select id="mainSection" name="topic.subSectionBySectionId.mainSectionId"
+                                onchange="onselected(this)">
                             <%for (MainSection mainSection : mainSections) {%>
                             <option value=<%=mainSection.getId()%>><%=mainSection.getTitle() %>
                             </option>
@@ -123,7 +118,7 @@
     /*获取输入区的内容*/
     function onUpdateContent() {
         var content = document.getElementById("content");
-        content.value = UE.getEditor("ueditor").getContentTxt();
+        content.value = UE.getEditor("ueditor").getContent();
         // alert(content.value);
         return true;
     }
@@ -142,19 +137,19 @@
     function onselected(obj) {
 
         var mainSection = document.getElementById("mainSection");
-        //console.log("size:" + mainSection.length);
+        console.log("size:" + mainSection.length);
         for (var i = 0; i < mainSection.length; i++) {
-            //console.log("main:" + mainForum[i].value);
+            // console.log("main:" + mainSection[i].value);
             var sub = document.getElementById(mainSection[i].value);
             sub.style.display = "none";
-            sub.name = "sub"
-            //console.log("sub value:" + sub.value);
+            sub.name = "topic.sectionId"
+            // console.log("sub value:" + sub.value);
         }
         var value = obj.value;
-        //console.log("select value:" + value);
+        // console.log("select value:" + value);
         var subSection = document.getElementById(value);
         subSection.style.display = "";
-        subSection.name = "subSection"
+        subSection.name = "sub";
     }
 </script>
 </body>

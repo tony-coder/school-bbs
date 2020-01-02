@@ -229,7 +229,7 @@ UE.I18N['en'] = {
         'removeFontsize':"Remove font size",
         'removeFontFamily':"Remove fontFamily",
         'removeHtml':"Remove redundant HTML code",
-        'pasteFilter':"Paste filter",
+        'pasteFilter':"Paste filters",
         'run':"Done",
         'symbol':'Symbol Conversion',
         'bdc2sb':'Full-width to Half-width',
