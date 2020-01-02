@@ -76,4 +76,14 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         return list;
     }
 
+    @Override
+    public List<Topic> getLatestTopic(int pageIndex, int pageSize) {
+        String queryString = "from Topic topic order by topic.updateTime desc";
+        Query queryObject = getSession().createQuery(queryString);
+        int startIndex = (pageIndex - 1) * pageSize;
+        queryObject.setFirstResult(startIndex);
+        queryObject.setMaxResults(pageSize);
+        return queryObject.list();
+    }
+
 }

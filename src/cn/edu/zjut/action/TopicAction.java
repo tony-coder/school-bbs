@@ -47,7 +47,7 @@ public class TopicAction extends BaseAction {
     }
 
     public String initTopicPage() throws Exception {
-//        getSession().put("user", userService.findById(17));  //测试数据
+        getSession().put("user", userService.findById(17));  //测试数据
         User user = (User) getSession().get("user");
 
         String pageNumStr = (String) getRequest().get("page");  //获取第几页

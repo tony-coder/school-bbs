@@ -57,7 +57,7 @@
                         <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"></script>
                     </s:if>
                     <s:else>
-                        <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><s:property
+                        <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><s:property escape="false"
                                 value="#request.topic.content"/></script>
                     </s:else>
 

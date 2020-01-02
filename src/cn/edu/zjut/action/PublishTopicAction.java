@@ -47,6 +47,7 @@ public class PublishTopicAction extends BaseAction {
         user1.setEmail("");
         user1.setLevel(1);
         getSession().put("user", user1);
+        //
 
         User user = (User) getSession().get("user");  //获取用户
 
@@ -83,6 +84,7 @@ public class PublishTopicAction extends BaseAction {
         topic.getSubSectionBySectionId().setMainSectionId(mainSectionId);*/
         topic.setSubSectionBySectionId(subSection);
         topic.getSubSectionBySectionId().setMainSectionByMainSectionId(mainSection);
+        topic.setUpdateTime(new Timestamp(System.currentTimeMillis()));  //更新帖子更新时间
 
         if (topicService.updateTopic(topic))
             return "success";

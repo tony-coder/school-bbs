@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
   <body>
-  <jsp:include page="/page/headers.jsp"/>
+  <jsp:include page="/page/header.jsp"/>
 
    <div class="list-group search-list">
     <a href="#" class="list-group-item active">

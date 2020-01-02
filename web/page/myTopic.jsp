@@ -37,7 +37,7 @@
 
                 <s:iterator value="#request.topics">
                     <div class="list-group-item">
-                        <a href="<%=path%>/page/topic.jsp?postId=<s:property value="id"/>&&page=1" style="color:grey">
+                        <a href="<%=path%>/topicDetail.action?topicId=<s:property value="id"/>&&page=1" style="color:grey">
                             <h4 class="list-group-item-heading" style="color:black">[<s:property
                                     value="subSectionBySectionId.mainSectionByMainSectionId.title"/>]</h4>
                             <s:property value="title"/>

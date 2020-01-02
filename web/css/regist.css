@@ -1,10 +1,10 @@
 body{
     background-color: #ebeaea;
 }
-div.login{
+div.regist{
     width: 450px;
-    height: 350px;
-    margin-top: 80px;
+    height: 400px;
+    margin-top: 60px;
     margin-right: auto;
     margin-left: auto;
     border-radius: 5px;

@@ -16,6 +16,8 @@ public interface TopicDao {
 
     public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize);
 
+    public List<Topic> getLatestTopic(int pageIndex, int pageSize);
+
 //    public void delete(User user);
 
 //    public Topic findById(int id);

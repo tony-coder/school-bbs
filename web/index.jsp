@@ -1,3 +1,4 @@
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%--
   Created by IntelliJ IDEA.
   User: lenovo
@@ -11,6 +12,11 @@
     <title>$Title$</title>
 </head>
 <body>
-<jsp:forward page="register.jsp"/>
+<%--<jsp:forward page="homePage.action"/>--%>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    response.sendRedirect(basePath + "homePage.action");
+%>
 </body>
 </html>

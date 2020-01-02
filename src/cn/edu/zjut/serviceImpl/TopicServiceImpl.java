@@ -40,12 +40,12 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize) {
-        return topicDao.getTopicByUserId(userId,pageIndex, pageSize);
+        return topicDao.getTopicByUserId(userId, pageIndex, pageSize);
     }
 
     @Override
-    public List<Topic> getLatestTopic() {
-        return null;
+    public List<Topic> getLatestTopic(int pageIndex, int pageSize) {
+        return topicDao.getLatestTopic(pageIndex, pageSize);
     }
 
     @Override

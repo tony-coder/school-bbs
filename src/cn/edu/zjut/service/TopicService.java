@@ -15,12 +15,11 @@ public interface TopicService {
     //更新帖子内容
     public boolean updateTopic(Topic topic);
 
-    //根据用户id获取帖子列表。范围为一页的长度
-    public List<Topic> getTopicByUserId(int userId,int pageIndex,int pageSize);
+    //根据用户id获取帖子列表 范围为一页的长度
+    public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize);
 
-    //按照时间顺序获取最新帖子列表
-    public List<Topic> getLatestTopic();
-
+    //按照时间顺序获取最新帖子列表 范围为一页的长度
+    public List<Topic> getLatestTopic(int pageIndex, int pageSize);
 
     List<Topic> searchTopics(String keywords);
 }

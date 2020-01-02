@@ -58,5 +58,14 @@
         <action name="mytopic" class="topicAction" method="initTopicPage">
             <result name="success">/page/myTopic.jsp</result>
         </action>
+
+        <action name="searchTopic" class="searchAction" method="execute">
+            <result name="success">/page/item.jsp</result>
+            <result name="error">/page/header.jsp</result>
+        </action>
+
+        <action name="homePage" class="mainAction" method="initHomePage">
+            <result name="success">/home.jsp</result>
+        </action>
     </package>
 </struts>
