@@ -18,7 +18,7 @@
     <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<%--<jsp:include page="<%=basePath%>header.jsp"/>--%>
+<%--<jsp:include page="<%=basePath%>page/header.jsp"/>--%>
 <div class="container" style="margin-top: 30px">
     <div class="row">
         <div class="col-xs-3">
@@ -34,61 +34,79 @@
                 <a class="list-group-item active">
                     我的帖子
                 </a>
-
                 <s:iterator value="#request.topics">
                     <div class="list-group-item">
-                        <a href="<%=path%>/topicDetail.action?topicId=<s:property value="id"/>&&page=1" style="color:grey">
+                        <a href="topicDetail.action?topicId=<s:property value="id"/>&&page=1"
+                           style="color:grey">
                             <h4 class="list-group-item-heading" style="color:black">[<s:property
                                     value="subSectionBySectionId.mainSectionByMainSectionId.title"/>]</h4>
                             <s:property value="title"/>
                         </a>
-                       <%-- <a href="<%=basePath%>/deleteTopic.action?topicId=<s:property value="id"/>"
-                           style="float: right">删除</a>--%>
-
-                        <a href="<%=path%>/editTopic.action?topic.id=<s:property value="id"/>"
+                            <%-- <a href="<%=basePath%>/deleteTopic.action?topicId=<s:property value="id"/>"
+                                style="float: right">删除</a>--%>
+                        <a href="editTopic.action?topic.id=<s:property value="id"/>"
                            style="float: right">编辑</a>
                         <s:if test="type==0">
-                            <a href="<%=path%>/applybest.action?postId=<s:property value="id"/>" style="float: right">申请精华贴&nbsp;</a>
+                            <a href="<%=path%>applybest.action?postId=<s:property value="id"/>" style="float: right">申请精华贴&nbsp;</a>
                         </s:if>
 
                         <p style="float: right;margin-right: 50px">浏览量:<s:property value="click"/>&nbsp;评论量:<s:property
                                 value="replyNum"/>&nbsp;发表日期:<s:property value="createTime"/></p>
                     </div>
-
                 </s:iterator>
             </ul>
-
-            <%--            <ul class="pagination pagination-lg" style="float:right">
-                            <% if (pageNum>1) { int pageIndex = pageNum -1;%>
-                            <li><a href="<%=path+"/pages/myTopic.jsp?page="+pageIndex%>">&laquo;</a></li>
-                            <%}
-                                if (pageNum<=5){
-                                    for (int i=1; i<=5; i++){
-                                        if (pageNum == i){
-                            %>
-                            <li class="active"><a href="<%=path+"/myTopic.jsp?page="+i%>"><%=i%></a></li>
-                            <%}else {
-                            %>
-                            <li><a href="<%=path+"/pages/myTopic.jsp?page="+i%>"><%=i%></a></li>
-                            <%}
-                                if (i ==5){
-                            %>
-                            <li><a href="<%=path+"/pages/myTopic.jsp?page="+6%>">&raquo;</a></li>
-                            <%}}}
-                                if (pageNum >5){
-                                    int maxPage = pageNum+1;
-                                    for (int i=4; i>=0; i--){
-                                        int pageIndex = pageNum - i;
-                                        if (i==0){
-                            %>
-                            <li class="active"><a href="<%=path+"/pages/myTopic.jsp?page="+pageIndex%>"><%=pageIndex%></a></li>
-
-                            <%}else {%>
-                            <li class=""><a href="<%=path+"/pages/myTopic.jsp?page="+pageIndex%>"><%=pageIndex%></a></li>
-                            <%}}%>
-                            <li><a href="<%=path+"/pages/myTopic.jsp?page="+maxPage%>">&raquo;</a></li>
-                            <%}%>
-                        </ul>--%>
+            <ul class="pagination pagination-lg" style="float:right">
+                <s:if test="#request.pageNum > 1">
+                    <s:set name="pageIndex" value="#request.pageNum - 1"/>
+                    <li><a href="mytopic.action?page=<s:property value="#pageIndex"/>"> &laquo;</a></li>
+                </s:if>
+                <s:if test="#request.pageNum <=5">
+                    <s:bean name="org.apache.struts2.util.Counter" id="counter">
+                        <s:param name="first" value="0"/>
+                        <s:param name="last" value="4"/>
+                        <s:iterator>
+                            <s:if test="#request.pageNum == #counter.current">
+                                <li class="active"><a
+                                        href="mytopic.action?page=<s:property value="#counter.current"/>"><s:property
+                                        value="#counter.current"/>
+                                </a></li>
+                            </s:if>
+                            <s:else>
+                                <li>
+                                    <a href="mytopic.action?page=<s:property value="#counter.current"/>"><s:property
+                                            value="#counter.current"/>
+                                    </a></li>
+                            </s:else>
+                            <s:if test="#counter.current == 5">
+                                <li><a href="mytopic.action?page=6">&raquo;</a></li>
+                            </s:if>
+                        </s:iterator>
+                    </s:bean>
+                </s:if>
+                <s:if test="#request.pageNum >5">
+                    <s:bean name="org.apache.struts2.util.Counter" id="counter">
+                        <s:param name="first" value="0"/>
+                        <s:param name="last" value="4"/>
+                        <s:set name="maxPage" value="#request.pageNum + 1"/>
+                        <s:iterator>
+                            <s:set name="pageIndex" value="#request.pageNum - 5 + #counter.current"/>
+                            <s:if test="#counter.current == 5">
+                                <li class="active"><a
+                                        href="mytopic.action?page=<s:property value="#pageIndex"/>"><s:property
+                                        value="#pageIndex"/>
+                                </a></li>
+                            </s:if>
+                            <s:else>
+                                <li class=""><a
+                                        href="mytopic.action?page=<s:property value="#pageIndex"/>"><s:property
+                                        value="#pageIndex"/>
+                                </a></li>
+                            </s:else>
+                        </s:iterator>
+                    </s:bean>
+                    <li><a href="mytopic.action?page=<s:property value="#maxPage"/>">&raquo;</a></li>
+                </s:if>
+            </ul>
             <br>
         </div>
     </div>

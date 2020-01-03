@@ -13,6 +13,7 @@ import java.util.List;
 
 public class TopicAction extends BaseAction {
     private Integer topicId;  //帖子id
+    private Integer page;     //页数
 
     //Spring注入
     TopicService topicService;
@@ -24,6 +25,14 @@ public class TopicAction extends BaseAction {
 
     public void setTopicId(Integer topicId) {
         this.topicId = topicId;
+    }
+
+    public Integer getPage() {
+        return page;
+    }
+
+    public void setPage(Integer page) {
+        this.page = page;
     }
 
     public void setTopicService(TopicService topicService) {
@@ -51,14 +60,13 @@ public class TopicAction extends BaseAction {
         getSession().put("user", userService.findById(17));  //测试数据
         User user = (User) getSession().get("user");
 
-        String pageNumStr = (String) getRequest().get("page");  //获取第几页
-        int pageNum = 1;
-        if (pageNumStr != null)
-            pageNum = Integer.parseInt(pageNumStr);
+        if (page == null)
+            page = 1;
 
-        List<Topic> topics = topicService.getTopicByUserId(user.getId(), pageNum, 10);
+        List<Topic> topics = topicService.getTopicByUserId(user.getId(), page, 10);
 
         getRequest().put("topics", topics);
+        getRequest().put("pageNum", page);
         return "success";
     }
 }
