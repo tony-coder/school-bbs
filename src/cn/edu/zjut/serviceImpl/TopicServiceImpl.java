@@ -3,6 +3,7 @@ package cn.edu.zjut.serviceImpl;
 import cn.edu.zjut.dao.TopicDao;
 import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.service.TopicService;
+import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -51,5 +52,14 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public List<Topic> searchTopics(String keywords) {
         return topicDao.search(keywords);
+    }
+
+    @Override
+    public void autoIncreaseViewNum(Topic topic) {
+        try {
+            topicDao.autoIncreaseViewNum(topic);
+        } catch (Exception e) {
+
+        }
     }
 }

@@ -22,4 +22,9 @@ public interface TopicService {
     public List<Topic> getLatestTopic(int pageIndex, int pageSize);
 
     List<Topic> searchTopics(String keywords);
+
+    //自动更新帖子浏览数
+    void autoIncreaseViewNum(Topic topic);
+
+
 }

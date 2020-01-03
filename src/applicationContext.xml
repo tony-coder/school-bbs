@@ -28,6 +28,7 @@
             <tx:method name="register*" propagation="REQUIRED"/>  <!-- 注意，不添加的话没有存储更新权限 -->
             <tx:method name="activeUser*" propagation="REQUIRED"/>
             <tx:method name="publish*" propagation="REQUIRED"/>
+            <tx:method name="autoIncreaseViewNum" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>

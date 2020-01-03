@@ -1,6 +1,7 @@
 package cn.edu.zjut.dao;
 
 import cn.edu.zjut.po.Topic;
+import org.hibernate.Session;
 
 import java.util.List;
 
@@ -23,5 +24,9 @@ public interface TopicDao {
 //    public Topic findById(int id);
 
     List<Topic> search(String keywords);
+
+    void autoIncreaseViewNum(Topic topic) throws Exception;
+
+    public Session getSession();
 
 }

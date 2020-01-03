@@ -40,6 +40,7 @@ public class TopicAction extends BaseAction {
             Topic topic = topicService.getTopicById(topicId);
             if (topic == null)
                 return "error";
+            topicService.autoIncreaseViewNum(topic);  //浏览数+1
             getRequest().put("topic", topic);
             return "success";
         }
