@@ -33,7 +33,6 @@
         <form method="post" action="<%=path%>/updateTopic.action?topic.id=<s:property value="#request.topic.id"/>"
               onsubmit="return onUpdateContent();"> <%--更新帖子--%>
             </s:else>
-
             <input type="hidden" name="topic.content" id="content">
             <tr>
                 <th>文章标题</th>

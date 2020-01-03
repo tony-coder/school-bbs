@@ -74,12 +74,164 @@
             <div class="col-md-1 post-border">
             </div>
         </div>
+    </div>
 
-        <div class="col-md-1 post-border">
+    <!-- 回复内容 -->
+    <s:set name="floor" value="(#request.pageNum - 1)*5"/>
+    <s:iterator value="#request.replies">
+        <s:set name="floor" value="#floor+1"/>
+        <div class="container">
+            <div class="row" style="margin-top: 5px">
+                <div class="col-md-1 reply-border">
+                </div>
+                <div class="col-md-2 reply-head">
+                    <img alt="" class="img-responsive img-circle"
+                         src="<%=path%><s:property value="userByUserId.userAvatarUrl"/>"
+                         style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
 
+                    <span class="user-info">
+                        <span class="badge" style="background: #f1c40f;margin-top: 5px">姓名</span>
+                        :<span class="badge" style="background: #f1c40f;margin-top: 5px"><s:property
+                            value="userByUserId.username"/></span>
+                    </span><br/>
+                    <span class="user-info">
+                        <span class="badge" style="background: #2ecc71;margin-top: 5px">性别</span>
+                        :<span class="badge" style="background: #2ecc71;margin-top: 5px"><s:property
+                            value="userByUserId.sex"/></span>
+                    </span><br/>
+                    <span class="user-info">
+                         <span class="badge" style="background: #ff6927;margin-top: 5px">等级</span>:
+                        <span class="badge" style="background: #ff6927;margin-top: 5px">LV<s:property
+                                value="userByUserId.level"/></span>
+                    </span>
+                    <br>
+                </div>
+                <div class="col-md-8 reply-content">
+
+                    <div class="reply-time">
+                        <span style="color: gray">回复于:<s:property value="replyTime"/></span>
+                        <s:if test="#floor == 1">
+                             <span class="badge"
+                                   style="float:right;margin-right:10px;background: #ff6927;width: 50px;">沙发</span>
+                        </s:if>
+                        <s:elseif test="#floor == 2">
+                             <span class="badge"
+                                   style="float:right;margin-right:10px;background: #ff5959;width: 50px;">板凳</span>
+                        </s:elseif>
+                        <s:elseif test="#floor == 3">
+                            <span class="badge"
+                                  style="float:right;margin-right:10px;background: #4b9ded;width: 50px;">地板</span>
+                        </s:elseif>
+                        <s:elseif test="">
+                            <span class="badge"
+                                  style="float:right;margin-right:10px;background: #4b9ded;width: 50px;">第<s:property
+                                    value="#floor"/> </span>
+                        </s:elseif>
+                    </div>
+                    <div style="margin: 20px;">
+                        <s:property value="content"/>
+                    </div>
+                </div>
+                <div class="col-md-1 reply-border">
+                </div>
+            </div>
         </div>
+    </s:iterator>
+    <ul class="pagination pagination-lg" style="float:right">
+        <s:if test="#request.pageNum > 1">
+            <s:set name="pageIndex" value="#request.pageNum - 1"/>
+            <li>
+                <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#pageIndex"/>">
+                    &laquo;</a></li>
+        </s:if>
+        <s:if test="#request.pageNum <=5">
+            <s:bean name="org.apache.struts2.util.Counter" id="counter">
+                <s:param name="first" value="0"/>
+                <s:param name="last" value="4"/>
+                <s:iterator>
+                    <s:if test="#request.pageNum == #counter.current">
+                        <li class="active"><a
+                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#counter.current"/>"><s:property
+                                value="#counter.current"/>
+                        </a></li>
+                    </s:if>
+                    <s:else>
+                        <li>
+                            <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#counter.current"/>"><s:property
+                                    value="#counter.current"/>
+                            </a></li>
+                    </s:else>
+                    <s:if test="#counter.current == 5">
+                        <li>
+                            <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=6">&raquo;</a>
+                        </li>
+                    </s:if>
+                </s:iterator>
+            </s:bean>
+        </s:if>
+        <s:if test="#request.pageNum >5">
+            <s:bean name="org.apache.struts2.util.Counter" id="counter">
+                <s:param name="first" value="0"/>
+                <s:param name="last" value="4"/>
+                <s:set name="maxPage" value="#request.pageNum + 1"/>
+                <s:iterator>
+                    <s:set name="pageIndex" value="#request.pageNum - 5 + #counter.current"/>
+                    <s:if test="#counter.current == 5">
+                        <li class="active"><a
+                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#pageIndex"/>"><s:property
+                                value="#pageIndex"/>
+                        </a></li>
+                    </s:if>
+                    <s:else>
+                        <li class=""><a
+                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#pageIndex"/>"><s:property
+                                value="#pageIndex"/>
+                        </a></li>
+                    </s:else>
+                </s:iterator>
+            </s:bean>
+            <li>
+                <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#maxPage"/>">&raquo;</a>
+            </li>
+        </s:if>
+    </ul>
+    <br>
+
+    <div style="height: 200px;margin: 70px auto; width: 800px;">
+        <form action="<%=path%>/reply.action" method="post" onsubmit="return onUpdateContent();">
+            <input type="hidden" name="content" id="content">
+            <input type="hidden" name="postId" value=<s:property value="#request.topic.id"/>>
+            <input type="hidden" name="page" value=
+            <s:property value="#request.pageNum"/>>
+            <div style="margin: 5px auto;height: 100px; width: 800px">
+                <%--<textarea id="TextArea1" cols="20" rows="1" name="content" class="ckeditor"></textarea>--%>
+                <script id="ueditor" name="topic.content" type="text/plain" style="height: 100px"></script>
+            </div>
+            <s:fielderror fieldName="limit"/>
+            <div style="float:right;margin: 60px auto">
+                <input type="submit" class="btn btn-primary" style="width: 60px;" value="回复"/>
+            </div>
+        </form>
     </div>
 </div>
+
+<script type="text/javascript" charset="utf-8" src="<%=basePath%>ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=basePath%>ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=basePath%>ueditor/lang/zh-cn/zh-cn.js"></script>
+<script id="editor" type="text/plain" name="gdesc" style="width:100%;height:350px;"></script>
+<script type="text/javascript">
+    //实例化编辑器
+    var ue = UE.getEditor('ueditor', {});
+
+    /*获取输入区的内容*/
+    function onUpdateContent() {
+        var content = document.getElementById("content");
+        content.value = UE.getEditor("ueditor").getContent();
+        // alert(content.value);
+        return true;
+    }
+
+</script>
 
 </body>
 </html>

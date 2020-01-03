@@ -58,18 +58,24 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
 
     @Override
     public List<Topic> getTopicByUserId(int userId, int pageIndex, int pageSize) {
+        log.debug("finding Topic instances by userId");
         String queryString = "from Topic topic where topic.userByUserId.id= :id";
-        Query queryObject = getSession().createQuery(queryString);
-        queryObject.setInteger("id", userId);
-        int startIndex = (pageIndex - 1) * pageSize;
-        queryObject.setFirstResult(startIndex);
-        queryObject.setMaxResults(pageSize);
-        return queryObject.list();
+        try {
+            Query queryObject = getSession().createQuery(queryString);
+            queryObject.setInteger("id", userId);
+            int startIndex = (pageIndex - 1) * pageSize;
+            queryObject.setFirstResult(startIndex);
+            queryObject.setMaxResults(pageSize);
+            return queryObject.list();
+        } catch (RuntimeException re) {
+            log.error("find topics by userId failed", re);
+            return null;
+        }
     }
 
     @Override
     public List<Topic> search(String keywords) {
-        String queryString = "from Topic as topic where topic.title like '%"+keywords+"%'";
+        String queryString = "from Topic as topic where topic.title like '%" + keywords + "%'";
         Query queryObject = getSession().createQuery(queryString);
 //        queryObject.setParameter("title",keywords);
         List list = queryObject.list();
@@ -92,11 +98,16 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
     @Override
     public List<Topic> getLatestTopic(int pageIndex, int pageSize) {
         String queryString = "from Topic topic order by topic.updateTime desc";
-        Query queryObject = getSession().createQuery(queryString);
-        int startIndex = (pageIndex - 1) * pageSize;
-        queryObject.setFirstResult(startIndex);
-        queryObject.setMaxResults(pageSize);
-        return queryObject.list();
+        try {
+            Query queryObject = getSession().createQuery(queryString);
+            int startIndex = (pageIndex - 1) * pageSize;
+            queryObject.setFirstResult(startIndex);
+            queryObject.setMaxResults(pageSize);
+            return queryObject.list();
+        } catch (RuntimeException re) {
+            log.error("find latest topic failed", re);
+            return null;
+        }
     }
 
 }

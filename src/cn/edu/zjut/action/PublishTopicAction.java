@@ -4,6 +4,7 @@ import cn.edu.zjut.po.MainSection;
 import cn.edu.zjut.po.SubSection;
 import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.po.User;
+import cn.edu.zjut.service.BlackListService;
 import cn.edu.zjut.service.MainSectionService;
 import cn.edu.zjut.service.TopicService;
 
@@ -21,6 +22,7 @@ public class PublishTopicAction extends BaseAction {
     //Spring注入
     private TopicService topicService;
     private MainSectionService mainSectionService;
+    private BlackListService blackListService;
 
     public Topic getTopic() {
         return topic;
@@ -38,6 +40,10 @@ public class PublishTopicAction extends BaseAction {
         this.mainSectionService = mainSectionService;
     }
 
+    public void setBlackListService(BlackListService blackListService) {
+        this.blackListService = blackListService;
+    }
+
     public String publish() throws Exception {
         //int userId = (Integer) getSession().get("userId"); //获取用户
         // 测试
@@ -51,14 +57,13 @@ public class PublishTopicAction extends BaseAction {
 
         User user = (User) getSession().get("user");  //获取用户
 
-        /*int level = blackListBiz.getLevel(userId);
-        if (level<=3&&level>0){
+        int level = blackListService.getLevel(user.getId());
+        if (level <= 3 && level > 0) {
             this.addFieldError("limit", "您已被管理员限制发帖");
             return "publish";
-        }*/
+        }
 
         topic.setUserByUserId(user);
-
         topic.setType(0);  //设置帖子类型，默认为普通帖
         topic.setReplyNum(0);
         topic.setCreateTime(new Timestamp(System.currentTimeMillis()));
