@@ -29,6 +29,7 @@
             <tx:method name="activeUser*" propagation="REQUIRED"/>
             <tx:method name="publish*" propagation="REQUIRED"/>
             <tx:method name="autoIncreaseViewNum" propagation="REQUIRED"/>
+            <tx:method name="save*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
@@ -94,6 +95,7 @@
     <bean name="adminDao" class="cn.edu.zjut.daoImpl.AdminDaoImpl" parent="baseDAO"/>
     <bean name="topicDAO" class="cn.edu.zjut.daoImpl.TopicDaoImpl" parent="baseDAO"/>
     <bean name="mainSectionDao" class="cn.edu.zjut.daoImpl.MainSectionDaoImpl" parent="baseDAO"/>
+    <bean name="blackListDao" class="cn.edu.zjut.daoImpl.BlackListDaoImpl" parent="baseDAO"/>
 
     <!--Service-->
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
@@ -109,6 +111,10 @@
     </bean>
     <bean name="mainSectionService" class="cn.edu.zjut.serviceImpl.MainSectionServiceImpl">
         <property name="mainSectionDao" ref="mainSectionDao"/>
+    </bean>
+
+    <bean name="blackListService" class="cn.edu.zjut.serviceImpl.BlackListServiceImpl">
+        <property name="blackListDao" ref="blackListDao"/>
     </bean>
 
     <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
@@ -136,5 +142,10 @@
 
     <bean name="mainAction" class="cn.edu.zjut.action.MainAction" parent="baseAction" scope="prototype">
         <property name="topicService" ref="topicService"/>
+    </bean>
+
+    <bean name="limitUserAction" class="cn.edu.zjut.action.LimitUserAction" parent="baseAction" scope="prototype">
+        <property name="userService" ref="userService"/>
+        <property name="blackListService" ref="blackListService"/>
     </bean>
 </beans>

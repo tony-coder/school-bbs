@@ -22,4 +22,6 @@ public interface UserDao {
     public User findByUsername(String username);
 
     public User findByActiveCode(String code);
+
+    public List<User> findByKeywords(String keywords);
 }

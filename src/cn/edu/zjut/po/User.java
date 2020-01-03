@@ -2,7 +2,9 @@ package cn.edu.zjut.po;
 
 import java.sql.Timestamp;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * 用户实体类
@@ -23,7 +25,7 @@ public class User {
     private String signature;
     private Integer privilege;
     private Collection<BestTopic> bestTopicsById;
-    private Collection<BlackList> blackListsById;
+    private Set<BlackList> blackListsById;
     private Collection<Notice> noticesById;
     private Collection<Reply> repliesById;
     private Collection<Topic> topicsById;
@@ -173,11 +175,20 @@ public class User {
         this.bestTopicsById = bestTopicsById;
     }
 
-    public Collection<BlackList> getBlackListsById() {
+//    public Collection<BlackList> getBlackListsById() {
+//        return blackListsById;
+//    }
+//
+//    public void setBlackListsById(Collection<BlackList> blackListsById) {
+//        this.blackListsById = blackListsById;
+//    }
+
+
+    public Set<BlackList> getBlackListsById() {
         return blackListsById;
     }
 
-    public void setBlackListsById(Collection<BlackList> blackListsById) {
+    public void setBlackListsById(Set<BlackList> blackListsById) {
         this.blackListsById = blackListsById;
     }
 

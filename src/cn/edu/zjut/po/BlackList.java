@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class BlackList {
     private int id;
-    private int userId;
+//    private int userId;
     private int level;
     private User userByUserId;
 
@@ -16,13 +16,13 @@ public class BlackList {
         this.id = id;
     }
 
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+//    public int getUserId() {
+//        return userId;
+//    }
+//
+//    public void setUserId(int userId) {
+//        this.userId = userId;
+//    }
 
     public int getLevel() {
         return level;
@@ -32,19 +32,33 @@ public class BlackList {
         this.level = level;
     }
 
+//    @Override
+//    public boolean equals(Object o) {
+//        if (this == o) return true;
+//        if (o == null || getClass() != o.getClass()) return false;
+//        BlackList blackList = (BlackList) o;
+//        return id == blackList.id &&
+//                userId == blackList.userId &&
+//                level == blackList.level;
+//    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BlackList blackList = (BlackList) o;
         return id == blackList.id &&
-                userId == blackList.userId &&
                 level == blackList.level;
     }
 
+//    @Override
+//    public int hashCode() {
+//        return Objects.hash(id, userId, level);
+//    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, level);
+        return Objects.hash(id, level);
     }
 
     public User getUserByUserId() {

@@ -5,11 +5,6 @@ import cn.edu.zjut.po.User;
 
 import java.util.List;
 
-/**
- * @author 鲍锋雄
- * 用户服务接口
- */
-
 public interface UserService {
     /**
      * 用户注册
@@ -58,6 +53,10 @@ public interface UserService {
      * @return
      */
     public User findById(Integer id);
+
+
+    public List<User> findByKeywords(String keywords);
+
 
 
 }

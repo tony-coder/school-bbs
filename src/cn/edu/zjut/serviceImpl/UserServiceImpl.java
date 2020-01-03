@@ -81,4 +81,10 @@ public class UserServiceImpl implements UserService {
         User user = userDao.findById(id);
         return user;
     }
+
+    @Override
+    public List<User> findByKeywords(String keywords) {
+        return userDao.findByKeywords(keywords);
+    }
+
 }

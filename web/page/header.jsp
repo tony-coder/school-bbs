@@ -55,7 +55,7 @@
                 </a>
 
                 <%--<ul class="dropdown-menu">--%>
-                    <%--<%--%>
+                    <%--&lt;%&ndash;%>
                         <%--ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");--%>
                         <%--MainForumBiz mainbiz = (MainForumBiz)context.getBean("mainForumBiz");--%>
                         <%--List<MainForum> mains = mainbiz.getAllMainForums();--%>
@@ -77,64 +77,63 @@
         </ul>
     </div>
 
-
-    <%--<% String username  = (String)session.getAttribute("username");--%>
-        <%--String adminname  = (String)session.getAttribute("adminname");--%>
-        <%--if (username == null && adminname == null){--%>
-    <%--%>--%>
-    <%--<ul class="nav navbar-nav navbar-right user">--%>
-        <%--<li><a href="<%=request.getContextPath()%>/login.jsp">登陆</a></li>--%>
-        <%--<li><a href="<%=request.getContextPath()%>/regist.jsp">注册</a></li>--%>
-    <%--</ul>--%>
-    <%--<p class="navbar-text navbar-right">尊敬的游客您好！</p>--%>
-
+    <% String username = (String) session.getAttribute("username");
+        String adminname = (String) session.getAttribute("adminname");
+        if (username == null && adminname == null) {
+    %>
+    <ul class="nav navbar-nav navbar-right user">
+        <li><a href="<%=request.getContextPath()%>/login.jsp">登陆</a></li>
+        <li><a href="<%=request.getContextPath()%>/regist.jsp">注册</a></li>
+    </ul>
+    <p class="navbar-text navbar-right">尊敬的游客您好！</p>
 
 
-    <%--<%}--%>
-    <%--else if (username != null && adminname == null){--%>
-    <%--%>--%>
-    <%--<ul class="nav navbar-nav navbar-right user">--%>
+    <%
+    } else if (username != null && adminname == null) {
+    %>
+    <ul class="nav navbar-nav navbar-right user">
 
-        <%--<li class="dropdown">--%>
-            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
-                <%--<%=username%> <b class="caret"></b>--%>
-            <%--</a>--%>
-            <%--<ul class="dropdown-menu">--%>
-                <%--<li><a href="<%=path+"/pages/change-info.jsp"%>">设置</a></li>--%>
-                <%--<li><a href="<%=path+"/pages/mypost.jsp?page=1"%>">我的帖子</a></li>--%>
-                <%--<li><a href="<%=path+"/publish_post.jsp"%>">我要发帖</a></li>--%>
-                <%--<li class="divider"></li>--%>
-                <%--<li><a href="<%=path+"/logout.action"%>">退出登陆</a></li>--%>
-            <%--</ul>--%>
-        <%--</li>--%>
-    <%--</ul>--%>
-    <%--<p class="navbar-text navbar-right">尊敬的用户您好！</p>--%>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%=username%> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="<%=path+"/pages/change-info.jsp"%>">设置</a></li>
+                <li><a href="<%=path+"/pages/mypost.jsp?page=1"%>">我的帖子</a></li>
+                <li><a href="<%=path+"/publish_post.jsp"%>">我要发帖</a></li>
+                <li class="divider"></li>
+                <li><a href="<%=path+"/logout.action"%>">退出登陆</a></li>
+            </ul>
+        </li>
+    </ul>
+    <p class="navbar-text navbar-right">尊敬的用户您好！</p>
 
-    <%--<%--%>
-    <%--}else {--%>
-    <%--%>--%>
+    <%
+    } else {
+    %>
 
-    <%--<ul class="nav navbar-nav navbar-right user">--%>
+    <ul class="nav navbar-nav navbar-right user">
 
-        <%--<li class="dropdown">--%>
-            <%--<a href="#" class="dropdown-toggle" data-toggle="dropdown">--%>
-                <%--<%=adminname%> <b class="caret"></b>--%>
-            <%--</a>--%>
-            <%--<ul class="dropdown-menu">--%>
-                <%--<li ><a href="<%=path%>/manage/notice.jsp">发布公告</a></li>--%>
-                <%--<li  ><a href="<%=path%>/manage/change-admin.jsp">资料修改</a></li>--%>
-                <%--<li ><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>--%>
-                <%--<li><a href="<%=path%>/manage/bestpost.jsp">精华帖请求</a></li>--%>
-                <%--<li><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>--%>
-                <%--<li><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>--%>
-                <%--<li class="divider"></li>--%>
-                <%--<li><a href="<%=path+"/logout.action"%>">退出登陆</a></li>--%>
-            <%--</ul>--%>
-        <%--</li>--%>
-    <%--</ul>--%>
-    <%--<p class="navbar-text navbar-right">尊敬的管理员您好！</p>--%>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <%=adminname%> <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="<%=path%>/manage/notice.jsp">发布公告</a></li>
+                <li><a href="<%=path%>/manage/change-admin.jsp">资料修改</a></li>
+                <li><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>
+                <li><a href="<%=path%>/manage/bestpost.jsp">精华帖请求</a></li>
+                <li><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>
+                <li><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>
+                <li class="divider"></li>
+                <li><a href="<%=path+"/logout.action"%>">退出登陆</a></li>
+            </ul>
+        </li>
+    </ul>
+    <p class="navbar-text navbar-right">尊敬的管理员您好！</p>
 
-    <%--<%} %>--%>
+    <%} %>
+
     <form name="fileForm" class="navbar-form navbar-right" role="search" action="<%=request.getContextPath()%>/searchTopic">
         <div class="input-group">
             <input type="text" class="form-control" name="keywords" placeholder="search">
@@ -142,11 +141,6 @@
         </div>
     </form>
 </nav>
-
-<span class="glyphicon glyphicon-search"></span>
-
-
-
 
 </body>
 </html>

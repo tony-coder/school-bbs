@@ -39,6 +39,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                    <p class="text-right post-date">浏览量:<s:property value="%{#topic.click}"/>&nbsp;评论量:<s:property value="%{#topic.replyNum}"/>&nbsp;发表日期:<s:property value="%{#topic.createTime}"/></p>
            </a>
        </s:iterator>
-</div>
+    </div>
   </body>
 </html>

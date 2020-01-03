@@ -67,5 +67,13 @@
         <action name="homePage" class="mainAction" method="initHomePage">
             <result name="success">/home.jsp</result>
         </action>
+
+        <action name="searchUser" class="limitUserAction" method="execute">
+            <result name="success">/manager/limitUser.jsp</result>
+        </action>
+
+        <action name="limitUser" class="limitUserAction" method="limit">
+            <result name="success">/manager/limitUser.jsp</result>
+        </action>
     </package>
 </struts>

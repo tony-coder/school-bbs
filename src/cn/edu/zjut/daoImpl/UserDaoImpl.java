@@ -112,4 +112,13 @@ public class UserDaoImpl extends BaseHibernateDAO implements UserDao {
         }
     }
 
+    @Override
+    public List<User> findByKeywords(String keywords) {
+        String queryString = "from User user where user.username like :keyword or user.email like :keyword";
+        Query query = getSession().createQuery(queryString);
+        query.setParameter("keyword", '%'+keywords+'%');
+        List list = query.list();
+        return list;
+    }
+
 }

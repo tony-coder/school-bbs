@@ -14,8 +14,19 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/titlebar.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link href="<%=basePath%>css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript">
+        function spanSubmit(){
+            var keywords = document.fileForm.keywords;
+            if(keywords.value.length==0) {
+                alert("请输入搜索信息");
+            }else{
+                document.fileForm.submit();
+            }
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-inverse" role="navigation">
@@ -105,10 +116,10 @@
     <p class="navbar-text navbar-right">尊敬的管理员您好！</p>
 
     <%} %>
-    <form class="navbar-form navbar-right" role="search" action="<%=request.getContextPath()%>/search.action">
+    <form name="fileForm" class="navbar-form navbar-right" role="search" action="<%=request.getContextPath()%>/searchUser.action">
         <div class="input-group">
             <input type="text" class="form-control" name="keywords" placeholder="search">
-            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span> </span>
+            <span class="input-group-addon"><span onclick="spanSubmit()" class="glyphicon glyphicon-search"></span> </span>
         </div>
     </form>
 </nav>
