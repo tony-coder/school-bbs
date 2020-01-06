@@ -28,7 +28,14 @@
             <result name="success">/skip_login.jsp</result>
             <result name="error"></result>
         </action>
-
+        <!--用户登出-->
+        <action name="logout" class="userAction" method="logout">
+            <result name="logout">/login.jsp</result>
+        </action>
+        <!--用户更新信息-->
+        <action name="updateUser" class="userAction" method="update">
+            <result name="success">/page/change_info.jsp</result>
+        </action>
         <action name="update" class="adminAction" method="update">
             <result name="success">/manager/change_info.jsp</result>
         </action>
@@ -74,6 +81,12 @@
 
         <action name="limitUser" class="limitUserAction" method="limit">
             <result name="success">/manager/limitUser.jsp</result>
+        </action>
+            <!--创建讨论区（子模块）-->
+        <action name="createDiscuss" class="createDiscussAction" method="create">
+            <result name="success">/manager/create_discuss.jsp</result>
+            <result name="create">/manager/create_discuss.jsp</result>
+            <result name="error">/page/error.jsp</result>
         </action>
     </package>
 </struts>
