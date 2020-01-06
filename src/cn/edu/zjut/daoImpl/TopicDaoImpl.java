@@ -122,4 +122,64 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         }
     }
 
+        @Override
+    public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
+        if (type > 0){//大于0寻找主板块下的所有topic
+            String queryString = "from Topic topic where topic.subSectionBySectionId.mainSectionId= :id";
+            try {
+                Query queryObject = getSession().createQuery(queryString);
+                queryObject.setInteger("id", type);
+                int startIndex = (pageIndex - 1) * pageSize;
+                queryObject.setFirstResult(startIndex);
+                queryObject.setMaxResults(pageSize);
+                return queryObject.list();
+            } catch (RuntimeException re) {
+                log.error("find mainSection topics failed", re);
+                return null;
+            }
+        }else if (type==-1){//最新帖
+            return getLatestTopic(pageIndex, pageSize);
+        }
+        else if (type==-2){//精华帖
+            return getBestTopic(pageIndex, pageSize);
+        }else if (type==-3){//最热帖
+            return getHotTopic(pageIndex, pageSize);
+        }
+        return null;
+    }
+
+    //最热帖
+    @Override
+    public List<Topic> getHotTopic(int pageIndex, int pageSize) {
+        //按点击量判断
+        String queryString = "from Topic topic order by topic.click desc";
+        try {
+            Query queryObject = getSession().createQuery(queryString);
+            int startIndex = (pageIndex - 1) * pageSize;
+            queryObject.setFirstResult(startIndex);
+            queryObject.setMaxResults(pageSize);
+            return queryObject.list();
+        } catch (RuntimeException re) {
+            log.error("find hot topic failed", re);
+            return null;
+        }
+    }
+
+    //精华帖
+    @Override
+    public List<Topic> getBestTopic(int pageIndex, int pageSize) {
+        //按类型判断
+        String queryString = "from Topic topic where topic.type= :type";
+        try {
+            Query queryObject = getSession().createQuery(queryString);
+            queryObject.setInteger("type", 1);//精华帖为1
+            int startIndex = (pageIndex - 1) * pageSize;
+            queryObject.setFirstResult(startIndex);
+            queryObject.setMaxResults(pageSize);
+            return queryObject.list();
+        } catch (RuntimeException re) {
+            log.error("find best topic failed", re);
+            return null;
+        }
+    }
 }
