@@ -8,6 +8,7 @@
   User: lenovo
   Date: 2019/12/23
   Time: 20:58
+
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -117,7 +118,6 @@
     function onUpdateContent() {
         var content = document.getElementById("content");
         content.value = UE.getEditor("ueditor").getContent();
-        // alert(content.value);
         return true;
     }
 

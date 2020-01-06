@@ -4,8 +4,8 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
-        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school_bbs?serverTimezone=Asia/Shanghai</property>
+        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school_bbs</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
 
         <property name="hbm2ddl.auto">update</property>
@@ -34,6 +34,9 @@
         <mapping resource="cn/edu/zjut/po/SubSection.hbm.xml"/>
         <mapping resource="cn/edu/zjut/po/Topic.hbm.xml"/>
         <mapping resource="cn/edu/zjut/po/User.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/SensitiveWord.hbm.xml"/>
+        <mapping class="cn.edu.zjut.po.SensitiveWord"/>
+        <mapping resource="cn/edu/zjut/po/SensitiveWord.hbm.xml"/>
 
 
         <!-- DB schema will be updated if needed -->

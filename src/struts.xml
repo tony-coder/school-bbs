@@ -11,7 +11,7 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.devMode" value="false"/>
     <constant name="struts.ui.theme" value="simple"/>
-
+    <constant name="struts.action.excludePattern" value="/static/.*?" />
     <package name="strutsBean" extends="struts-default" namespace="/">
         <action name="login" class="userAction" method="login">
             <result name="success">/loginSuccess.jsp</result>
@@ -100,6 +100,18 @@
         <action name="more" class="detailAction" method="execute">
             <result name="success">/page/detailTopic.jsp</result>
             <result name="error">/page/error.jsp</result>
+        </action>
+
+        <action name="getAllSensitiveWords" class="sensitiveWordAction" method="findAllSensitiveWord">
+            <result name="success">/manager/sensitiveWords.jsp</result>
+        </action>
+
+        <action name="deleteSensitiveWord" class="sensitiveWordAction" method="deleteSensitiveWord">
+            <result name="success" type="redirect">/manager/sensitiveWords.jsp</result>
+        </action>
+
+        <action name="addSensitiveWord" class="sensitiveWordAction" method="addSensitiveWord">
+            <result name="success">/manager/sensitiveWords.jsp</result>
         </action>
     </package>
 </struts>
