@@ -5,9 +5,12 @@ import cn.edu.zjut.service.AdminService;
 import cn.edu.zjut.service.UserService;
 import cn.edu.zjut.util.MailUtil;
 import cn.edu.zjut.util.Utils;
-
+import com.opensymphony.xwork2.ActionContext;
+import org.apache.commons.io.FileUtils;
+import org.apache.struts2.ServletActionContext;
 import java.sql.Timestamp;
-
+import java.io.File;
+import java.io.IOException;
 
 public class UserAction extends BaseAction {
     //注册信息
@@ -16,7 +19,9 @@ public class UserAction extends BaseAction {
     private String activeCode;
     //用户权限
     private int privilege;
-
+    //头像文件
+    private File photoImg;
+    private String photoImgFileName;
     //Spring 注入
     private UserService userService;
     private MailUtil mailUtil;
@@ -137,5 +142,68 @@ public class UserAction extends BaseAction {
                 break;
         }
         return "login";
+    }
+    //用户登出，返回登录界面
+    public String logout() throws Exception {
+        if (getSession().get("user")!=null){
+            getSession().put("user",null);
+        }
+        return "logout";
+    }
+
+    //用户信息更新
+    public String update() throws IOException {
+        User user = (User)getSession().get("user");
+        if (user.getUsername() != null || user.getPassword() != null || user.getEmail() != null || user.getSex() != null || photoImg != null) {
+            if (userService.isExist(user)== 1 ) {
+                int id = userService.getUserIdByUsername(user.getUsername());
+                if(id!=user.getId()){
+                    System.out.println("该用户已存在");
+                    addFieldError("username", "该用户名已存在");
+                    return SUCCESS;
+                }
+            } else if (userService.isExist(user)== 2 ) {
+                int id = userService.getUserIdByEmail(user.getEmail());
+                if(id!=user.getId()){
+                    System.out.println("该邮箱已存在");
+                    addFieldError("email", "该邮箱已存在");
+                    return SUCCESS;
+                }
+            }
+            if(user.getPassword() != null){
+                user.setPassword(user.getPassword());
+            }
+            user.setEmail(user.getEmail());
+            user.setUsername(user.getUsername());
+            if (photoImg != null){
+                String root = ServletActionContext.getServletContext().getRealPath("/upload/headImg");
+                System.out.println(root);
+                String filename = photoImgFileName;
+                int index = filename.indexOf("\\");
+                if (index != -1){
+                    filename = filename.substring(index+1);
+                }
+                //得到哈希码
+                int code = filename.hashCode();
+                //转化成16进制
+                String hex = Integer.toHexString(code);
+                File dstDir = new File(root,hex.charAt(0)+"/"+hex.charAt(1));
+                //防止文件重名
+                String saveFilename = Utils.createUUID()+filename;
+                String abstractPath = "/upload/headImg/"+hex.charAt(0)+"/"+hex.charAt(1)+"/"+saveFilename;
+                File dstFile = new File(dstDir,saveFilename);
+                System.out.println(dstFile.toPath());
+                if (!dstFile.getParentFile().exists()){
+                    dstFile.getParentFile().mkdirs();
+                }
+                FileUtils.copyFile(photoImg,dstFile);
+                user.setUserAvatarUrl(abstractPath);
+                ActionContext.getContext().put("message", "上传成功");
+            }
+            //更新
+            userService.update(user);
+            return SUCCESS;
+        }
+        return SUCCESS;
     }
 }
