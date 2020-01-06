@@ -57,8 +57,8 @@
                     </h2>
                     <div style="margin-left:20px">
                         <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;<s:property
-                            value="#request.topic.replyNum"/> &nbsp;|&nbsp;<span>发表于:<s:property
-                            value="#request.topic.createTime"/></span>
+                            value="#request.topic.replyNum"/> &nbsp;|&nbsp;<span>发表于:<s:date
+                            name="#request.topic.createTime" format="yyyy-MM-dd HH:mm:ss"/></span>
                         <s:if test="#request.topic.userByUserId.username == #session.user.username">
                             <a style="float:right;margin-right: 20px;"
                                href="<%=path%>/editTopic.action?topic.id=<s:property value="#request.topic.id"/>">编辑</a>
@@ -109,7 +109,7 @@
                 <div class="col-md-8 reply-content">
 
                     <div class="reply-time">
-                        <span style="color: gray">回复于:<s:property value="replyTime"/></span>
+                        <span style="color: gray">回复于:<s:date name="replyTime" format="yyyy-MM-dd HH:mm:ss"/></span>
                         <s:if test="#floor == 1">
                              <span class="badge"
                                    style="float:right;margin-right:10px;background: #ff6927;width: 50px;">沙发</span>

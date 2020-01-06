@@ -14,8 +14,8 @@
 <html>
 <head>
     <title>Title</title>
-<%--    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>--%>
-<%--    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>--%>
+    <%--    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>--%>
+    <%--    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>--%>
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link href="<%=basePath%>css/zzsc-demo.css" type="text/css" rel="stylesheet">
@@ -87,7 +87,7 @@
                                 <s:property value="title"/><span class="badge">新</span>
                                 <p class="text-right" style="float: right;margin-right: 20px">浏览量:<s:property
                                         value="click"/>&nbsp;评论量:<s:property
-                                        value="replyNum"/>&nbsp;发表日期:<s:property value="createTime"/></p>
+                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></p>
                             </a>
                         </s:iterator>
                     </ul>

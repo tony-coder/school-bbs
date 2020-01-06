@@ -50,7 +50,7 @@
                         </s:if>
 
                         <p style="float: right;margin-right: 50px">浏览量:<s:property value="click"/>&nbsp;评论量:<s:property
-                                value="replyNum"/>&nbsp;发表日期:<s:property value="createTime"/></p>
+                                value="replyNum"/>&nbsp;发表日期:<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></p>
                     </div>
                 </s:iterator>
             </ul>
