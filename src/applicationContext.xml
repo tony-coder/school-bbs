@@ -169,4 +169,8 @@
         <property name="topicService" ref="topicService"/>
         <property name="replyService" ref="replyService"/>
     </bean>
+    <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
+        <property name="mainSectionService" ref="mainSectionService"/>
+        <property name="topicService" ref="topicService"/>
+    </bean>
 </beans>
