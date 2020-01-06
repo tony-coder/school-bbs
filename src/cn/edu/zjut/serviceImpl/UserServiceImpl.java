@@ -87,4 +87,18 @@ public class UserServiceImpl implements UserService {
         return userDao.findByKeywords(keywords);
     }
 
+    @Override
+    public int getUserIdByEmail(String email) {
+        return userDao.findByEmail(email).getId();
+    }
+
+    @Override
+    public int getUserIdByUsername(String username) {
+        return userDao.findByUsername(username).getId();
+    }
+
+    @Override
+    public void update(User user) {
+        userDao.update(user);
+    }
 }
