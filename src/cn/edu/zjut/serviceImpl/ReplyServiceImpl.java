@@ -15,11 +15,12 @@ public class ReplyServiceImpl implements ReplyService {
     }
 
     @Override
-    public boolean addRepy(Reply reply) {
+    public boolean addReply(Reply reply) {
         try {
             replyDao.save(reply);
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

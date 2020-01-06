@@ -26,5 +26,8 @@ public interface TopicService {
     //自动更新帖子浏览数
     void autoIncreaseViewNum(Topic topic);
 
+    //自动更新帖子回复数
+    void autoIncreaseReply(Topic topic);
+
 
 }

@@ -1,25 +1,23 @@
 package cn.edu.zjut.action;
 
+import cn.edu.zjut.po.Reply;
+import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.BlackListService;
+import cn.edu.zjut.service.ReplyService;
+import cn.edu.zjut.service.TopicService;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 public class ReplyAction extends BaseAction {
-    private int topicId;
     private int pageNum;
-    private String content;
+    private Reply reply;
 
     //Spring注入
     private BlackListService blackListService;
-
-    public int getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
-    }
+    private TopicService topicService;
+    private ReplyService replyService;
 
     public int getPageNum() {
         return pageNum;
@@ -29,20 +27,28 @@ public class ReplyAction extends BaseAction {
         this.pageNum = pageNum;
     }
 
-    public String getContent() {
-        return content;
+    public Reply getReply() {
+        return reply;
+    }
+
+    public void setReply(Reply reply) {
+        this.reply = reply;
     }
 
     public void setBlackListService(BlackListService blackListService) {
         this.blackListService = blackListService;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setTopicService(TopicService topicService) {
+        this.topicService = topicService;
+    }
+
+    public void setReplyService(ReplyService replyService) {
+        this.replyService = replyService;
     }
 
     public String reply() {
-        if (content == null) {
+        if (reply.getContent() == null) {
             return "error";
         }
 //        int userId = (Integer) getSession().get("userId");
@@ -52,21 +58,22 @@ public class ReplyAction extends BaseAction {
             this.addFieldError("limit", "你已被管理员限制发表回复");
             return "post";
         }
-       /* Followcard followcard = new Followcard();
-        followcard.setFollowContent(content);
-        Post post = new Post();
-        post.setId(postId);
-        followcard.setPost(post);
-        followcard.setFollowDate(new Timestamp(System.currentTimeMillis()));
-        User user = new User();
-        user.setId(userId);
-        System.out.println("user id:" + userId + user.getUsername());
-        user.setUsername((String) getSession().get("username"));
-        followcard.setUser(user);
-        followcardBiz.addReply(followcard);
-        postBiz.autoIncreaseReply(postId);
-        getRequest().put("postId", postId);
-        getRequest().put("page", pageNum);*/
-        return SUCCESS;
+        Topic topic = topicService.getTopicById(reply.getTopicByTopicId().getId());
+        reply.setTopicByTopicId(topic);
+        reply.setReplyTime(new Timestamp(System.currentTimeMillis()));
+
+        reply.setUserByUserId(user);
+
+        if (!replyService.addReply(reply))
+            return "error";
+        topicService.autoIncreaseReply(topic);
+        pageNum = topic.getReplyNum() % 5 == 0 ? topic.getReplyNum() / 5 : topic.getReplyNum() / 5 + 1;
+        List<Reply> replies = replyService.getReplies(topic.getId(), pageNum, 5);
+
+        getRequest().put("topic", topic);
+        getRequest().put("replies", replies);
+        getRequest().put("pageNum", pageNum);
+
+        return "success";
     }
 }

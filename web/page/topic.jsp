@@ -129,7 +129,7 @@
                         </s:elseif>
                     </div>
                     <div style="margin: 20px;">
-                        <s:property value="content"/>
+                        <s:property escape="false" value="content"/>
                     </div>
                 </div>
                 <div class="col-md-1 reply-border">
@@ -198,14 +198,14 @@
     <br>
 
     <div style="height: 200px;margin: 70px auto; width: 800px;">
-        <form action="<%=path%>/reply.action" method="post" onsubmit="return onUpdateContent();">
-            <input type="hidden" name="content" id="content">
-            <input type="hidden" name="postId" value=<s:property value="#request.topic.id"/>>
-            <input type="hidden" name="page" value=
+        <form action="reply.action" method="post" onsubmit="return onUpdateContent();">
+            <input type="hidden" name="reply.content" id="content">
+            <input type="hidden" name="reply.topicByTopicId.id" value=<s:property value="#request.topic.id"/>>
+            <input type="hidden" name="pageNum" value=
             <s:property value="#request.pageNum"/>>
             <div style="margin: 5px auto;height: 100px; width: 800px">
                 <%--<textarea id="TextArea1" cols="20" rows="1" name="content" class="ckeditor"></textarea>--%>
-                <script id="ueditor" name="topic.content" type="text/plain" style="height: 100px"></script>
+                <script id="ueditor" type="text/plain" style="height: 20px"></script>
             </div>
             <s:fielderror fieldName="limit"/>
             <div style="float:right;margin: 60px auto">
@@ -221,7 +221,35 @@
 <script id="editor" type="text/plain" name="gdesc" style="width:100%;height:350px;"></script>
 <script type="text/javascript">
     //实例化编辑器
-    var ue = UE.getEditor('ueditor', {});
+    var ue = UE.getEditor('ueditor', {
+        toolbars: [
+            [
+                'undo', //撤销
+                'bold', //加粗
+                'underline', //下划线
+                'preview', //预览
+                'horizontal', //分隔线
+                'inserttitle', //插入标题
+                'cleardoc', //清空文档
+                'fontfamily', //字体
+                'fontsize', //字号
+                'paragraph', //段落格式
+                'simpleupload', //单图上传
+                'insertimage', //多图上传
+                'attachment', //附件
+                'inserttable', //插入表格
+                'emotion', //表情
+                'justifyleft', //居左对齐
+                'justifyright', //居右对齐
+                'justifycenter', //居中对
+                'justifyjustify', //两端对齐
+                'forecolor', //字体颜色
+                'fullscreen', //全屏
+                'edittip ', //编辑提示
+                'customstyle', //自定义标题
+            ]
+        ]
+    });
 
     /*获取输入区的内容*/
     function onUpdateContent() {

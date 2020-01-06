@@ -5,8 +5,6 @@ import java.util.Objects;
 
 public class Reply {
     private int id;
-    private int topicId;
-    private int userId;
     private String content;
     private Timestamp replyTime;
     private Topic topicByTopicId;
@@ -18,22 +16,6 @@ public class Reply {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getContent() {
@@ -58,15 +40,13 @@ public class Reply {
         if (o == null || getClass() != o.getClass()) return false;
         Reply reply = (Reply) o;
         return id == reply.id &&
-                topicId == reply.topicId &&
-                userId == reply.userId &&
                 Objects.equals(content, reply.content) &&
                 Objects.equals(replyTime, reply.replyTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, topicId, userId, content, replyTime);
+        return Objects.hash(id, content, replyTime);
     }
 
     public Topic getTopicByTopicId() {

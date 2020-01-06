@@ -6,8 +6,6 @@ import java.util.Objects;
 
 public class Topic {
     private int id;
-//    private int sectionId;  //subSection
-//    private int userId;
     private String title;
     private String content;
     private Timestamp createTime;
@@ -27,22 +25,6 @@ public class Topic {
     public void setId(int id) {
         this.id = id;
     }
-
-  /*  public int getSectionId() {
-        return sectionId;
-    }
-
-    public void setSectionId(int sectionId) {
-        this.sectionId = sectionId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }*/
 
     public String getTitle() {
         return title;

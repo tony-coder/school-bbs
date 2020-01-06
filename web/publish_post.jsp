@@ -25,7 +25,6 @@
 <body>
 <%--<jsp:include page="/pages/header.jsp"/>--%>
 <table class="tb" cellspacing="0" cellpadding="3">
-    <%--    <%Topic topic = (Topic) request.getAttribute("topic");%>--%>
     <s:if test="%{#request.topic == null}">
     <form method="post" action="<%=path%>/publish.action" onsubmit="return onUpdateContent();"><%--新建帖子--%>
         </s:if>

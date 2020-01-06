@@ -59,7 +59,16 @@ public class TopicServiceImpl implements TopicService {
         try {
             topicDao.autoIncreaseViewNum(topic);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @Override
+    public void autoIncreaseReply(Topic topic) {
+        try {
+            topicDao.autoIncreaseReply(topic);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

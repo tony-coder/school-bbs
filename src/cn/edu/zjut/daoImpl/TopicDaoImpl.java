@@ -94,6 +94,18 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         }
     }
 
+    @Override
+    public void autoIncreaseReply(Topic topic) throws Exception {
+        topic.setReplyNum(topic.getReplyNum() + 1);
+        try {
+            getSession().update(topic);
+            log.debug("update successful");
+        } catch (RuntimeException re) {
+            log.error("update failed", re);
+            throw re;
+        }
+    }
+
 
     @Override
     public List<Topic> getLatestTopic(int pageIndex, int pageSize) {

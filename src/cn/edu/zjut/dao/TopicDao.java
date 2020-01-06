@@ -23,10 +23,9 @@ public interface TopicDao {
 
 //    public Topic findById(int id);
 
-    List<Topic> search(String keywords);
+    public List<Topic> search(String keywords);
 
-    void autoIncreaseViewNum(Topic topic) throws Exception;
+    public void autoIncreaseViewNum(Topic topic) throws Exception;
 
-    public Session getSession();
-
+    public void autoIncreaseReply(Topic topic) throws Exception;
 }

@@ -28,8 +28,9 @@
             <tx:method name="register*" propagation="REQUIRED"/>  <!-- 注意，不添加的话没有存储更新权限 -->
             <tx:method name="activeUser*" propagation="REQUIRED"/>
             <tx:method name="publish*" propagation="REQUIRED"/>
-            <tx:method name="autoIncreaseViewNum" propagation="REQUIRED"/>
+            <tx:method name="autoIncrease*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="addReply*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
@@ -95,6 +96,7 @@
     <bean name="adminDao" class="cn.edu.zjut.daoImpl.AdminDaoImpl" parent="baseDAO"/>
     <bean name="topicDAO" class="cn.edu.zjut.daoImpl.TopicDaoImpl" parent="baseDAO"/>
     <bean name="mainSectionDao" class="cn.edu.zjut.daoImpl.MainSectionDaoImpl" parent="baseDAO"/>
+    <bean name="subSectionDao" class="cn.edu.zjut.daoImpl.SubSectionDaoImpl" parent="baseDAO"/>
     <bean name="blackListDao" class="cn.edu.zjut.daoImpl.BlackListDaoImpl" parent="baseDAO"/>
     <bean name="replyDao" class="cn.edu.zjut.daoImpl.ReplyDaoImpl" parent="baseDAO"/>
 
@@ -113,7 +115,9 @@
     <bean name="mainSectionService" class="cn.edu.zjut.serviceImpl.MainSectionServiceImpl">
         <property name="mainSectionDao" ref="mainSectionDao"/>
     </bean>
-
+    <bean name="subSectionService" class="cn.edu.zjut.serviceImpl.SubSectionServiceImpl">
+        <property name="subSectionDao" ref="subSectionDao"/>
+    </bean>
     <bean name="blackListService" class="cn.edu.zjut.serviceImpl.BlackListServiceImpl">
         <property name="blackListDao" ref="blackListDao"/>
     </bean>
@@ -153,5 +157,16 @@
     <bean name="limitUserAction" class="cn.edu.zjut.action.LimitUserAction" parent="baseAction" scope="prototype">
         <property name="userService" ref="userService"/>
         <property name="blackListService" ref="blackListService"/>
+    </bean>
+
+    <bean name="createDiscussAction" class="cn.edu.zjut.action.CreateDiscussAction" parent="baseAction"
+          scope="prototype">
+        <property name="mainSectionService" ref="mainSectionService"/>
+        <property name="subSectionService" ref="subSectionService"/>
+    </bean>
+    <bean name="replyAction" class="cn.edu.zjut.action.ReplyAction" parent="baseAction" scope="prototype">
+        <property name="blackListService" ref="blackListService"/>
+        <property name="topicService" ref="topicService"/>
+        <property name="replyService" ref="replyService"/>
     </bean>
 </beans>

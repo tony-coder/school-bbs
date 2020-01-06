@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.driver_class">com.mysql.cj.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/school_bbs?serverTimezone=Asia/Shanghai</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+
+        <property name="hbm2ddl.auto">update</property>
+
+        <!-- 显示Hibernate持久化操作所生成的SQL -->
+        <property name="show_sql">true</property>
+        <!-- 将SQL脚本进行格式化后再输出 -->
+        <property name="hibernate.format_sql">true</property>
+        <!-- 生成SQL注释 -->
+        <property name="hibernate.use_sql_comments">true</property>
+
+        <!-- 指定连接池里最大连接数 -->
+        <property name="hibernate.c3p0.max_size">20</property>
+        <!-- 指定连接池里最小连接数 -->
+        <property name="hibernate.c3p0.min_size">1</property>
+        <!-- 指定连接池里连接的超时时长 -->
+        <property name="hibernate.c3p0.timeout">1800</property>
+        <!-- 指定连接池里最大缓存多少个Statement对象 -->
+        <property name="hibernate.c3p0.max_statements">50</property>
+        <mapping resource="cn/edu/zjut/po/BestTopic.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/BlackList.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/LoginLog.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/MainSection.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/Notice.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/Reply.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/SubSection.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/Topic.hbm.xml"/>
+        <mapping resource="cn/edu/zjut/po/User.hbm.xml"/>
+
+
+        <!-- DB schema will be updated if needed -->
+        <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
+    </session-factory>
+</hibernate-configuration>

@@ -28,8 +28,9 @@
             <tx:method name="register*" propagation="REQUIRED"/>  <!-- 注意，不添加的话没有存储更新权限 -->
             <tx:method name="activeUser*" propagation="REQUIRED"/>
             <tx:method name="publish*" propagation="REQUIRED"/>
-            <tx:method name="autoIncreaseViewNum" propagation="REQUIRED"/>
+            <tx:method name="autoIncrease*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="addReply*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
@@ -157,9 +158,15 @@
         <property name="userService" ref="userService"/>
         <property name="blackListService" ref="blackListService"/>
     </bean>
-    
-    <bean name="createDiscussAction" class="cn.edu.zjut.action.CreateDiscussAction" parent="baseAction" scope="prototype">
+
+    <bean name="createDiscussAction" class="cn.edu.zjut.action.CreateDiscussAction" parent="baseAction"
+          scope="prototype">
         <property name="mainSectionService" ref="mainSectionService"/>
         <property name="subSectionService" ref="subSectionService"/>
+    </bean>
+    <bean name="replyAction" class="cn.edu.zjut.action.ReplyAction" parent="baseAction" scope="prototype">
+        <property name="blackListService" ref="blackListService"/>
+        <property name="topicService" ref="topicService"/>
+        <property name="replyService" ref="replyService"/>
     </bean>
 </beans>
