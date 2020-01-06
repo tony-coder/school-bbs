@@ -30,4 +30,6 @@ public interface TopicService {
     void autoIncreaseReply(Topic topic);
 
 
+    //按类型查找帖
+    public List<Topic> getTopicByType(int type,int pageIndex,int pageSize);
 }
