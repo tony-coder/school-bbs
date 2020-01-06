@@ -57,6 +57,29 @@ public interface UserService {
 
     public List<User> findByKeywords(String keywords);
 
+     /**
+     * 根据用户email 查询用户
+     *
+     * @param email
+     * @return 用户id -1:找不到用户
+     */
+    public int getUserIdByEmail(String email);
+
+    /**
+     * 根据用户username 查询用户
+     *
+     * @param username
+     * @return 用户id -1:找不到用户
+     */
+    public int getUserIdByUsername(String username);
+
+    /**
+     * 更新用户
+     *
+     * @param user
+     * @return
+     */
+    public void update(User user);
 
 
 }
