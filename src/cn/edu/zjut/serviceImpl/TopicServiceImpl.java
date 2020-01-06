@@ -71,4 +71,9 @@ public class TopicServiceImpl implements TopicService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
+        return topicDao.getTopicByType(type,pageIndex,pageSize);
+    }
 }
