@@ -32,6 +32,7 @@
             <tx:method name="save*" propagation="REQUIRED"/>
             <tx:method name="getAllSensitiveWords" propagation="REQUIRED"/>
             <tx:method name="addReply*" propagation="REQUIRED"/>
+            <tx:method name="log" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
     </tx:advice>
@@ -91,6 +92,15 @@
         </property>
     </bean>
 
+    <!--用户登录日志切面-->
+    <bean name="logAspect" class="cn.edu.zjut.aspect.LogAspect"/>
+    <aop:config>
+        <aop:aspect id="log" ref="logAspect">
+            <aop:pointcut id="pointcut" expression="execution(* cn.edu.zjut.action.*.login*(..))"/>
+            <aop:after method="recordLog" pointcut-ref="pointcut"/>
+        </aop:aspect>
+    </aop:config>
+
     <bean name="baseDAO" class="cn.edu.zjut.db.BaseHibernateDAO">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
@@ -105,16 +115,16 @@
     <bean name="replyDao" class="cn.edu.zjut.daoImpl.ReplyDaoImpl" parent="baseDAO"/>
     <bean name="bestTopicDao" class="cn.edu.zjut.daoImpl.BestTopicDaoImpl" parent="baseDAO"/>
 
+    <bean name="loginLog" class="cn.edu.zjut.daoImpl.LoginLogDaoImpl" parent="baseDAO"/>
+
     <!--Service-->
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
         <property name="sensitiveWordDao" ref="sensitiveWordDao"/>
     </bean>
-
     <bean name="adminService" class="cn.edu.zjut.serviceImpl.AdminServiceImpl">
         <property name="adminDAO" ref="adminDao"/>
     </bean>
-
     <bean name="topicService" class="cn.edu.zjut.serviceImpl.TopicServiceImpl">
         <property name="topicDao" ref="topicDAO"/>
     </bean>
@@ -141,6 +151,10 @@
     </bean>
     <bean name="bestTopicService" class="cn.edu.zjut.serviceImpl.BestTopivServiceImpl">
         <property name="bestTopicDao" ref="bestTopicDao"/>
+    </bean>
+
+    <bean name="loginLogService" class="cn.edu.zjut.serviceImpl.LoginLogServiceImpl">
+        <property name="loginLogDao" ref="loginLog"/>
     </bean>
 
     <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
@@ -207,8 +221,8 @@
         <property name="bestTopicService" ref="bestTopicService"/>
         <property name="topicService" ref="topicService"/>
     </bean>
-     <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
-         <property name="mainSectionService" ref="mainSectionService"/>
-         <property name="topicService" ref="topicService"/>
-     </bean>
+    <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
+        <property name="mainSectionService" ref="mainSectionService"/>
+        <property name="topicService" ref="topicService"/>
+    </bean>
 </beans>

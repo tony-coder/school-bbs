@@ -162,6 +162,14 @@
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
+
+        <action name="getAllLimitUsers" class="limitUserAction" method="getAllLimitUsers">
+            <result name="success">/manager/limitUser.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
+        </action>
+
+
         <!--创建讨论区（子模块）-->
         <action name="createDiscuss" class="createDiscussAction" method="create">
             <result name="success">/manager/create_discuss.jsp</result>
@@ -171,6 +179,7 @@
         <!--各类帖查询-->
         <action name="more" class="detailAction" method="execute">
             <result name="success">/page/detailTopic.jsp</result>
+            <result name="admin">/manager/newTopics.jsp</result>
             <result name="error">/page/error.jsp</result>
         </action>
 
@@ -179,15 +188,12 @@
         </action>
 
         <action name="deleteSensitiveWord" class="sensitiveWordAction" method="deleteSensitiveWord">
-            <result name="success" type="redirect">/manager/sensitiveWords.jsp</result>
+            <result name="success">/manager/sensitiveWords.jsp</result>
         </action>
 
         <action name="addSensitiveWord" class="sensitiveWordAction" method="addSensitiveWord">
             <result name="success">/manager/sensitiveWords.jsp</result>
         </action>
 
-        <action name="newTopics" class="topicAction" method="getLatestTopics">
-            <result name="success">/manager/newTopics.jsp</result>
-        </action>
     </package>
 </struts>

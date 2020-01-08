@@ -21,6 +21,12 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
+    <listener>
+        <listener-class>
+            org.springframework.web.context.request.RequestContextListener
+        </listener-class>
+    </listener>
+
     <filter>
         <filter-name>accessFilter</filter-name>
         <filter-class>cn.edu.zjut.filter.AccessFilter</filter-class>
