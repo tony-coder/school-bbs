@@ -92,8 +92,8 @@
         </property>
     </bean>
 
+    <!--用户登录日志切面-->
     <bean name="logAspect" class="cn.edu.zjut.aspect.LogAspect"/>
-    <!-- 配置文件的方式 -->
     <aop:config>
         <aop:aspect id="log" ref="logAspect">
             <aop:pointcut id="pointcut" expression="execution(* cn.edu.zjut.action.*.login*(..))"/>

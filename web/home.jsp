@@ -34,12 +34,12 @@
                     <!-- Wrapper for slides -->
                     <div class="carousel-inner" role="listbox">
                         <div class="item active">
-                            <img src="<%=basePath%>imag/2.jpg" alt="...">
+                            <img src="<%=basePath%>img/2.jpg" alt="...">
                             <div class="carousel-caption">
                             </div>
                         </div>
                         <div class="item">
-                            <img src="<%=basePath%>imag/1.jpg" alt="...">
+                            <img src="<%=basePath%>img/1.jpg" alt="...">
                             <div class="carousel-caption">
                             </div>
                         </div>
