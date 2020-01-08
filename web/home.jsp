@@ -13,14 +13,14 @@
 %>
 <html>
 <head>
-    <title>Title</title>
-    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>
-    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>
-    <%--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>--%>
-    <link href="<%=basePath%>css/zzsc-demo.css" type="text/css" rel="stylesheet">
-    <link href="<%=basePath%>css/index.css" type="text/css" rel="stylesheet">
-    <link href="<%=basePath%>css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <title>论坛主页</title>
+    <%--    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>--%>
+    <%--    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>--%>
+    <%--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>--%>
+    <%--<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>--%>
+    <%--<link href="<%=basePath%>css/zzsc-demo.css" type="text/css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath%>css/index.css" type="text/css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath%>css/bootstrap.min.css" type="text/css" rel="stylesheet">--%>
 </head>
 <body>
 
@@ -87,11 +87,41 @@
                                 <s:property value="title"/><span class="badge">新</span>
                                 <p class="text-right" style="float: right;margin-right: 20px">浏览量:<s:property
                                         value="click"/>&nbsp;评论量:<s:property
-                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime"
-                                                                             format="yyyy-MM-dd HH:mm:ss"/></p>
+                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></p>
                             </a>
                         </s:iterator>
                     </ul>
+                </div>
+                <div class="col-md-3">
+                    <ul class="list-group">
+                        <div class="list-group-item active">
+                            论坛公告
+                        </div>
+
+
+
+                    </ul>
+                    <a href="<%=request.getContextPath()%>/publish_post.jsp" ><button type="button" class="btn btn-primary" style="width: 200px;height:50px;margin-left: 30px">我要发帖</button></a>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-9" style="margin-left: 15px">
+                        <ul class="list-group">
+                            <div class="list-group-item active">
+                                精华帖
+                                <a href="<%=request.getContextPath() %>/more.action?type=-2&&page=1" style="float: right;color: white">更多>></a>
+                            </div>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 20px;margin-left: 15px">板块分类</h3>
+                <hr/>
+                <div  class="container">
+
+
                 </div>
 
             </div>
