@@ -14,13 +14,7 @@
 <html>
 <head>
     <title>论坛主页</title>
-    <%--    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>--%>
-    <%--    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>--%>
-    <%--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>--%>
-    <%--<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>--%>
-    <%--<link href="<%=basePath%>css/zzsc-demo.css" type="text/css" rel="stylesheet">--%>
-    <%--<link href="<%=basePath%>css/index.css" type="text/css" rel="stylesheet">--%>
-    <%--<link href="<%=basePath%>css/bootstrap.min.css" type="text/css" rel="stylesheet">--%>
+    <link href="<%=basePath%>css/index.css" type="text/css" rel="stylesheet">
 </head>
 <body>
 
@@ -87,7 +81,8 @@
                                 <s:property value="title"/><span class="badge">新</span>
                                 <p class="text-right" style="float: right;margin-right: 20px">浏览量:<s:property
                                         value="click"/>&nbsp;评论量:<s:property
-                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></p>
+                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime"
+                                                                             format="yyyy-MM-dd HH:mm:ss"/></p>
                             </a>
                         </s:iterator>
                     </ul>
@@ -98,39 +93,83 @@
                             论坛公告
                         </div>
 
-
-
+                        <s:iterator value="#request.notices">
+                            <a href="<%=request.getContextPath()%>/page/notice.jsp?noticeId=<s:property value="id"/> "
+                               class="list-group-item"><s:property value="title"/>
+                            </a>
+                        </s:iterator>
                     </ul>
-                    <a href="<%=request.getContextPath()%>/publish_post.jsp" ><button type="button" class="btn btn-primary" style="width: 200px;height:50px;margin-left: 30px">我要发帖</button></a>
+                    <a href="<%=request.getContextPath()%>/publish_post.jsp">
+                        <button type="button" class="btn btn-primary"
+                                style="width: 200px;height:50px;margin-left: 30px">我要发帖
+                        </button>
+                    </a>
                 </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-9">
+                    <ul class="list-group">
+                        <div class="list-group-item active">
+                            精华帖
+                            <a href="<%=request.getContextPath() %>/more.action?type=-2&&page=1"
+                               style="float: right;color: white">更多>></a>
+                        </div>
+                        <s:iterator value="#request.bestTopics">
+                            <a href="topicDetail.action?topicId=<s:property value="topicByTopicId.id"/>&&page=1"
+                               class="list-group-item">
+                                <h4 class="list-group-item-heading">
+                                    [<s:property
+                                        value="topicByTopicId.subSectionBySectionId.mainSectionByMainSectionId.title"/>]</h4>
+                                <s:property value="topicByTopicId.title"/><span class="badge">热</span>
+                                <p class="text-right" style="float: right;margin-right: 20px">
+                                    浏览量<s:property value="click"/>&nbsp;评论量:<s:property
+                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime"
+                                                                             format="yyyy-MM-dd HH:mm:ss"/>
+                                </p>
+                            </a>
+                        </s:iterator>
+                    </ul>
+                </div>
+            </div>
 
-                <div class="row">
-                    <div class="col-md-9" style="margin-left: 15px">
-                        <ul class="list-group">
-                            <div class="list-group-item active">
-                                精华帖
-                                <a href="<%=request.getContextPath() %>/more.action?type=-2&&page=1" style="float: right;color: white">更多>></a>
+            <h3 style="margin-top: 20px;margin-left: 15px">板块分类</h3>
+            <hr/>
+            <div class="container">
+                <s:set name="i" value="1"/>
+                <s:iterator value="#session.mainSections" var="top">
+                    <s:if test="#i % 4 == 1">
+                        <div class="row">
+                    </s:if>
+                    <div class="col-md-3 col-sm-12">
+                        <a href="<%=request.getContextPath() %>/more.action?type=<s:property value="id"/>&&page=1">
+                            <div class="main-forum">
+                                <h3><s:property value="#top.title"/></h3>
+                                <s:set name="switcher" value="true"/>
+                                <s:iterator value="#top.subSectionsById" var="inner">
+                                    <s:if test="#switcher == true">
+                                        <s:set name="switcher" value="false"/><s:property value="#inner.title"/>
+                                    </s:if>
+                                    <s:else>
+                                        <s:set name="switcher" value="true"/><s:property value="#inner.title"/>
+                                    </s:else>
+
+                                </s:iterator>
                             </div>
-
-                        </ul>
+                        </a>
                     </div>
-                </div>
-
-                <h3 style="margin-top: 20px;margin-left: 15px">板块分类</h3>
-                <hr/>
-                <div  class="container">
-
-
-                </div>
-
+                    <s:if test="#i % 4 ==4">
+                        </div>
+                    </s:if>
+                    <s:set name="i" value="#i + 1"/>
+                </s:iterator>
             </div>
         </div>
     </div>
 </div>
+</div>
 
 <jsp:include page="page/bottom.jsp"/>
-
 
 </body>
 </html>

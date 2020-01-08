@@ -29,15 +29,29 @@ public class NoticeDaoImpl extends BaseHibernateDAO implements NoticeDao {
     public Notice getNoticeById(int noticeId) {
         String queryString = "from Notice notice where notice.id=?1";
         Query query = getSession().createQuery(queryString);
-        query.setParameter(1,noticeId);
+        query.setParameter(1, noticeId);
         List<Notice> list = query.list();
-        if(list.size()>0){
+        if (list.size() > 0) {
             return list.get(0);
-        }else{
+        } else {
             return null;
         }
 
 
+    }
 
+    @Override
+    public List<Notice> getNotice(int pageIndex, int pageSize) {
+        try {
+            String queryString = "from Notice notice order by notice.createTime desc ";
+            Query query = getSession().createQuery(queryString);
+            int startIndex = (pageIndex - 1) * pageSize;
+            query.setFirstResult(startIndex);
+            query.setMaxResults(pageSize);
+            return query.list();
+        } catch (RuntimeException re) {
+            re.printStackTrace();
+            return null;
+        }
     }
 }

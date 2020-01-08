@@ -23,7 +23,7 @@
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"><a href="<%=path%>/page/change-info.jsp">资料修改</a></li>
-                <li role="presentation" class="active"><a href="<%=path%>/page/myTopic.jsp">我的帖子</a></li>
+                <li role="presentation" class="active"><a href="mytopic.action">我的帖子</a></li>
                 <li role="presentation"><a href=applyrecords.action>申请记录</a></li>
                 <!--<li role="presentation"><a href="#">Messages</a></li>-->
             </ul>
@@ -51,8 +51,7 @@
                         </s:if>
 
                         <p style="float: right;margin-right: 50px">浏览量:<s:property value="click"/>&nbsp;评论量:<s:property
-                                value="replyNum"/>&nbsp;发表日期:<s:date name="createTime"
-                                                                     format="yyyy-MM-dd HH:mm:ss"/></p>
+                                value="replyNum"/>&nbsp;发表日期:<s:date name="createTime" format="yyyy-MM-dd HH:mm:ss"/></p>
                     </div>
                 </s:iterator>
             </ul>

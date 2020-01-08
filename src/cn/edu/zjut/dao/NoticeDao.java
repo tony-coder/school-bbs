@@ -5,9 +5,9 @@ import cn.edu.zjut.po.Notice;
 import java.util.List;
 
 public interface NoticeDao {
-    void publish(Notice notice);
+    public void publish(Notice notice);
 
-    Notice getNoticeById(int noticeId);
+    public Notice getNoticeById(int noticeId);
 
-
+    public List<Notice> getNotice(int pageIndex, int pageSize);
 }

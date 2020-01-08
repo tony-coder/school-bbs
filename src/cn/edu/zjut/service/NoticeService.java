@@ -2,8 +2,12 @@ package cn.edu.zjut.service;
 
 import cn.edu.zjut.po.Notice;
 
-public interface NoticeService {
-    void publish(Notice notice);
+import java.util.List;
 
-    Notice getNoticeById(int noticeId);
+public interface NoticeService {
+    public void publish(Notice notice);
+
+    public Notice getNoticeById(int noticeId);
+
+    public List<Notice> getNotice(int pageIndex, int pageSize);
 }

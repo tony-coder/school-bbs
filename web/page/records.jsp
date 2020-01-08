@@ -21,9 +21,9 @@
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="<%=path%>/pages/change-info.jsp">资料修改</a></li>
-                <li role="presentation"><a href="<%=path%>/pages/mypost.jsp">我的帖子</a></li>
-                <li role="presentation" class="active"><a href="<%=path%>/pages/records.jsp">申请记录</a></li>
+                <li role="presentation"><a href="<%=path%>/page/change-info.jsp">资料修改</a></li>
+                <li role="presentation"><a href="mytopic.action">我的帖子</a></li>
+                <li role="presentation" class="active"><a href="applyrecords.action">申请记录</a></li>
                 <!--<li role="presentation"><a href="#">Messages</a></li>-->
             </ul>
         </div>

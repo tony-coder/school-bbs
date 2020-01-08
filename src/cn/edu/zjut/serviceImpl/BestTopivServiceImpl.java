@@ -56,7 +56,7 @@ public class BestTopivServiceImpl implements BestTopicService {
     }
 
     @Override
-    public boolean isExist(int postId) {
-        return false;
+    public boolean isExist(int topicId) {
+        return bestTopicDao.isExist(topicId);
     }
 }
