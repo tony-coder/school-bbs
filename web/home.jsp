@@ -123,8 +123,8 @@
                                         value="topicByTopicId.subSectionBySectionId.mainSectionByMainSectionId.title"/>]</h4>
                                 <s:property value="topicByTopicId.title"/><span class="badge">热</span>
                                 <p class="text-right" style="float: right;margin-right: 20px">
-                                    浏览量<s:property value="click"/>&nbsp;评论量:<s:property
-                                        value="replyNum"/>&nbsp;发表日期:<s:date name="createTime"
+                                    浏览量<s:property value="topicByTopicId.click"/>&nbsp;评论量:<s:property
+                                        value="topicByTopicId.replyNum"/>&nbsp;发表日期:<s:date name="createTime"
                                                                              format="yyyy-MM-dd HH:mm:ss"/>
                                 </p>
                             </a>
