@@ -13,7 +13,7 @@
 %>
 <html>
 <head>
-    <title>Title</title>
+    <title>我的帖子</title>
     <%--<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">--%>
 </head>
 <body>

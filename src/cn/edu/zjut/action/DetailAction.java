@@ -7,6 +7,7 @@ import cn.edu.zjut.service.TopicService;
 import java.util.List;
 //按类型 帖子详情
 public class DetailAction extends BaseAction {
+    private int isAdmin;
     private int type;//1,2,3.4.5.6.7.
     private int page;
     private TopicService topicService;//帖子
@@ -36,7 +37,11 @@ public class DetailAction extends BaseAction {
             getRequest().put("page", page);
             getRequest().put("type", type);
             getRequest().put("typename", typename);
-            return SUCCESS;
+            if(isAdmin==1){
+                return "admin";
+            }else{
+                return SUCCESS;
+            }
         }
         return ERROR;
     }
@@ -63,6 +68,14 @@ public class DetailAction extends BaseAction {
 
     public int getPage(){
         return page;
+    }
+
+    public int getIsAdmin() {
+        return isAdmin;
+    }
+
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 }
 

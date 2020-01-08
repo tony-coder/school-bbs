@@ -1,6 +1,8 @@
 package cn.edu.zjut.serviceImpl;
 
+import cn.edu.zjut.dao.SensitiveWordDao;
 import cn.edu.zjut.dao.UserDao;
+import cn.edu.zjut.po.SensitiveWord;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.UserService;
 
@@ -12,6 +14,11 @@ import java.util.List;
  */
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
+    private SensitiveWordDao sensitiveWordDao;
+
+    public void setSensitiveWordDao(SensitiveWordDao sensitiveWordDao) {
+        this.sensitiveWordDao = sensitiveWordDao;
+    }
 
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
@@ -100,5 +107,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(User user) {
         userDao.update(user);
+    }
+
+    @Override
+    public boolean checkUsername(User user) {
+        List<SensitiveWord> sensitiveWordList = sensitiveWordDao.findAll();
+        for (SensitiveWord sensitiveWord : sensitiveWordList){
+            if (user.getUsername().contains(sensitiveWord.getWord())){
+                return false;
+            }
+        }
+        return true;
     }
 }

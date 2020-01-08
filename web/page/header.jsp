@@ -99,13 +99,13 @@
                     <s:property value="%{#session.user.username}"/><b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
-                    <li><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
-                    <li><a href="<%=path%>/manager/newTopics.jsp">查看新帖</a></li>
-                    <li><a href="bestTopic.action">精华帖请求</a></li>
-                    <li><a href="<%=path%>/manager/limitUser.jsp">封锁用户</a></li>
-                    <li><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
-                    <li><a href="<%=path%>/manager/sensitiveWords.jsp">创建讨论区</a></li>
+                    <li ><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
+                    <li ><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
+                    <li ><a href="more.action?type=-1&&page=1&&isAdmin=1">查看新帖</a></li>
+                    <li ><a href="bestTopic.action">精华帖请求</a></li>
+                    <li ><a href="getAllLimitUsers.action">封锁用户</a></li>
+                    <li ><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
+                    <li ><a href="getAllSensitiveWords">敏感词管理</a></li>
                     <li class="divider"></li>
                     <li><a href="<%=path+"/logout.action"%>">退出登陆</a></li>
                 </ul>
@@ -115,12 +115,10 @@
 
     </s:elseif>
 
-    <form name="fileForm" class="navbar-form navbar-right" role="search"
-          action="<%=request.getContextPath()%>/searchTopic">
+    <form name="fileForm" class="navbar-form navbar-right" role="search" action="<%=request.getContextPath()%>/searchTopic">
         <div class="input-group">
             <input type="text" class="form-control" name="keywords" placeholder="search">
-            <span class="input-group-addon"><span onclick="spanSubmit()"
-                                                  class="glyphicon glyphicon-search"></span></span>
+            <span class="input-group-addon"><span onclick="spanSubmit()" class="glyphicon glyphicon-search"></span></span>
         </div>
     </form>
 </nav>

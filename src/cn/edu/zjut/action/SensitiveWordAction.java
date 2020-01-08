@@ -53,6 +53,7 @@ public class SensitiveWordAction extends BaseAction{
         sensitiveWord =(SensitiveWord) sensitiveWordService.findById(id).get(0);
         sensitiveWordService.deleteSensitiveWord(sensitiveWord);
         setAllSensitiveWord(sensitiveWordService.findAll());
+        getRequest().put("allSensitiveWord",allSensitiveWord);
         return SUCCESS;
     }
 

@@ -108,6 +108,7 @@
     <!--Service-->
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
+        <property name="sensitiveWordDao" ref="sensitiveWordDao"/>
     </bean>
 
     <bean name="adminService" class="cn.edu.zjut.serviceImpl.AdminServiceImpl">

@@ -69,16 +69,22 @@ public class LimitUserAction extends BaseAction{
 //            System.out.println(tempgetLevel());
             getRequest().put("users", users);
             getRequest().put("keywords", keywords);
+            getRequest().put("isFind",1);
             return SUCCESS;
         }
         return ERROR;
     }
 
+    public String getAllLimitUsers() throws Exception{
+        List<User> users = blackListService.getAll();
+        getRequest().put("limitUsers", users);
+        getRequest().put("isFind",0);
+        return SUCCESS;
+    }
 
     public String limit() throws Exception{
 
         if (userId >0 && level>0){
-            System.out.println("limit:"+keywords);
             BlackList blackList = new BlackList();
             User user = new User();
             user.setId(userId);
@@ -97,15 +103,9 @@ public class LimitUserAction extends BaseAction{
         }else if (level<0){
             blackListService.delete(userId);
         }
-        System.out.println("before query"+keywords);
-        List<User> users = userService.findByKeywords(keywords);
-//        Map<Integer,Integer> levelMap = new HashMap<Integer,Integer>();
-//        for(User user : users){
-//            int tempLevel = blackListService.getLevel(user.getId());
-//            levelMap.put(user.getId(),tempLevel);
-//        }
-//        getRequest().put("levelList", levelMap.values());
-        getRequest().put("users", users);
+        List<User> users = blackListService.getAll();
+        getRequest().put("limitUsers", users);
+        getRequest().put("isFind",0);
         getRequest().put("keywords", keywords);
         return SUCCESS;
     }

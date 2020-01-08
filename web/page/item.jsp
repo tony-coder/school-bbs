@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <html lang="en">
 <head>
-    <title>Title</title>
+    <title>搜索结果</title>
     <%--<link href="css/bootstrap.min.css" rel="stylesheet">--%>
     <%--<link href="css/search-result.css" rel="stylesheet"/>--%>
 

@@ -13,7 +13,7 @@
 %>
 <html>
 <head>
-    <title>Title</title>
+    <title>申请记录</title>
 </head>
 <jsp:include page="/page/header.jsp"/>
 

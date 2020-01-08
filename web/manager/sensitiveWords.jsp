@@ -14,7 +14,7 @@
 <head>
     <base href="<%=basePath%>">
 
-    <title>管理员修改个人信息</title>
+    <title>敏感词管理</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -45,13 +45,13 @@
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation"><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
+                <li role="presentation" ><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
-                <li role="presentation"><a href="<%=path%>/manager/newTopics.jsp">查看新帖</a></li>
+                <li role="presentation"><a href="more.action?type=-1&&page=1&&isAdmin=1">查看新帖</a></li>
                 <li role="presentation"><a href="bestTopic.action">精华帖请求</a></li>
-                <li role="presentation"><a href="<%=path%>/manager/limitUser.jsp">封锁用户</a></li>
+                <li role="presentation"><a href="getAllLimitUsers.action">封锁用户</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
-                <li role="presentation" class="active"><a href="<%=path%>/manager/sensitiveWords.jsp">敏感词管理</a></li>
+                <li role="presentation" class="active"><a href="getAllSensitiveWords">敏感词管理</a></li>
             </ul>
         </div>
 
@@ -73,25 +73,26 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
                             <s:iterator value="allSensitiveWord" var="sensitiveWord">
-                                <td><s:property value="%{#sensitiveWord.id}"/></td>
-                                <td><span><s:property value="%{#sensitiveWord.word}"/></span></td>
-                                <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default dropdown-toggle btn-xs"
-                                                data-toggle="dropdown">
-                                            操作<span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li>
-                                                <a href="<%=path%>/deleteSensitiveWord.action?id=<s:property value="%{#sensitiveWord.id}"/>">删除敏感词</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </td>
+                                <tr>
+                                    <td><s:property value="%{#sensitiveWord.id}"/></td>
+                                    <td><span><s:property value="%{#sensitiveWord.word}"/></span></td>
+                                    <td>
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default dropdown-toggle btn-xs"
+                                                    data-toggle="dropdown">
+                                                操作<span class="caret"></span>
+                                            </button>
+                                            <ul class="dropdown-menu" role="menu">
+                                                <li>
+                                                    <a href="<%=path%>/deleteSensitiveWord.action?id=<s:property value="%{#sensitiveWord.id}"/>">删除敏感词</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
                             </s:iterator>
-                        </tr>
+
                         </tbody>
                     </table>
                     <form name="fileForm1" style="float: right;" class="navbar-form navbar-left" role="search"

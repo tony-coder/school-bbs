@@ -1,5 +1,6 @@
 package cn.edu.zjut.action;
 
+import cn.edu.zjut.po.SensitiveWord;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.UserService;
 import cn.edu.zjut.util.MailUtil;
@@ -10,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import java.sql.Timestamp;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 public class UserAction extends BaseAction {
     //注册信息
@@ -49,7 +51,10 @@ public class UserAction extends BaseAction {
     }
 
     public String register() throws Exception {
-
+        if(!userService.checkUsername(user)){
+            this.addFieldError("username", "该用户名包含敏感词");
+            return "fail";
+        }
         switch (userService.isExist(user)) {
             case 1:
                 this.addFieldError("username", "该用户名已被注册");
@@ -60,6 +65,7 @@ public class UserAction extends BaseAction {
             default:
                 break;
         }
+
         String code = Utils.createUUID();
         user.setActiveCode(code);   //设置用于验证的uuid
         user.setLevel(1);           //设置用户初始等级

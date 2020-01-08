@@ -67,7 +67,7 @@ public class AdminAction extends BaseAction{
                     return SUCCESS;
                 }
             }
-            if(user.getPassword() != null){
+            if(user.getPassword() != null&&!user.getPassword().equals("")){
                 admin.setPassword(user.getPassword());
             }
             admin.setEmail(user.getEmail());

@@ -30,11 +30,11 @@
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation" ><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
-                <li role="presentation"><a href="<%=path%>/manager/newTopics.jsp">查看新帖</a></li>
-                <li role="presentation"><a href="<%=path%>/manager/bestpost.jsp">精华帖请求</a></li>
-                <li role="presentation"><a href="<%=path%>/manager/limitUser.jsp">封锁用户</a></li>
-                <li role="presentation" class="active"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
-                <li role="presentation"><a href="<%=path%>/manager/sensitiveWords.jsp">敏感词管理</a></li>
+                <li role="presentation"><a href="more.action?type=-1&&page=1&&isAdmin=1">查看新帖</a></li>
+                <li role="presentation"><a href="bestTopic.action">精华帖请求</a></li>
+                <li role="presentation"><a href="getAllLimitUsers.action">封锁用户</a></li>
+                <li role="presentation"  class="active"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
+                <li role="presentation"><a href="getAllSensitiveWords">敏感词管理</a></li>
             </ul>
         </div>
         <div class="col-md-9">
@@ -58,7 +58,6 @@
                                        placeholder="请输入子板块名称">(多个子版块之间用逗号隔开)
                             </div>
                             <p><button type="submit" class="btn btn-primary">创建板块</button></p>
-                    </div>
                     <s:fielderror fieldName="create_result"></s:fielderror>
                     </form>
                 </div>

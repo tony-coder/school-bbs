@@ -81,5 +81,6 @@ public interface UserService {
      */
     public void update(User user);
 
+    boolean checkUsername(User user);
 
 }

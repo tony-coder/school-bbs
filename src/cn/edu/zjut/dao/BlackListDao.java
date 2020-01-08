@@ -1,6 +1,9 @@
 package cn.edu.zjut.dao;
 
 import cn.edu.zjut.po.BlackList;
+import cn.edu.zjut.po.User;
+
+import java.util.List;
 
 public interface BlackListDao {
     void save(BlackList blackListItem);
@@ -10,5 +13,7 @@ public interface BlackListDao {
     void delete(int userId);
 
     int getLevel(int userId);
+
+    List getAll();
 
 }

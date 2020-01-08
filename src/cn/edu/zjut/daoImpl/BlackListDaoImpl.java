@@ -46,6 +46,8 @@ public class BlackListDaoImpl  extends BaseHibernateDAO implements BlackListDao 
             Query query = getSession().createQuery(queryString);
             query.setParameter(1,userId);
             BlackList newBlackList = (BlackList)query.list().get(0);
+            newBlackList.getUserByUserId().getBlackListsById().remove(newBlackList);
+            newBlackList.setUserByUserId(null);
             getSession().delete(newBlackList);
         }
     }
@@ -62,5 +64,17 @@ public class BlackListDaoImpl  extends BaseHibernateDAO implements BlackListDao 
             return blackList.getLevel();
         }
         return -1;
+    }
+
+    @Override
+    public List getAll() {
+        String queryString = "from BlackList ";
+        try{
+            Query query = getSession().createQuery(queryString);
+            List list = query.list();
+            return list;
+        }catch (RuntimeException re){
+            throw re;
+        }
     }
 }
