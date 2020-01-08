@@ -17,7 +17,7 @@
         <interceptor name="authority" class="cn.edu.zjut.interceptors.AuthorityInterceptor"/>
     </interceptors>
         <action name="login" class="userAction" method="login">
-            <result name="success">/home.jsp</result>
+            <result type="chain" name="success">homePage</result>
             <result name="login">/login.jsp</result>
         </action>
 
@@ -29,7 +29,7 @@
         <action name="active" class="userAction" method="active">
             <result name="index">/index.jsp</result>
             <result name="success">/skip_login.jsp</result>
-            <result name="error"></result>
+            <result name="error">/page/error.jsp</result>
         </action>
         <!--用户登出-->
         <action name="logout" class="userAction" method="logout">
@@ -101,7 +101,7 @@
 
         <!--回复精华帖-->
         <action name="replyapply" class="bestTopicAction" method="replyapply">
-            <!--            <result name="success">/manager/bestpost.jsp</result>-->
+            <result type="chain" name="success">bestTopic</result>
             <result name="error">/page/error.jsp</result>
             <result name="input">/page/error.jsp</result>
             <interceptor-ref name="defaultStack"/>

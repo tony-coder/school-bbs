@@ -47,13 +47,12 @@ public class PublishTopicAction extends BaseAction {
     public String publish() throws Exception {
         //int userId = (Integer) getSession().get("userId"); //获取用户
         // 测试
-        User user1 = new User();
+       /* User user1 = new User();
         user1.setId(17);
         user1.setUsername("test");
         user1.setEmail("");
         user1.setLevel(1);
-        getSession().put("user", user1);
-        //
+        getSession().put("user", user1);*/
 
         User user = (User) getSession().get("user");  //获取用户
 
@@ -99,13 +98,12 @@ public class PublishTopicAction extends BaseAction {
 
     public String initPublishPostPage() throws Exception {
         List<MainSection> mainSections = mainSectionService.getAllMainSection();  //获取所有主板块
-        int topicId = topic.getId();
-        if (topicId > 0) {
+        if (topic != null && topic.getId() > 0) {
+            int topicId = topic.getId();
             Topic topic = topicService.getTopicById(topicId);
             getRequest().put("topic", topic);
-            getRequest().put("mainSections", mainSections);
-            return "success";
         }
-        return "error";
+        getRequest().put("mainSections", mainSections);
+        return "success";
     }
 }

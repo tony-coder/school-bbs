@@ -55,7 +55,7 @@
                     <s:iterator value="%{#session.mainSections}" var="mainSection">
                         <li class="divider"></li>
                         <li>
-                            <a href="<%=request.getContextPath() %>/more.action?type=<s:property value="%{#mainSection.id}"/> &&page=1"><s:property
+                            <a href="more.action?type=<s:property value="%{#mainSection.id}"/> &&page=1"><s:property
                                     value="%{#mainSection.title}"/></a></li>
                     </s:iterator>
                 </ul>

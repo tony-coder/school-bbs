@@ -13,8 +13,11 @@
     <constant name="struts.ui.theme" value="simple"/>
     <constant name="struts.action.excludePattern" value="/static/.*?"/>
     <package name="strutsBean" extends="struts-default" namespace="/">
+    <interceptors >
+        <interceptor name="authority" class="cn.edu.zjut.interceptors.AuthorityInterceptor"/>
+    </interceptors>
         <action name="login" class="userAction" method="login">
-            <result name="success">/home.jsp</result>
+            <result type="chain" name="success">homePage</result>
             <result name="login">/login.jsp</result>
         </action>
 
@@ -26,7 +29,7 @@
         <action name="active" class="userAction" method="active">
             <result name="index">/index.jsp</result>
             <result name="success">/skip_login.jsp</result>
-            <result name="error"></result>
+            <result name="error">/page/error.jsp</result>
         </action>
         <!--用户登出-->
         <action name="logout" class="userAction" method="logout">
@@ -35,9 +38,13 @@
         <!--用户更新信息-->
         <action name="updateUser" class="userAction" method="update">
             <result name="success">/page/change_info.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
         <action name="updateAdmin" class="adminAction" method="update">
             <result name="success">/manager/change_info.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <action name="topicDetail" class="topicAction" method="postDetail">
@@ -47,23 +54,32 @@
 
         <!--发布帖子-->
         <action name="publish" class="publishTopicAction" method="publish">
+
             <result type="chain" name="success">mytopic</result>
             <result name="error">/page/error.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
         <!--更新帖子-->
         <action name="updateTopic" class="publishTopicAction" method="updateTopic">
             <result type="chain" name="success">mytopic</result>
             <result name="error">/page/error.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <!--进入编辑帖子页面-->
         <action name="editTopic" class="publishTopicAction" method="initPublishPostPage">
             <result name="success">/publish_post.jsp</result>
             <result name="error">/page/error.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <action name="mytopic" class="topicAction" method="initTopicPage">
             <result name="success">/page/myTopic.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <!--回复帖子-->
@@ -72,24 +88,32 @@
             <result name="post">/page/topic.jsp</result>
             <result name="error">page/error.jsp</result>
             <result name="login">/login.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <!--申请精华帖-->
         <action name="applybest" class="bestTopicAction" method="applyBestTopic">
             <result type="chain" name="success">mytopic</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <!--回复精华帖-->
         <action name="replyapply" class="bestTopicAction" method="replyapply">
-            <!--            <result name="success">/manager/bestpost.jsp</result>-->
+            <result type="chain" name="success">bestTopic</result>
             <result name="error">/page/error.jsp</result>
             <result name="input">/page/error.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <!--申请记录-->
         <action name="applyrecords" class="bestTopicAction" method="applyRecords">
             <result name="success">/page/records.jsp</result>
             <result name="login">/login.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
 
         <!--初始化查看精华帖页面-->
@@ -112,6 +136,8 @@
 
         <action name="limitUser" class="limitUserAction" method="limit">
             <result name="success">/manager/limitUser.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
         </action>
         <!--创建讨论区（子模块）-->
         <action name="createDiscuss" class="createDiscussAction" method="create">

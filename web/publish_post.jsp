@@ -21,7 +21,7 @@
 <html>
 <head>
     <title>Title</title>
-    <%--<link type="text/css" href="css/publish-post.css" rel="stylesheet">--%>
+    <link type="text/css" href="css/publish-post.css" rel="stylesheet">
 </head>
 <body>
 <jsp:include page="/page/header.jsp"/>
@@ -56,7 +56,8 @@
                         <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"></script>
                     </s:if>
                     <s:else>
-                        <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><s:property escape="false"
+                        <script id="ueditor" name="topic.content" type="text/plain" style="height: 300px"><s:property
+                                escape="false"
                                 value="#request.topic.content"/></script>
                     </s:else>
 

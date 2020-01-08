@@ -25,10 +25,10 @@
             <ul class="nav nav-pills nav-stacked">
                 <li role="presentation"><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/newTopics.jsp">查看新帖</a></li>
                 <li role="presentation" class="active"><a href="bestTopic.action">精华帖请求</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/limitUser.jsp">封锁用户</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
             </ul>
         </div>
 

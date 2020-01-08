@@ -116,6 +116,7 @@ public class UserAction extends BaseAction {
 //                getSession().put("username", user.getUsername());
 //                getSession().put("userId", result);
                 //将用户信息写入session
+                user = userService.findById(result);
                 getSession().put("user", user);
                 return "success";
             }

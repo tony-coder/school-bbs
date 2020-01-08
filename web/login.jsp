@@ -13,6 +13,7 @@
     <link href="css/login.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="/page/header.jsp"/>
 <div class="login">
     <h4 align="center">用户登录</h4>
     <form id="form1" role="form" action="login" method="post">
@@ -38,6 +39,8 @@
         </div>
     </form>
 </div>
+<jsp:include page="page/bottom.jsp"/>
+
 </body>
 <script type="text/javascript" src="js/jquery.validate.min.js"></script>
 <script type="text/javascript">

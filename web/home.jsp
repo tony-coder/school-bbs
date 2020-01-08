@@ -99,7 +99,7 @@
                             </a>
                         </s:iterator>
                     </ul>
-                    <a href="<%=request.getContextPath()%>/publish_post.jsp">
+                    <a href="editTopic.action">
                         <button type="button" class="btn btn-primary"
                                 style="width: 200px;height:50px;margin-left: 30px">我要发帖
                         </button>
@@ -125,7 +125,7 @@
                                 <p class="text-right" style="float: right;margin-right: 20px">
                                     浏览量<s:property value="topicByTopicId.click"/>&nbsp;评论量:<s:property
                                         value="topicByTopicId.replyNum"/>&nbsp;发表日期:<s:date name="createTime"
-                                                                             format="yyyy-MM-dd HH:mm:ss"/>
+                                                                                            format="yyyy-MM-dd HH:mm:ss"/>
                                 </p>
                             </a>
                         </s:iterator>
