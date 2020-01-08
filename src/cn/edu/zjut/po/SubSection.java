@@ -5,7 +5,7 @@ import java.util.Objects;
 
 public class SubSection {
     private int id;
-    private int mainSectionId;
+//    private int mainSectionId;
     private String title;
     private String description;
     private MainSection mainSectionByMainSectionId;
@@ -19,13 +19,13 @@ public class SubSection {
         this.id = id;
     }
 
-    public int getMainSectionId() {
-        return mainSectionId;
-    }
-
-    public void setMainSectionId(int mainSectionId) {
-        this.mainSectionId = mainSectionId;
-    }
+//    public int getMainSectionId() {
+//        return mainSectionId;
+//    }
+//
+//    public void setMainSectionId(int mainSectionId) {
+//        this.mainSectionId = mainSectionId;
+//    }
 
     public String getTitle() {
         return title;
@@ -49,13 +49,12 @@ public class SubSection {
         if (o == null || getClass() != o.getClass()) return false;
         SubSection that = (SubSection) o;
         return id == that.id &&
-                mainSectionId == that.mainSectionId &&
                 Objects.equals(title, that.title);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, mainSectionId, title);
+        return Objects.hash(id, title);
     }
 
     public MainSection getMainSectionByMainSectionId() {

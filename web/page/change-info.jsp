@@ -8,8 +8,8 @@
 <head>
     <title>资料修改</title>
     <base href="<%=basePath%>">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/search-result.css" rel="stylesheet"/>
+    <%--<link href="css/bootstrap.min.css" rel="stylesheet">--%>
+    <%--<link href="css/search-result.css" rel="stylesheet"/>--%>
 </head>
 <body>
 <jsp:include page="/page/header.jsp"/>

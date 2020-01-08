@@ -21,26 +21,27 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/titlebar.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <%--<link href="css/bootstrap.min.css" rel="stylesheet">--%>
+    <%--<link href="css/titlebar.css" rel="stylesheet">--%>
+    <%--<script src="js/jquery.min.js"></script>--%>
+    <%--<script src="js/bootstrap.min.js"></script>--%>
 </head>
 
 <body>
 
-<%--<jsp:include page="/pages/header.jsp"/>--%>
+<jsp:include page="/page/header.jsp"/>
 
 <div class="container" style="margin-top: 80px">
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" ><a href="<%=path%>/manage/notice.jsp">发布公告</a></li>
-                <li role="presentation" class="active"><a href="<%=path%>/manage/change-admin.jsp">资料修改</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/bestpost.jsp">精华帖请求</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>
+                <li role="presentation" ><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
+                <li role="presentation" class="active"><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/newTopics.jsp">查看新帖</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/bestpost.jsp">精华帖请求</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/limitUser.jsp">封锁用户</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/sensitiveWords.jsp">敏感词管理</a></li>
             </ul>
         </div>
 
@@ -53,15 +54,17 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-                    <form id="form1" action="update" method="post" enctype="multipart/form-data">
+                    <form id="form1" action="updateAdmin" method="post" enctype="multipart/form-data">
 
                         <div class="column">
 
                             <div class="form-group">
-                                <img alt="@zhangjianhao" class="avatar left" height="70" src="<%=path%><s:property value="#session.user.getUserAvatarUrl()"/>" width="70" />
+                                <img class="avatar left" height="70" src="<%=path%><s:property value="#session.user.getUserAvatarUrl()"/>" width="70" />
                                 请上传你的头像<br/>
                             </div>
-                            <input type="file" id="inputfile" accept="image/*" name="photoImg"><br/>
+                            <input type="file" id="inputfile" accept="image/*" name="photoImg">文件大小不得超过1M<br/>
+
+                            <br/>
 
                             <div class="form-group">
                                 <label for="name">用户名</label>

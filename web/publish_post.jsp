@@ -21,10 +21,10 @@
 <html>
 <head>
     <title>Title</title>
-    <link type="text/css" href="css/publish-post.css" rel="stylesheet">
+    <%--<link type="text/css" href="css/publish-post.css" rel="stylesheet">--%>
 </head>
 <body>
-<%--<jsp:include page="/pages/header.jsp"/>--%>
+<jsp:include page="/page/header.jsp"/>
 <table class="tb" cellspacing="0" cellpadding="3">
     <s:if test="%{#request.topic == null}">
     <form method="post" action="<%=path%>/publish.action" onsubmit="return onUpdateContent();"><%--新建帖子--%>

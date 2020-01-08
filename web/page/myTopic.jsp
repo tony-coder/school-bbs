@@ -14,10 +14,10 @@
 <html>
 <head>
     <title>Title</title>
-    <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
+    <%--<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">--%>
 </head>
 <body>
-<%--<jsp:include page="<%=basePath%>page/header.jsp"/>--%>
+<jsp:include page="/page/header.jsp"/>
 <div class="container" style="margin-top: 30px">
     <div class="row">
         <div class="col-xs-3">
