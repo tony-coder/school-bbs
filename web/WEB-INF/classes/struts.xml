@@ -13,9 +13,9 @@
     <constant name="struts.ui.theme" value="simple"/>
     <constant name="struts.action.excludePattern" value="/static/.*?"/>
     <package name="strutsBean" extends="struts-default" namespace="/">
-    <interceptors >
-        <interceptor name="authority" class="cn.edu.zjut.interceptors.AuthorityInterceptor"/>
-    </interceptors>
+        <interceptors>
+            <interceptor name="authority" class="cn.edu.zjut.interceptors.AuthorityInterceptor"/>
+        </interceptors>
         <action name="login" class="userAction" method="login">
             <result type="chain" name="success">homePage</result>
             <result name="login">/login.jsp</result>
@@ -37,12 +37,14 @@
         </action>
         <!--用户更新信息-->
         <action name="updateUser" class="userAction" method="update">
-            <result name="success">/page/change_info.jsp</result>
+            <result name="success">/page/change-info.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
         <action name="updateAdmin" class="adminAction" method="update">
             <result name="success">/manager/change_info.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
@@ -54,9 +56,10 @@
 
         <!--发布帖子-->
         <action name="publish" class="publishTopicAction" method="publish">
-
             <result type="chain" name="success">mytopic</result>
+            <result name="publish">/publish_post.jsp</result>
             <result name="error">/page/error.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
@@ -64,6 +67,7 @@
         <action name="updateTopic" class="publishTopicAction" method="updateTopic">
             <result type="chain" name="success">mytopic</result>
             <result name="error">/page/error.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
@@ -72,12 +76,14 @@
         <action name="editTopic" class="publishTopicAction" method="initPublishPostPage">
             <result name="success">/publish_post.jsp</result>
             <result name="error">/page/error.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
 
         <action name="mytopic" class="topicAction" method="initTopicPage">
             <result name="success">/page/myTopic.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
@@ -95,6 +101,7 @@
         <!--申请精华帖-->
         <action name="applybest" class="bestTopicAction" method="applyBestTopic">
             <result type="chain" name="success">mytopic</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
@@ -104,6 +111,7 @@
             <result type="chain" name="success">bestTopic</result>
             <result name="error">/page/error.jsp</result>
             <result name="input">/page/error.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>
@@ -121,6 +129,19 @@
             <result name="success">/manager/bestTopic.jsp</result>
         </action>
 
+        <!--发布公告-->
+        <action name="postNotice" class="noticeAction" method="postNotice">
+            <result name="success">/manager/notice.jsp</result>
+            <result name="login">/login.jsp</result>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="authority"/>
+        </action>
+
+        <action name="notice" class="noticeAction" method="notice">
+            <result name="success">/page/notice.jsp</result>
+            <result name="error">page/error.jsp</result>
+        </action>
+
         <action name="searchTopic" class="searchAction" method="execute">
             <result name="success">/page/item.jsp</result>
             <result name="error">/page/header.jsp</result>
@@ -136,6 +157,7 @@
 
         <action name="limitUser" class="limitUserAction" method="limit">
             <result name="success">/manager/limitUser.jsp</result>
+            <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>
             <interceptor-ref name="authority"/>
         </action>

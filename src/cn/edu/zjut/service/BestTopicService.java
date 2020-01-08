@@ -11,6 +11,9 @@ public interface BestTopicService {
 
     public List<BestTopic> getBestTopics();
 
+    //已经同意的精华帖
+    public List<BestTopic> getBestTopicsAllow(int pageIndex, int pageSize);
+
     public void delete(int topicId);
 
     public boolean updateState(int topicId, int state);

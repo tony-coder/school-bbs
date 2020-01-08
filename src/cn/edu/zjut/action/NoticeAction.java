@@ -9,7 +9,7 @@ import java.util.Date;
 
 import static com.opensymphony.xwork2.Action.SUCCESS;
 
-public class NoticeAction extends BaseAction{
+public class NoticeAction extends BaseAction {
     private Notice notice;
 
     private NoticeService noticeService;
@@ -30,20 +30,24 @@ public class NoticeAction extends BaseAction{
         this.noticeService = noticeService;
     }
 
-    public String execute() throws Exception{
-        String title = notice.getTitle();
-        String content = notice.getContent();
-        if (title != null && content != null){
-            Notice notice = new Notice();
-            notice.setTitle(title);
-            notice.setContent(content);
+    public String postNotice() throws Exception {
+        User admin = (User) getSession().get("user");
+        if (notice != null && notice.getTitle() != null && notice.getContent() != null && admin.getPrivilege() == 1) {
             notice.setCreateTime(new Timestamp(System.currentTimeMillis()));
-            User user = new User();
-            User admin = (User)getSession().get("admin");
-            user.setId(admin.getId());
             notice.setUserByUserId(admin);
             noticeService.publish(notice);
-            this.addFieldError("notice_result","发表成功");
+            this.addFieldError("notice_result", "发表成功");
+            return SUCCESS;
+        }
+        return ERROR;
+    }
+
+    public String notice() {
+        if(notice!=null && notice.getId()>=0){
+            Notice not = noticeService.getNoticeById(notice.getId());
+            if(not==null)
+                return ERROR;
+            getRequest().put("notice", not);
             return SUCCESS;
         }
         return ERROR;

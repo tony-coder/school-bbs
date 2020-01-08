@@ -7,9 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <body>
-
 <div style="margin-top: 80px;background-color: rgba(0,0,0,0.8);height: 100px;color: darkgray;width: 100%">
     <div style="width: 400px;padding-top: 35px;padding-left:40px;padding-right: 40px;margin:auto;">
         <div>
@@ -22,6 +20,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>

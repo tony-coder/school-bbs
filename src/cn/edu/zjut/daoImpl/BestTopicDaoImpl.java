@@ -53,6 +53,21 @@ public class BestTopicDaoImpl extends BaseHibernateDAO implements BestTopicDao {
     }
 
     @Override
+    public List<BestTopic> getBestTopicsAllow(int pageIndex, int pageSize) {
+        try {
+            String queryString = "from BestTopic topic where topic.state =2 order by topic.createTime desc";
+            Query queryObject = getSession().createQuery(queryString);
+            int startIndex = (pageIndex - 1) * pageSize;
+            queryObject.setFirstResult(startIndex);
+            queryObject.setMaxResults(pageSize);
+            return queryObject.list();
+        } catch (RuntimeException re) {
+            log.error("find latest allow bestTopic failed", re);
+            return null;
+        }
+    }
+
+    @Override
     public void delete(int postId) {
 
     }

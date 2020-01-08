@@ -94,7 +94,7 @@
                         </div>
 
                         <s:iterator value="#request.notices">
-                            <a href="<%=request.getContextPath()%>/page/notice.jsp?noticeId=<s:property value="id"/> "
+                            <a href="notice.action?notice.id=<s:property value="id"/> "
                                class="list-group-item"><s:property value="title"/>
                             </a>
                         </s:iterator>
@@ -166,7 +166,6 @@
             </div>
         </div>
     </div>
-</div>
 </div>
 
 <jsp:include page="page/bottom.jsp"/>

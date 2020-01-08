@@ -16,7 +16,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";  //获取web应用根目录路径
 
-    List<MainSection> mainSections = (List<MainSection>) request.getAttribute("mainSections");  //获取所有主板块
+    List<MainSection> mainSections = (List<MainSection>) session.getAttribute("mainSections");  //获取所有主板块
 %>
 <html>
 <head>

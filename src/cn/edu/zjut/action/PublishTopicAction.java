@@ -16,7 +16,6 @@ import java.util.List;
  */
 
 public class PublishTopicAction extends BaseAction {
-
     private Topic topic;
 
     //Spring注入
@@ -62,6 +61,10 @@ public class PublishTopicAction extends BaseAction {
             return "publish";
         }
 
+        if (topic.getTitle().length() > 30) {
+            this.addFieldError("limit", "输入标题超过30个字符");
+            return "publish";
+        }
         topic.setUserByUserId(user);
         topic.setType(0);  //设置帖子类型，默认为普通帖
         topic.setReplyNum(0);
@@ -75,17 +78,27 @@ public class PublishTopicAction extends BaseAction {
     }
 
     public String updateTopic() throws Exception {
+        User user = (User) getSession().get("user");  //获取用户
+
+        int level = blackListService.getLevel(user.getId());
+        if (level <= 3 && level > 0) {
+            this.addFieldError("limit", "您已被管理员限制发帖");
+            return "publish";
+        }
+
+        if (topic.getTitle().length() > 30) {
+            this.addFieldError("limit", "输入标题超过30个字符");
+            return "publish";
+        }
         String title = topic.getTitle();
         String content = topic.getContent();
         MainSection mainSection = topic.getSubSectionBySectionId().getMainSectionByMainSectionId();
         SubSection subSection = topic.getSubSectionBySectionId();
-        /*int mainSectionId = topic.getSubSectionBySectionId().getMainSectionId();
-        int subSectionId = topic.*/
+
         topic = topicService.getTopicById(topic.getId());
         topic.setTitle(title);
         topic.setContent(content);
-        /*topic.setSectionId(subSectionId);
-        topic.getSubSectionBySectionId().setMainSectionId(mainSectionId);*/
+
         topic.setSubSectionBySectionId(subSection);
         topic.getSubSectionBySectionId().setMainSectionByMainSectionId(mainSection);
         topic.setUpdateTime(new Timestamp(System.currentTimeMillis()));  //更新帖子更新时间

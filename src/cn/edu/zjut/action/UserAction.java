@@ -1,7 +1,6 @@
 package cn.edu.zjut.action;
 
 import cn.edu.zjut.po.User;
-import cn.edu.zjut.service.AdminService;
 import cn.edu.zjut.service.UserService;
 import cn.edu.zjut.util.MailUtil;
 import cn.edu.zjut.util.Utils;
@@ -17,8 +16,6 @@ public class UserAction extends BaseAction {
     private User user;
     //激活信息
     private String activeCode;
-    //用户权限
-    private int privilege;
     //头像文件
     private File photoImg;
     private String photoImgFileName;
@@ -49,14 +46,6 @@ public class UserAction extends BaseAction {
 
     public void setMailUtil(MailUtil mailUtil) {
         this.mailUtil = mailUtil;
-    }
-
-    public int getPrivilege() {
-        return privilege;
-    }
-
-    public void setPrivilege(int privilege) {
-        this.privilege = privilege;
     }
 
     public String register() throws Exception {
@@ -107,14 +96,10 @@ public class UserAction extends BaseAction {
     }
 
     public String login() throws Exception {
-        user.setPrivilege(privilege);
         int result = 0;
         if (user.getPrivilege() == 0) {
             result = userService.login(user);
             if (result >= 0) {//如果用户名密码都正确，登录成功
-                //将用户id，和姓名写入session
-//                getSession().put("username", user.getUsername());
-//                getSession().put("userId", result);
                 //将用户信息写入session
                 user = userService.findById(result);
                 getSession().put("user", user);

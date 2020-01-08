@@ -5,7 +5,6 @@ import java.util.Objects;
 
 public class Notice {
     private int id;
-    private int userId;
     private String title;
     private String content;
     private Timestamp createTime;
@@ -17,14 +16,6 @@ public class Notice {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public String getTitle() {
@@ -57,7 +48,6 @@ public class Notice {
         if (o == null || getClass() != o.getClass()) return false;
         Notice notice = (Notice) o;
         return id == notice.id &&
-                userId == notice.userId &&
                 Objects.equals(title, notice.title) &&
                 Objects.equals(content, notice.content) &&
                 Objects.equals(createTime, notice.createTime);
@@ -65,7 +55,7 @@ public class Notice {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, title, content, createTime);
+        return Objects.hash(id, title, content, createTime);
     }
 
     public User getUserByUserId() {

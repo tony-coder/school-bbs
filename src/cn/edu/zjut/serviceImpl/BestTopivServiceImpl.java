@@ -35,6 +35,11 @@ public class BestTopivServiceImpl implements BestTopicService {
     }
 
     @Override
+    public List<BestTopic> getBestTopicsAllow(int pageIndex, int pageSize) {
+        return bestTopicDao.getBestTopicsAllow(pageIndex, pageSize);
+    }
+
+    @Override
     public void delete(int postId) {
 
     }

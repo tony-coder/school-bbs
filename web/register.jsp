@@ -24,6 +24,7 @@
     <link href="css/register.css" rel="stylesheet">
 </head>
 <body>
+<jsp:include page="page/header.jsp"/>
 <div class="register">
     <h4 align="center">用户注册</h4>
     <form id="form1" role="form" action="<%=basePath%>register.action" method="post">
@@ -76,8 +77,8 @@
 </div>
 
 </body>
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.validate.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script type="text/javascript">
     // JS validate校验框架的使用
     $(function () {

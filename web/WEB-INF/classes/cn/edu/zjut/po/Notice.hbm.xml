@@ -19,7 +19,7 @@
         <property name="createTime" type="timestamp">
             <column name="create_time" sql-type="datetime" not-null="true"/>
         </property>
-        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User" fetch="select" not-null="true">
+        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User" fetch="select" not-null="true" lazy="false">
             <column name="user_id"/>
         </many-to-one>
     </class>

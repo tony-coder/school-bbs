@@ -11,6 +11,8 @@ public interface BestTopicDao {
 
     public List<BestTopic> getBestTopics();
 
+    public List<BestTopic> getBestTopicsAllow(int pageIndex, int pageSize);
+
     public void delete(int postId);
 
     public void updateState(int topicId, int state) throws Exception;

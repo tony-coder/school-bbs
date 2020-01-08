@@ -42,7 +42,7 @@ public class MainAction extends BaseAction {
         List<Topic> latestPosts = topicService.getLatestTopic(1, 6);
         List<MainSection> mainSectionList = mainSectionService.getAllMainSection();
         List<Notice> notices = noticeService.getNotice(1, 5);
-        List<BestTopic> bestTopics = bestTopicService.getBestTopics(1, 6);
+        List<BestTopic> bestTopics = bestTopicService.getBestTopicsAllow(1, 6);
         getSession().put("mainSections", mainSectionList);
         getRequest().put("notices", notices);
         getRequest().put("topics", latestPosts);

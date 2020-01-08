@@ -17,12 +17,6 @@
     <meta http-equiv="expires" content="0">
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
-
-    <%--<link href="css/bootstrap.min.css" rel="stylesheet">--%>
-    <%--<link href="css/titlebar.css" rel="stylesheet">--%>
-    <%--<script src="js/jquery.min.js"></script>--%>
-    <%--<script src="js/bootstrap.min.js"></script>--%>
-
 </head>
 
 <body>
@@ -44,7 +38,6 @@
         </div>
 
         <div class="col-md-9">
-
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">
@@ -52,49 +45,75 @@
                     </h3>
                 </div>
                 <div class="panel-body">
-
-
                     <div class="column">
-
-                        <form action="<%=path%>/notice.action" method="post">
-                            <input type="hidden" name="topic.content" id="content">
+                        <form action="postNotice.action" method="post" onsubmit="return onUpdateContent();">
+                            <input type="hidden" name="notice.content" id="content">
                             <div class="form-group">
                                 <label for="name">公告标题</label>
-                                <input required type="text" class="form-control" name="title" id="name" width="200px"
-                                       height="80px"
-                                       placeholder="请输入标题">
+                                <input required type="text" class="form-control" name="notice.title" id="name"
+                                       width="200px"
+                                       height="80px" placeholder="请输入标题">
                             </div>
-
-
                             <dl class="form-group">
                                 <dt><label>公告内容</label></dt>
                                 <dd>
-                                    <script id="ueditor" name="topic.content" type="text/plain"
-                                            style="height: 300px"></script>
+                                    <script id="ueditor" type="text/plain" style="height: 20px"></script>
                                 </dd>
                             </dl>
-
-
                             <p>
                                 <button type="submit" class="btn btn-primary">发布公告</button>
                             </p>
-                            <s:fielderror fieldName="notice_result"></s:fielderror>
-
+                            <s:fielderror fieldName="notice_result"/>
                         </form>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
 </div>
-<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.config.js"/>
-<script type="text/javascript" charset="utf-8" src="ueditor/ueditor.all.min.js"/>
-<script type="text/javascript" charset="utf-8" src="ueditor/lang/zh-cn/zh-cn.js"/>
-<script id="editor" type="text/plain" name="gdesc" style="width:100%;height:350px;"/>
+<script type="text/javascript" charset="utf-8" src="<%=basePath%>ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=basePath%>ueditor/ueditor.all.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="<%=basePath%>ueditor/lang/zh-cn/zh-cn.js"></script>
+<script id="editor" type="text/plain" name="gdesc" style="width:100%;height:350px;"></script>
 <script type="text/javascript">
     //实例化编辑器
-    var ue = UE.getEditor('ueditor', {});
+    var ue = UE.getEditor('ueditor', {
+        toolbars: [
+            [
+                'undo', //撤销
+                'bold', //加粗
+                'underline', //下划线
+                'preview', //预览
+                'horizontal', //分隔线
+                'inserttitle', //插入标题
+                'cleardoc', //清空文档
+                'fontfamily', //字体
+                'fontsize', //字号
+                'paragraph', //段落格式
+                'simpleupload', //单图上传
+                'insertimage', //多图上传
+                'attachment', //附件
+                'inserttable', //插入表格
+                'emotion', //表情
+                'justifyleft', //居左对齐
+                'justifyright', //居右对齐
+                'justifycenter', //居中对
+                'justifyjustify', //两端对齐
+                'forecolor', //字体颜色
+                'fullscreen', //全屏
+                'edittip ', //编辑提示
+                'customstyle', //自定义标题
+            ]
+        ]
+    });
+
+    /*获取输入区的内容*/
+    function onUpdateContent() {
+        var content = document.getElementById("content");
+        content.value = UE.getEditor("ueditor").getContent();
+        // alert(content.value);
+        return true;
+    }
 
 </script>
 

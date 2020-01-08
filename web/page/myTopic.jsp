@@ -58,7 +58,7 @@
             <ul class="pagination pagination-lg" style="float:right">
                 <s:if test="#request.pageNum > 1">
                     <s:set name="pageIndex" value="#request.pageNum - 1"/>
-                    <li><a href="mytopic.action?page=<s:property value="#pageIndex"/>"> &laquo;</a></li>
+                    <li><a href="mytopic.action?pageNum=<s:property value="#pageIndex"/>"> &laquo;</a></li>
                 </s:if>
                 <s:if test="#request.pageNum <=5">
                     <s:bean name="org.apache.struts2.util.Counter" id="counter">
@@ -67,18 +67,18 @@
                         <s:iterator>
                             <s:if test="#request.pageNum == #counter.current">
                                 <li class="active"><a
-                                        href="mytopic.action?page=<s:property value="#counter.current"/>"><s:property
+                                        href="mytopic.action?pageNum=<s:property value="#counter.current"/>"><s:property
                                         value="#counter.current"/>
                                 </a></li>
                             </s:if>
                             <s:else>
                                 <li>
-                                    <a href="mytopic.action?page=<s:property value="#counter.current"/>"><s:property
+                                    <a href="mytopic.action?pageNum=<s:property value="#counter.current"/>"><s:property
                                             value="#counter.current"/>
                                     </a></li>
                             </s:else>
                             <s:if test="#counter.current == 5">
-                                <li><a href="mytopic.action?page=6">&raquo;</a></li>
+                                <li><a href="mytopic.action?pageNum=6">&raquo;</a></li>
                             </s:if>
                         </s:iterator>
                     </s:bean>
@@ -92,19 +92,19 @@
                             <s:set name="pageIndex" value="#request.pageNum - 5 + #counter.current"/>
                             <s:if test="#counter.current == 5">
                                 <li class="active"><a
-                                        href="mytopic.action?page=<s:property value="#pageIndex"/>"><s:property
+                                        href="mytopic.action?pageNum=<s:property value="#pageIndex"/>"><s:property
                                         value="#pageIndex"/>
                                 </a></li>
                             </s:if>
                             <s:else>
                                 <li class=""><a
-                                        href="mytopic.action?page=<s:property value="#pageIndex"/>"><s:property
+                                        href="mytopic.action?pageNum=<s:property value="#pageIndex"/>"><s:property
                                         value="#pageIndex"/>
                                 </a></li>
                             </s:else>
                         </s:iterator>
                     </s:bean>
-                    <li><a href="mytopic.action?page=<s:property value="#maxPage"/>">&raquo;</a></li>
+                    <li><a href="mytopic.action?pageNum=<s:property value="#maxPage"/>">&raquo;</a></li>
                 </s:if>
             </ul>
             <br>
