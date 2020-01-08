@@ -195,8 +195,5 @@
             <result name="success">/manager/sensitiveWords.jsp</result>
         </action>
 
-        <action name="newTopics" class="topicAction" method="getLatestTopics">
-            <result name="success">/manager/newTopics.jsp</result>
-        </action>
     </package>
 </struts>

@@ -99,7 +99,7 @@
                             </a>
                         </s:iterator>
                     </ul>
-                    <a href="editTopic.action">
+                    <a href="<%=basePath%>publish_post.jsp">
                         <button type="button" class="btn btn-primary"
                                 style="width: 200px;height:50px;margin-left: 30px">我要发帖
                         </button>

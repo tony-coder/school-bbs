@@ -21,4 +21,22 @@
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
 
+    <filter>
+        <filter-name>accessFilter</filter-name>
+        <filter-class>cn.edu.zjut.filter.AccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>accessFilter</filter-name>
+        <url-pattern>/publish_post.jsp</url-pattern>
+        <url-pattern>/page/notice.jsp</url-pattern>
+        <url-pattern>/page/myTopic.jsp</url-pattern>
+        <url-pattern>/page/change-info.jsp</url-pattern>
+        <url-pattern>/manager/bestTopic.jsp</url-pattern>
+        <url-pattern>/manager/change_info.jsp</url-pattern>
+        <url-pattern>/manager/create_discuss.jsp</url-pattern>
+        <url-pattern>/manager/limitUser.jsp</url-pattern>
+        <url-pattern>/manager/newTopics.jsp</url-pattern>
+        <url-pattern>/manager/sensitiveWords.jsp</url-pattern>
+    </filter-mapping>
+
 </web-app>

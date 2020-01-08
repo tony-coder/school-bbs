@@ -66,6 +66,7 @@
         <!--更新帖子-->
         <action name="updateTopic" class="publishTopicAction" method="updateTopic">
             <result type="chain" name="success">mytopic</result>
+            <result name="publish">/publish_post.jsp</result>
             <result name="error">/page/error.jsp</result>
             <result name="login">/login.jsp</result>
             <interceptor-ref name="defaultStack"/>

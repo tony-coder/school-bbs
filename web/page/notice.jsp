@@ -44,7 +44,7 @@
                     <strong style=" float:right;margin-right:10px;margin-top: 10px"><span class="badge" style="background: #ff6927;width: 50px;">管理员</span></strong>
                 </div>
                 <div style="margin: 20px">
-                    <s:property value="#request.notice.content"/>
+                    <s:property escape="false" value="#request.notice.content"/>
                 </div>
             </div>
             <div class="col-md-1 post-border">
