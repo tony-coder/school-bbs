@@ -30,6 +30,7 @@
             <tx:method name="publish*" propagation="REQUIRED"/>
             <tx:method name="autoIncrease*" propagation="REQUIRED"/>
             <tx:method name="save*" propagation="REQUIRED"/>
+            <tx:method name="getAllSensitiveWords" propagation="REQUIRED"/>
             <tx:method name="addReply*" propagation="REQUIRED"/>
             <tx:method name="*" read-only="true"/>
         </tx:attributes>
@@ -85,6 +86,7 @@
                 <value>cn/edu/zjut/po/SubSection.hbm.xml</value>
                 <value>cn/edu/zjut/po/Topic.hbm.xml</value>
                 <value>cn/edu/zjut/po/User.hbm.xml</value>
+                <value>cn/edu/zjut/po/SensitiveWord.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -98,7 +100,10 @@
     <bean name="mainSectionDao" class="cn.edu.zjut.daoImpl.MainSectionDaoImpl" parent="baseDAO"/>
     <bean name="subSectionDao" class="cn.edu.zjut.daoImpl.SubSectionDaoImpl" parent="baseDAO"/>
     <bean name="blackListDao" class="cn.edu.zjut.daoImpl.BlackListDaoImpl" parent="baseDAO"/>
+    <bean name="noticeDao" class="cn.edu.zjut.daoImpl.NoticeDaoImpl" parent="baseDAO"/>
+    <bean name="sensitiveWordDao" class="cn.edu.zjut.daoImpl.SensitiveWordDaoImpl" parent="baseDAO"/>
     <bean name="replyDao" class="cn.edu.zjut.daoImpl.ReplyDaoImpl" parent="baseDAO"/>
+    <bean name="bestTopicDao" class="cn.edu.zjut.daoImpl.BestTopicDaoImpl" parent="baseDAO"/>
 
     <!--Service-->
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
@@ -122,9 +127,21 @@
         <property name="blackListDao" ref="blackListDao"/>
     </bean>
 
+    <bean name="noticeService" class="cn.edu.zjut.serviceImpl.NoticeServiceImpl">
+        <property name="noticeDao" ref="noticeDao"/>
+    </bean>
+
+    <bean name="sensitiveService" class="cn.edu.zjut.serviceImpl.SensitiveServiceImpl">
+        <property name="sensitiveWordDao" ref="sensitiveWordDao"/>
+    </bean>
+
     <bean name="replyService" class="cn.edu.zjut.serviceImpl.ReplyServiceImpl">
         <property name="replyDao" ref="replyDao"/>
     </bean>
+    <bean name="bestTopicService" class="cn.edu.zjut.serviceImpl.BestTopivServiceImpl">
+        <property name="bestTopicDao" ref="bestTopicDao"/>
+    </bean>
+
     <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
 
     <!--Action-->
@@ -159,6 +176,15 @@
         <property name="blackListService" ref="blackListService"/>
     </bean>
 
+    <bean name="noticeAction" class="cn.edu.zjut.action.NoticeAction" parent="baseAction" scope="prototype">
+        <property name="noticeService" ref="noticeService"/>
+    </bean>
+
+    <bean name="sensitiveWordAction" class="cn.edu.zjut.action.SensitiveWordAction" parent="baseAction"
+          scope="prototype">
+        <property name="sensitiveWordService" ref="sensitiveService"/>
+    </bean>
+
     <bean name="createDiscussAction" class="cn.edu.zjut.action.CreateDiscussAction" parent="baseAction"
           scope="prototype">
         <property name="mainSectionService" ref="mainSectionService"/>
@@ -169,4 +195,12 @@
         <property name="topicService" ref="topicService"/>
         <property name="replyService" ref="replyService"/>
     </bean>
+    <bean name="bestTopicAction" class="cn.edu.zjut.action.BestTopicAction" parent="baseAction" scope="prototype">
+        <property name="bestTopicService" ref="bestTopicService"/>
+        <property name="topicService" ref="topicService"/>
+    </bean>
+    <!-- <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
+         <property name="mainSectionService" ref="mainSectionService"/>
+         <property name="topicService" ref="topicService"/>
+     </bean>-->
 </beans>

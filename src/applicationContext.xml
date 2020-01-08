@@ -86,6 +86,7 @@
                 <value>cn/edu/zjut/po/SubSection.hbm.xml</value>
                 <value>cn/edu/zjut/po/Topic.hbm.xml</value>
                 <value>cn/edu/zjut/po/User.hbm.xml</value>
+                <value>cn/edu/zjut/po/SensitiveWord.hbm.xml</value>
             </list>
         </property>
     </bean>
@@ -102,6 +103,7 @@
     <bean name="noticeDao" class="cn.edu.zjut.daoImpl.NoticeDaoImpl" parent="baseDAO"/>
     <bean name="sensitiveWordDao" class="cn.edu.zjut.daoImpl.SensitiveWordDaoImpl" parent="baseDAO"/>
     <bean name="replyDao" class="cn.edu.zjut.daoImpl.ReplyDaoImpl" parent="baseDAO"/>
+    <bean name="bestTopicDao" class="cn.edu.zjut.daoImpl.BestTopicDaoImpl" parent="baseDAO"/>
 
     <!--Service-->
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
@@ -136,6 +138,10 @@
     <bean name="replyService" class="cn.edu.zjut.serviceImpl.ReplyServiceImpl">
         <property name="replyDao" ref="replyDao"/>
     </bean>
+    <bean name="bestTopicService" class="cn.edu.zjut.serviceImpl.BestTopivServiceImpl">
+        <property name="bestTopicDao" ref="bestTopicDao"/>
+    </bean>
+
     <bean name="mailUntil" class="cn.edu.zjut.util.MailUtil"/>
 
     <!--Action-->
@@ -174,7 +180,8 @@
         <property name="noticeService" ref="noticeService"/>
     </bean>
 
-    <bean name="sensitiveWordAction" class="cn.edu.zjut.action.SensitiveWordAction" parent="baseAction" scope="prototype">
+    <bean name="sensitiveWordAction" class="cn.edu.zjut.action.SensitiveWordAction" parent="baseAction"
+          scope="prototype">
         <property name="sensitiveWordService" ref="sensitiveService"/>
     </bean>
 
@@ -188,8 +195,12 @@
         <property name="topicService" ref="topicService"/>
         <property name="replyService" ref="replyService"/>
     </bean>
-    <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
-        <property name="mainSectionService" ref="mainSectionService"/>
+    <bean name="bestTopicAction" class="cn.edu.zjut.action.BestTopicAction" parent="baseAction" scope="prototype">
+        <property name="bestTopicService" ref="bestTopicService"/>
         <property name="topicService" ref="topicService"/>
     </bean>
+    <!-- <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
+         <property name="mainSectionService" ref="mainSectionService"/>
+         <property name="topicService" ref="topicService"/>
+     </bean>-->
 </beans>

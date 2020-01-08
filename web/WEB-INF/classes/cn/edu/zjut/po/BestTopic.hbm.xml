@@ -16,10 +16,10 @@
         <property name="state" type="java.lang.Integer">
             <column name="state" sql-type="int(4)" not-null="true"/>
         </property>
-        <many-to-one name="topicByTopicId" class="cn.edu.zjut.po.Topic">
+        <many-to-one name="topicByTopicId" class="cn.edu.zjut.po.Topic" fetch="select" not-null="true" lazy="false">
             <column name="topic_id"/>
         </many-to-one>
-        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User">
+        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User" fetch="select" not-null="true" lazy="false">
             <column name="user_id"/>
         </many-to-one>
     </class>

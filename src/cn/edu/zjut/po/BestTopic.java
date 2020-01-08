@@ -5,8 +5,6 @@ import java.util.Objects;
 
 public class BestTopic {
     private int id;
-    private int topicId;
-    private int userId;
     private Timestamp createTime;
     private Integer state;
     private Topic topicByTopicId;
@@ -18,22 +16,6 @@ public class BestTopic {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getTopicId() {
-        return topicId;
-    }
-
-    public void setTopicId(int topicId) {
-        this.topicId = topicId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public Timestamp getCreateTime() {
@@ -58,15 +40,13 @@ public class BestTopic {
         if (o == null || getClass() != o.getClass()) return false;
         BestTopic bestTopic = (BestTopic) o;
         return id == bestTopic.id &&
-                topicId == bestTopic.topicId &&
-                userId == bestTopic.userId &&
                 Objects.equals(createTime, bestTopic.createTime) &&
                 Objects.equals(state, bestTopic.state);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, topicId, userId, createTime, state);
+        return Objects.hash(id, createTime, state);
     }
 
     public Topic getTopicByTopicId() {

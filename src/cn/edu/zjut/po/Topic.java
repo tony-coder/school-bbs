@@ -12,7 +12,7 @@ public class Topic {
     private Timestamp updateTime;
     private int click;
     private Integer replyNum;
-    private Integer type;
+    private Integer type;  //0 为普通帖 1 为精华帖
     private Collection<BestTopic> bestTopicsById;
     private Collection<Reply> repliesById;
     private SubSection subSectionBySectionId;

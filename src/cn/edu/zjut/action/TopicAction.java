@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TopicAction extends BaseAction {
     private Integer topicId;  //帖子id
-    private Integer page;     //页数
+    private Integer pageNum;     //页数
 
     //Spring注入
     private TopicService topicService;
@@ -30,12 +30,12 @@ public class TopicAction extends BaseAction {
         this.topicId = topicId;
     }
 
-    public Integer getPage() {
-        return page;
+    public Integer getPageNum() {
+        return pageNum;
     }
 
-    public void setPage(Integer page) {
-        this.page = page;
+    public void setPageNum(Integer pageNum) {
+        this.pageNum = pageNum;
     }
 
     public void setTopicService(TopicService topicService) {
@@ -55,14 +55,18 @@ public class TopicAction extends BaseAction {
 //            System.out.println("id"+topicId);
             Topic topic = topicService.getTopicById(topicId);
 
-            List<Reply> replies = replyService.getReplies(topicId, page, 5);
+            if (pageNum == null) {
+                pageNum = 1;
+            }
+
+            List<Reply> replies = replyService.getReplies(topicId, pageNum, 5);
 
             if (topic == null)
                 return "error";
             topicService.autoIncreaseViewNum(topic);  //浏览数+1
             getRequest().put("topic", topic);
             getRequest().put("replies", replies);
-            getRequest().put("pageNum", page);
+            getRequest().put("pageNum", pageNum);
             return "success";
         }
         return "error";
@@ -71,29 +75,13 @@ public class TopicAction extends BaseAction {
     public String initTopicPage() throws Exception {
         getSession().put("user", userService.findById(17));  //测试数据
         User user = (User) getSession().get("user");
-        if (page == null)
-            page = 1;
-        List<Topic> topics = topicService.getTopicByUserId(user.getId(), page, 10);
+        if (pageNum == null)
+            pageNum = 1;
+        List<Topic> topics = topicService.getTopicByUserId(user.getId(), pageNum, 10);
 
         getRequest().put("topics", topics);
-        getRequest().put("pageNum", page);
+        getRequest().put("pageNum", pageNum);
         return "success";
     }
 
-   //申请精华帖
-    public String applyBestTopic(){
-//        if (postId >0 && getSession().get("username") !=null){
-//            BestPost bestPost = new BestPost();
-//            Post post = new Post();
-//            post.setId(postId);
-//            bestPost.setPost(post);
-//            User user = new User();
-//            user.setId((Integer)getSession().get("userId"));
-//            bestPost.setUser(user);
-//            bestPost.setState(1);//1表示请求正在等待处理
-//            bestPostBiz.insert(bestPost);
-
-      //  }
-        return SUCCESS;
-    }
 }

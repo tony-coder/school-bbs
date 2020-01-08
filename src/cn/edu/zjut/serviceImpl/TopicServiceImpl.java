@@ -3,7 +3,6 @@ package cn.edu.zjut.serviceImpl;
 import cn.edu.zjut.dao.TopicDao;
 import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.service.TopicService;
-import org.hibernate.Transaction;
 
 import java.util.List;
 

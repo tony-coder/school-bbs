@@ -11,7 +11,7 @@
     <constant name="struts.enable.DynamicMethodInvocation" value="true"/>
     <constant name="struts.devMode" value="false"/>
     <constant name="struts.ui.theme" value="simple"/>
-    <constant name="struts.action.excludePattern" value="/static/.*?" />
+    <constant name="struts.action.excludePattern" value="/static/.*?"/>
     <package name="strutsBean" extends="struts-default" namespace="/">
         <action name="login" class="userAction" method="login">
             <result name="success">/loginSuccess.jsp</result>
@@ -72,6 +72,29 @@
             <result name="post">/page/topic.jsp</result>
             <result name="error">page/error.jsp</result>
             <result name="login">/login.jsp</result>
+        </action>
+
+        <!--申请精华帖-->
+        <action name="applybest" class="bestTopicAction" method="applyBestTopic">
+            <result type="chain" name="success">mytopic</result>
+        </action>
+
+        <!--回复精华帖-->
+        <action name="replyapply" class="bestTopicAction" method="replyapply">
+            <!--            <result name="success">/manager/bestpost.jsp</result>-->
+            <result name="error">/page/error.jsp</result>
+            <result name="input">/page/error.jsp</result>
+        </action>
+
+        <!--申请记录-->
+        <action name="applyrecords" class="bestTopicAction" method="applyRecords">
+            <result name="success">/page/records.jsp</result>
+            <result name="login">/login.jsp</result>
+        </action>
+
+        <!--初始化查看精华帖页面-->
+        <action name="bestTopic" class="bestTopicAction" method="initBestTopicPage">
+            <result name="success">/manager/bestTopic.jsp</result>
         </action>
 
         <action name="searchTopic" class="searchAction" method="execute">

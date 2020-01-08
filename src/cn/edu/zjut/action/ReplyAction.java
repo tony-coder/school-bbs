@@ -67,7 +67,7 @@ public class ReplyAction extends BaseAction {
         if (!replyService.addReply(reply))
             return "error";
         topicService.autoIncreaseReply(topic);
-        pageNum = topic.getReplyNum() % 5 == 0 ? topic.getReplyNum() / 5 : topic.getReplyNum() / 5 + 1;
+        pageNum = topic.getReplyNum() % 5 == 0 ? topic.getReplyNum() / 5 : topic.getReplyNum() / 5 + 1;  //回复默认加在尾页，跳转到尾页
         List<Reply> replies = replyService.getReplies(topic.getId(), pageNum, 5);
 
         getRequest().put("topic", topic);

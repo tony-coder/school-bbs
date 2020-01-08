@@ -141,7 +141,7 @@
         <s:if test="#request.pageNum > 1">
             <s:set name="pageIndex" value="#request.pageNum - 1"/>
             <li>
-                <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#pageIndex"/>">
+                <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=<s:property value="#pageIndex"/>">
                     &laquo;</a></li>
         </s:if>
         <s:if test="#request.pageNum <=5">
@@ -151,19 +151,19 @@
                 <s:iterator>
                     <s:if test="#request.pageNum == #counter.current">
                         <li class="active"><a
-                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#counter.current"/>"><s:property
+                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=<s:property value="#counter.current"/>"><s:property
                                 value="#counter.current"/>
                         </a></li>
                     </s:if>
                     <s:else>
                         <li>
-                            <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#counter.current"/>"><s:property
+                            <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=<s:property value="#counter.current"/>"><s:property
                                     value="#counter.current"/>
                             </a></li>
                     </s:else>
                     <s:if test="#counter.current == 5">
                         <li>
-                            <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=6">&raquo;</a>
+                            <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=6">&raquo;</a>
                         </li>
                     </s:if>
                 </s:iterator>
@@ -178,20 +178,20 @@
                     <s:set name="pageIndex" value="#request.pageNum - 5 + #counter.current"/>
                     <s:if test="#counter.current == 5">
                         <li class="active"><a
-                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#pageIndex"/>"><s:property
+                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=<s:property value="#pageIndex"/>"><s:property
                                 value="#pageIndex"/>
                         </a></li>
                     </s:if>
                     <s:else>
                         <li class=""><a
-                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#pageIndex"/>"><s:property
+                                href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=<s:property value="#pageIndex"/>"><s:property
                                 value="#pageIndex"/>
                         </a></li>
                     </s:else>
                 </s:iterator>
             </s:bean>
             <li>
-                <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&page=<s:property value="#maxPage"/>">&raquo;</a>
+                <a href="topicDetail.action?topicId=<s:property value="#request.topic.id"/>&&pageNum=<s:property value="#maxPage"/>">&raquo;</a>
             </li>
         </s:if>
     </ul>
