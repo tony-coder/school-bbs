@@ -1,7 +1,9 @@
 package cn.edu.zjut.serviceImpl;
 
+import cn.edu.zjut.dao.BlackListDao;
 import cn.edu.zjut.dao.SensitiveWordDao;
 import cn.edu.zjut.dao.UserDao;
+import cn.edu.zjut.po.BlackList;
 import cn.edu.zjut.po.SensitiveWord;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.UserService;
@@ -15,6 +17,11 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private UserDao userDao;
     private SensitiveWordDao sensitiveWordDao;
+    private BlackListDao blackListDao;
+
+    public void setBlackListDao(BlackListDao blackListDao) {
+        this.blackListDao = blackListDao;
+    }
 
     public void setSensitiveWordDao(SensitiveWordDao sensitiveWordDao) {
         this.sensitiveWordDao = sensitiveWordDao;
@@ -118,5 +125,16 @@ public class UserServiceImpl implements UserService {
             }
         }
         return true;
+    }
+
+    @Override
+    public int checkBlackList(User user) {
+        List<BlackList> blackListList = blackListDao.getAll();
+        for (BlackList blackList : blackListList){
+            if (user.getUsername().equals(blackList.getUserByUserId().getUsername())){
+                return blackList.getLevel();
+            }
+        }
+        return -1;
     }
 }

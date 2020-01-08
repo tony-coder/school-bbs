@@ -83,4 +83,6 @@ public interface UserService {
 
     boolean checkUsername(User user);
 
+    int checkBlackList(User user);
+
 }
