@@ -117,12 +117,10 @@
 
     </s:elseif>
 
-    <form name="fileForm" class="navbar-form navbar-right" role="search"
-          action="<%=request.getContextPath()%>/searchTopic">
+    <form name="fileForm" class="navbar-form navbar-right" role="search" action="<%=request.getContextPath()%>/searchTopic">
         <div class="input-group">
             <input type="text" class="form-control" name="keywords" placeholder="search">
-            <span class="input-group-addon"><span onclick="spanSubmit()"
-                                                  class="glyphicon glyphicon-search"></span></span>
+            <span class="input-group-addon"><span onclick="spanSubmit()" class="glyphicon glyphicon-search"></span></span>
         </div>
     </form>
 </nav>

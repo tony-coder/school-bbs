@@ -206,8 +206,8 @@
         <property name="bestTopicService" ref="bestTopicService"/>
         <property name="topicService" ref="topicService"/>
     </bean>
-    <!-- <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
+    <bean name="detailAction" class="cn.edu.zjut.action.DetailAction" parent="baseAction" scope="prototype">
          <property name="mainSectionService" ref="mainSectionService"/>
          <property name="topicService" ref="topicService"/>
-     </bean>-->
+     </bean>
 </beans>

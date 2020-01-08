@@ -41,16 +41,8 @@ public class DetailAction extends BaseAction {
         return ERROR;
     }
 
-    public MainSectionService getMainSectionService() {
-        return mainSectionService;
-    }
-
     public void setMainSectionService(MainSectionService mainSectionService) {
         this.mainSectionService = mainSectionService;
-    }
-
-    public TopicService getTopicService() {
-        return topicService;
     }
 
     public void setTopicService(TopicService topicService) {
