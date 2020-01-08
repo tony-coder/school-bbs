@@ -163,6 +163,7 @@
 
     <bean name="mainAction" class="cn.edu.zjut.action.MainAction" parent="baseAction" scope="prototype">
         <property name="topicService" ref="topicService"/>
+        <property name="mainSectionService" ref="mainSectionService"/>
     </bean>
 
     <bean name="limitUserAction" class="cn.edu.zjut.action.LimitUserAction" parent="baseAction" scope="prototype">
@@ -172,6 +173,10 @@
 
     <bean name="noticeAction" class="cn.edu.zjut.action.NoticeAction" parent="baseAction" scope="prototype">
         <property name="noticeService" ref="noticeService"/>
+    </bean>
+
+    <bean name="updateAdmin" class="cn.edu.zjut.action.AdminAction" parent="baseAction" scope="prototype">
+        <property name="adminService" ref="adminService"/>
     </bean>
 
     <bean name="sensitiveWordAction" class="cn.edu.zjut.action.SensitiveWordAction" parent="baseAction" scope="prototype">

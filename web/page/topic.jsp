@@ -15,14 +15,14 @@
 <html>
 <head>
     <title>帖子浏览</title>
-    <link href="<%=basePath%>css/post-detail.css" rel="stylesheet">
-    <link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">
+    <%--<link href="<%=basePath%>css/post-detail.css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath%>css/bootstrap.min.css" rel="stylesheet">--%>
     <%-- <script type="text/javascript" src="ckeditor/ckeditor.js"></script>--%>
 </head>
 <body>
 <div style="height:100%">
 
-    <%-- <jsp:include page="/pages/header.jsp"/>--%>
+     <jsp:include page="/page/header.jsp"/>
     <div class="container" style="margin-top: 50px">
         <div class="row">
             <div class="col-md-1 post-border"></div>

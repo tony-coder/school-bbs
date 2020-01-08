@@ -125,7 +125,7 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         @Override
     public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
         if (type > 0){//大于0寻找主板块下的所有topic
-            String queryString = "from Topic topic where topic.subSectionBySectionId.mainSectionId= :id";
+            String queryString = "from Topic topic where topic.subSectionBySectionId.mainSectionByMainSectionId.id= :id";
             try {
                 Query queryObject = getSession().createQuery(queryString);
                 queryObject.setInteger("id", type);

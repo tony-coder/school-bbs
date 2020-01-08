@@ -16,11 +16,11 @@
     <title>Title</title>
     <%--    <script type="text/javascript" src="<%=basePath%>js/jquery.min.js"></script>--%>
     <%--    <script type="text/javascript" src="<%=basePath%>js/bootstrap.min.js"></script>--%>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <link href="<%=basePath%>css/zzsc-demo.css" type="text/css" rel="stylesheet">
-    <link href="<%=basePath%>css/index.css" type="text/css" rel="stylesheet">
-    <link href="<%=basePath%>css/bootstrap.min.css" type="text/css" rel="stylesheet">
+    <%--<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>--%>
+    <%--<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>--%>
+    <%--<link href="<%=basePath%>css/zzsc-demo.css" type="text/css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath%>css/index.css" type="text/css" rel="stylesheet">--%>
+    <%--<link href="<%=basePath%>css/bootstrap.min.css" type="text/css" rel="stylesheet">--%>
 </head>
 <body>
 
@@ -98,18 +98,7 @@
     </div>
 </div>
 
-<div style="margin-top: 80px;background-color: rgba(0,0,0,0.8);height: 100px;color: darkgray;width: 100%">
-    <div style="width: 400px;padding-top: 35px;padding-left:40px;padding-right: 40px;margin:auto;">
-        <div>
-            友情链接：
-            <a href="https://github.com/tony-coder" style="color: darkgray">&nbsp;github&nbsp;|&nbsp;</a>
-            <a href="http://www.csdn.net/" style="color: darkgray">csdn&nbsp;|&nbsp;</a>
-            <a href="http://www.oschina.net/" style="color: darkgray">开源中国&nbsp;|&nbsp;</a>
-            <a href="http://stackoverflow.com/" style="color: darkgray">stackflow</a><br>
-            小组成员：鲍锋雄、程凯、王梦欣
-        </div>
-    </div>
-</div>
+<jsp:include page="page/bottom.jsp"/>
 
 
 </body>

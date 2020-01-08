@@ -9,8 +9,8 @@
     <base href="<%=basePath%>">
     <title>帖子详情</title>
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link href="css/titlebar.css" rel="stylesheet">
-    <link href="css/search-result.css" rel="stylesheet"/>
+    <%--<link href="css/titlebar.css" rel="stylesheet">--%>
+    <%--<link href="css/search-result.css" rel="stylesheet"/>--%>
 </head>
 <body>
 <jsp:include page="/page/header.jsp"/>

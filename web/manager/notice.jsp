@@ -18,7 +18,10 @@
     <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
     <meta http-equiv="description" content="This is my page">
 
-    <script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+    <%--<link href="css/bootstrap.min.css" rel="stylesheet">--%>
+    <%--<link href="css/titlebar.css" rel="stylesheet">--%>
+    <%--<script src="js/jquery.min.js"></script>--%>
+    <%--<script src="js/bootstrap.min.js"></script>--%>
 
 </head>
 
@@ -30,12 +33,13 @@
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" class="active"><a href="<%=path%>/manage/notice.jsp">发布公告</a></li>
-                <li role="presentation" ><a href="<%=path%>/manage/change-admin.jsp">资料修改</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/newpost.jsp">查看新帖</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/bestpost.jsp">精华帖请求</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/limit.jsp">封锁用户</a></li>
-                <li role="presentation"><a href="<%=path%>/manage/create_discuss.jsp">创建讨论区</a></li>
+                <li role="presentation" class="active"><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
+                <li role="presentation" ><a href="<%=path%>/manager/newTopics.jsp">查看新帖</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/bestpost.jsp">精华帖请求</a></li>
+                <li role="presentation" ><a href="<%=path%>/manager/limitUser.jsp">封锁用户</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/sensitiveWords.jsp">敏感词管理</a></li>
             </ul>
         </div>
 

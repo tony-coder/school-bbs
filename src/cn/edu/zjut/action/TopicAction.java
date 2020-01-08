@@ -96,4 +96,13 @@ public class TopicAction extends BaseAction {
       //  }
         return SUCCESS;
     }
+
+    public String getLatestTopics(){
+        List topics = topicService.getLatestTopic(page,10);
+        getRequest().put("topics", topics);
+        getRequest().put("pageNum", page);
+        return SUCCESS;
+    }
+
+
 }
