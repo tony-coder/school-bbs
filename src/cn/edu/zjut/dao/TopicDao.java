@@ -23,6 +23,7 @@ public interface TopicDao {
 
 //    public Topic findById(int id);
 
+
     public List<Topic> search(String keywords);
 
     public void autoIncreaseViewNum(Topic topic) throws Exception;

@@ -110,7 +110,6 @@
                                         <s:elseif test="%{#blackListsById.level == 4 }">
                                             禁止回复
                                         </s:elseif>
-                                        <%--<s:property value="%{#blackListsById.level}"/>--%>
                                     </s:iterator>
 
                                 </div>

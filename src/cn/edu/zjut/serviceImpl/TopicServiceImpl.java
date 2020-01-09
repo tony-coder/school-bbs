@@ -85,6 +85,8 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
-        return topicDao.getTopicByType(type,pageIndex,pageSize);
+        return topicDao.getTopicByType(type, pageIndex, pageSize);
     }
+
+
 }

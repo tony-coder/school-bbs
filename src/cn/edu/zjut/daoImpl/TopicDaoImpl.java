@@ -133,6 +133,7 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         }
     }
 
+
     @Override
     public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
         if (type > 0){//大于0寻找主板块下的所有topic

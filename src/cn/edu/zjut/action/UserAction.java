@@ -25,6 +25,15 @@ public class UserAction extends BaseAction {
     private MailUtil mailUtil;
     private BlackListService blackListService;
 
+
+    public void setPhotoImg(File photoImg) {
+        this.photoImg = photoImg;
+    }
+
+    public void setPhotoImgFileName(String photoImgFileName) {
+        this.photoImgFileName = photoImgFileName;
+    }
+
     public void setBlackListService(BlackListService blackListService) {
         this.blackListService = blackListService;
     }
@@ -154,6 +163,7 @@ public class UserAction extends BaseAction {
 
     //用户信息更新
     public String update() throws IOException {
+        System.out.println("update");
         User user = (User)getSession().get("user");
         if (user.getUsername() != null || user.getPassword() != null || user.getEmail() != null || user.getSex() != null || photoImg != null) {
             if (userService.isExist(user)== 1 ) {
@@ -171,7 +181,7 @@ public class UserAction extends BaseAction {
                     return SUCCESS;
                 }
             }
-            if(user.getPassword() != null){
+            if(user.getPassword() != null && !user.getPassword().equals("")){
                 user.setPassword(user.getPassword());
             }
             user.setEmail(user.getEmail());

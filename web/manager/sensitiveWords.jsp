@@ -51,7 +51,7 @@
                 <li role="presentation"><a href="bestTopic.action">精华帖请求</a></li>
                 <li role="presentation"><a href="getAllLimitUsers.action">封锁用户</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
-                <li role="presentation" class="active"><a href="getAllSensitiveWords">敏感词管理</a></li>
+                <li role="presentation" class="active"><a href="getAllSensitiveWords.action">敏感词管理</a></li>
             </ul>
         </div>
 

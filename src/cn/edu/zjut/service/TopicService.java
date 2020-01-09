@@ -35,4 +35,5 @@ public interface TopicService {
 
     //按类型查找帖
     public List<Topic> getTopicByType(int type,int pageIndex,int pageSize);
+
 }

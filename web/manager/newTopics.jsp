@@ -79,24 +79,24 @@
                 <ul class="pagination pagination-lg" style="float:right">
                     <s:if test="%{#request.page > 1}">
                         <li>
-                            <a href="<%=path%>/more.action?page=<s:property value="%{#request.page - 1}"/>">&laquo;</a>
+                            <a href="<%=path%>/more.action?page=<s:property value="%{#request.page - 1}"/>&&type=-1&&isAdmin=1">&laquo;</a>
                         </li>
                     </s:if>
                     <s:if test="%{#request.page <= 5}">
                         <s:iterator begin="1" end="5" var="i"><%--for循环--%>
                             <s:if test="%{#request.page == #i}"><%--如果与i 相等--%>
                                 <li class="active">
-                                    <a href="<%=path%>/more.action?page=<s:property value="%{#i}"/>">
+                                    <a href="<%=path%>/more.action?page=<s:property value="%{#i}"/>&&type=-1&&isAdmin=1">
                                         <s:property value="%{#i}"/>
                                     </a></li>
                             </s:if>
                             <s:else><%--与i不一样--%>
-                                <li><a href="<%=path%>/more.action?page=<s:property value="%{#i}"/>">
+                                <li><a href="<%=path%>/more.action?page=<s:property value="%{#i}"/>&&type=-1&&isAdmin=1">
                                     <s:property value="%{#i}"/>
                                 </a></li>
                             </s:else>
                             <s:if test="%{#i == 5}"><%--如果 i=5--%>
-                                <li><a href="<%=path%>/more.action?page=6">&raquo;</a></li>
+                                <li><a href="<%=path%>/more.action?page=6&&type=-1&&isAdmin=1">&raquo;</a></li>
                             </s:if>
                         </s:iterator>
                     </s:if>
@@ -104,19 +104,19 @@
                         <s:iterator value="{4,3,2,1,0}" var="i"><%--for循环--%>
                             <s:if test="%{#i == 0}"><%--如果i =0相等--%>
                                 <li class="active">
-                                    <a href="<%=path%>/more.action?page=<s:property value="%{#request.page - #i}"/>">
+                                    <a href="<%=path%>/more.action?page=<s:property value="%{#request.page - #i}"/>&&type=-1&&isAdmin=1">
                                         <s:property value="%{#request.page - #i}"/>
                                     </a></li>
                             </s:if>
                             <s:else>
                                 <li>
-                                    <a href="<%=path%>/more.action?page=<s:property value="%{#request.page - #i}"/>">
+                                    <a href="<%=path%>/more.action?page=<s:property value="%{#request.page - #i}"/>&&type=-1&&isAdmin=1">
                                         <s:property value="%{#request.page - #i}"/>
                                     </a></li>
                             </s:else>
                         </s:iterator>
                         <li>
-                            <a href="<%=path%>/more.action?page=<s:property value="%{#request.page + 1}"/>">&raquo;</a>
+                            <a href="<%=path%>/more.action?page=<s:property value="%{#request.page + 1}"/>&&type=-1&&isAdmin=1">&raquo;</a>
                         </li>
                     </s:if>
                 </ul>
