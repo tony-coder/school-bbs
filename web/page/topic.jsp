@@ -28,7 +28,7 @@
             <div class="col-md-2 post-head">
                 <!--<img src="img/tm-bg-slide-1.jpg" width="80px" height="80px" class="img-responsive img-circle">-->
                 <img alt="" class="img-responsive img-circle"
-                     src="<%=basePath%> + <s:property value="#request.topic.getUserByUserId().getUserAvatarUrl()"/>"
+                     src="<%=basePath%><s:property value="#request.topic.getUserByUserId().getUserAvatarUrl()"/>"
                      style="margin:1px 1px;width: 120px;height: 120px;margin: 30px auto;"/>
                 <span class="user-info">
                             <span class="badge" style="background: #f1c40f;margin-top: 5px">发帖者</span>

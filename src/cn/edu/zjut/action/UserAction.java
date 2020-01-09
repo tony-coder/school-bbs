@@ -2,6 +2,7 @@ package cn.edu.zjut.action;
 
 import cn.edu.zjut.po.SensitiveWord;
 import cn.edu.zjut.po.User;
+import cn.edu.zjut.service.BlackListService;
 import cn.edu.zjut.service.UserService;
 import cn.edu.zjut.util.MailUtil;
 import cn.edu.zjut.util.Utils;
@@ -24,6 +25,11 @@ public class UserAction extends BaseAction {
     //Spring 注入
     private UserService userService;
     private MailUtil mailUtil;
+    private BlackListService blackListService;
+
+    public void setBlackListService(BlackListService blackListService) {
+        this.blackListService = blackListService;
+    }
 
     public User getUser() {
         return user;
@@ -51,6 +57,7 @@ public class UserAction extends BaseAction {
     }
 
     public String register() throws Exception {
+
         if(!userService.checkUsername(user)){
             this.addFieldError("username", "该用户名包含敏感词");
             return "fail";
@@ -102,6 +109,10 @@ public class UserAction extends BaseAction {
     }
 
     public String login() throws Exception {
+        if(userService.checkBlackList(user)==1){
+            this.addFieldError("username", "该用户限制登陆，请联系管理员");
+            return "login";
+        }
         int result = 0;
         if (user.getPrivilege() == 0) {
             result = userService.login(user);
