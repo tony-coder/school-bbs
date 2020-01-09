@@ -60,13 +60,13 @@
 
                 <s:iterator value="%{#request.topics}" var="topic">
                     <div class="list-group-item">
-                        <a href="<%=path%>/pages/post.jsp?postId=<s:property value="%{#topic.id}"/>&&page=1"
+                        <a href="topicDetail.action?topicId=<s:property value="%{#topic.id}"/>&&page=1"
                            style="color:grey">
                             <h4 class="list-group-item-heading" style="color:black">[<s:property
                                     value="%{#topic.subSectionBySectionId.mainSectionByMainSectionId.title}"/>]</h4>
                             <s:property value="%{#topic.title}"/>
                         </a>
-                        <a href="<%=path%>/postdelete.action?postId=<s:property value="%{#topic.id}"/>"
+                        <a href="deleteTopic.action?topicId=<s:property value="%{#topic.id}"/>"
                            style="float: right">删除</a>
                         <p style="float: right;margin-right: 50px">浏览量:<s:property
                                 value="%{#topic.click}"/>&nbsp;评论量:<s:property

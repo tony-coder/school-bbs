@@ -195,5 +195,10 @@
             <result name="success">/manager/sensitiveWords.jsp</result>
         </action>
 
+        <!--删除帖子-->
+        <action name="deleteTopic" class="topicAction" method="delete">
+            <result name="success" type="redirectAction">more?type=-1&amp;page=1&amp;isAdmin=1</result>
+            <result name="error">/page/error.jsp</result>
+        </action>
     </package>
 </struts>

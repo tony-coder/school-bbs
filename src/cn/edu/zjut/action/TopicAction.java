@@ -52,7 +52,6 @@ public class TopicAction extends BaseAction {
 
     public String postDetail() throws Exception {
         if (topicId != null) {
-//            System.out.println("id"+topicId);
             Topic topic = topicService.getTopicById(topicId);
 
             if (pageNum == null) {
@@ -68,6 +67,17 @@ public class TopicAction extends BaseAction {
             getRequest().put("replies", replies);
             getRequest().put("pageNum", pageNum);
             return "success";
+        }
+        return "error";
+    }
+
+    public String delete() {
+        User user = (User) getSession().get("user");
+        if (topicId != null && user != null && user.getPrivilege() == 1) {
+            Topic topic = topicService.getTopicById(topicId);
+            if(topicService.deleteTopic(topic))
+                return "success";
+            return "error";
         }
         return "error";
     }

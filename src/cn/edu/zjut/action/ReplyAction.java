@@ -56,6 +56,11 @@ public class ReplyAction extends BaseAction {
         int level = blackListService.getLevel(user.getId());
         if (level == 4 || level == 2 || level == 1) {
             this.addFieldError("limit", "你已被管理员限制发表回复");
+            Topic topic = topicService.getTopicById(reply.getTopicByTopicId().getId());
+            List<Reply> replies = replyService.getReplies(topic.getId(), pageNum, 5);
+            getRequest().put("topic", topic);
+            getRequest().put("replies", replies);
+            getRequest().put("pageNum", pageNum);
             return "post";
         }
         Topic topic = topicService.getTopicById(reply.getTopicByTopicId().getId());

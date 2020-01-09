@@ -197,6 +197,7 @@
     <br>
 
     <div style="height: 200px;margin: 70px auto; width: 800px;">
+        <s:fielderror fieldName="limit"/>
         <form action="reply.action" method="post" onsubmit="return onUpdateContent();">
             <input type="hidden" name="reply.content" id="content">
             <input type="hidden" name="reply.topicByTopicId.id" value=<s:property value="#request.topic.id"/>>
@@ -206,7 +207,6 @@
                 <%--<textarea id="TextArea1" cols="20" rows="1" name="content" class="ckeditor"></textarea>--%>
                 <script id="ueditor" type="text/plain" style="height: 20px"></script>
             </div>
-            <s:fielderror fieldName="limit"/>
             <div style="float:right;margin: 60px auto">
                 <input type="submit" class="btn btn-primary" style="width: 60px;" value="回复"/>
             </div>

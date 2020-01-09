@@ -53,14 +53,6 @@ public class User {
         this.password = password;
     }
 
-    /*public String getRepassword() {
-        return repassword;
-    }
-
-    public void setRepassword(String repassword) {
-        this.repassword = repassword;
-    }*/
-
     public String getSex() {
         return sex;
     }

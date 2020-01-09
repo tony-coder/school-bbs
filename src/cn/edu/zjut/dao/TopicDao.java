@@ -19,7 +19,7 @@ public interface TopicDao {
 
     public List<Topic> getLatestTopic(int pageIndex, int pageSize);
 
-//    public void delete(User user);
+    public void delete(Topic topic) throws Exception;
 
 //    public Topic findById(int id);
 
@@ -31,8 +31,10 @@ public interface TopicDao {
 
     //按类型寻找帖
     public List<Topic> getTopicByType(int type, int pageIndex, int pageSize);
+
     //最热帖
     List<Topic> getHotTopic(int pageIndex, int pageSize);
+
     //最新帖
     List<Topic> getBestTopic(int pageIndex, int pageSize);
 }

@@ -122,7 +122,18 @@ public class TopicDaoImpl extends BaseHibernateDAO implements TopicDao {
         }
     }
 
-        @Override
+    @Override
+    public void delete(Topic topic) throws Exception {
+        try {
+            getSession().delete(topic);
+            log.debug("delete successful");
+        } catch (RuntimeException re) {
+            log.error("delete failed", re);
+            throw re;
+        }
+    }
+
+    @Override
     public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
         if (type > 0){//大于0寻找主板块下的所有topic
             String queryString = "from Topic topic where topic.subSectionBySectionId.mainSectionByMainSectionId.id= :id";

@@ -73,7 +73,7 @@
                             <dl class="form-group">
                                 <dt><%--@declare id="user_profile_location"--%><label
                                         for="user_profile_location">重复密码</label></dt>
-                                <dd><input id="confirm_password" class="form-control" name="user.confirm_password" size="30"
+                                <dd><input id="confirm_password" class="form-control" name="confirm_password" size="30"
                                            type="password" width="200px"/></dd>
                             </dl>
                             <p><input type="submit" value="确认修改"></p>

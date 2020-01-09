@@ -24,10 +24,13 @@ public interface TopicService {
     List<Topic> searchTopics(String keywords);
 
     //自动更新帖子浏览数
-    void autoIncreaseViewNum(Topic topic);
+    public void autoIncreaseViewNum(Topic topic);
 
     //自动更新帖子回复数
-    void autoIncreaseReply(Topic topic);
+    public void autoIncreaseReply(Topic topic);
+
+    //删除帖子
+    public boolean deleteTopic(Topic topic);
 
 
     //按类型查找帖

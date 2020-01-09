@@ -25,14 +25,14 @@
         </s:else>
     </a>
     <s:iterator value="%{#request.topics}" var="topic">
-    <a href="<%=path%>/page/topic.jsp?topicId=<s:property value="%{#topic.id}"/>&&page=1" class="list-group-item">
+    <a href="topicDetail.action?topicId=<s:property value="%{#topic.id}"/>&&pageNum=1" class="list-group-item">
         <h4 class="list-group-item-heading">
             <s:property value="#topic.getSubSectionBySectionId().getMainSectionByMainSectionId().getTitle()"/>
         </h4>
         <s:property value="%{#topic.getTitle()}"/>&nbsp;<s:property value="#topic.getSubSectionBySectionId().getTitle()"/>
         <p class="text-right post-date">点击量:<s:property value="%{#topic.getClick()}"/>&nbsp;
             评论量:<s:property value="%{#topic.getReplyNum()}"/>&nbsp;
-            发表日期:<s:property value="%{#topic.getCreateTime()}"/></p>
+            发表日期:<s:date name="%{#topic.getCreateTime()}"/></p>
     </a>
     </s:iterator>
 </div>

@@ -1,6 +1,5 @@
 package cn.edu.zjut.action;
 
-import cn.edu.zjut.po.SensitiveWord;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.BlackListService;
 import cn.edu.zjut.service.UserService;
@@ -12,7 +11,6 @@ import org.apache.struts2.ServletActionContext;
 import java.sql.Timestamp;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 public class UserAction extends BaseAction {
     //注册信息

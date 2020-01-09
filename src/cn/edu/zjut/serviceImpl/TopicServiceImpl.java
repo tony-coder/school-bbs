@@ -72,6 +72,18 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public boolean deleteTopic(Topic topic) {
+        try {
+            topicDao.delete(topic);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
+    @Override
     public List<Topic> getTopicByType(int type, int pageIndex, int pageSize) {
         return topicDao.getTopicByType(type,pageIndex,pageSize);
     }

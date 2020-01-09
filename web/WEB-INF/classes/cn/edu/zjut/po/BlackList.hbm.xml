@@ -13,7 +13,7 @@
         <property name="level" type="java.lang.Integer">
             <column name="level" sql-type="int(4)"/>
         </property>
-        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User" lazy="false">
+        <many-to-one name="userByUserId" class="cn.edu.zjut.po.User" fetch="select" not-null="true" lazy="false">
             <column name="user_id"/>
         </many-to-one>
     </class>
