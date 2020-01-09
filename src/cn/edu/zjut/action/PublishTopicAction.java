@@ -6,6 +6,7 @@ import cn.edu.zjut.po.Topic;
 import cn.edu.zjut.po.User;
 import cn.edu.zjut.service.BlackListService;
 import cn.edu.zjut.service.MainSectionService;
+import cn.edu.zjut.service.SubSectionService;
 import cn.edu.zjut.service.TopicService;
 
 import java.sql.Timestamp;
@@ -17,10 +18,13 @@ import java.util.List;
 
 public class PublishTopicAction extends BaseAction {
     private Topic topic;
+    private int mainForum;
+    private int subForum;
 
     //Spring注入
     private TopicService topicService;
     private MainSectionService mainSectionService;
+    private SubSectionService subSectionService;
     private BlackListService blackListService;
 
     public Topic getTopic() {
@@ -31,12 +35,32 @@ public class PublishTopicAction extends BaseAction {
         this.topic = topic;
     }
 
+    public int getMainForum() {
+        return mainForum;
+    }
+
+    public void setMainForum(int mainForum) {
+        this.mainForum = mainForum;
+    }
+
+    public int getSubForum() {
+        return subForum;
+    }
+
+    public void setSubForum(int subForum) {
+        this.subForum = subForum;
+    }
+
     public void setTopicService(TopicService topicService) {
         this.topicService = topicService;
     }
 
     public void setMainSectionService(MainSectionService mainSectionService) {
         this.mainSectionService = mainSectionService;
+    }
+
+    public void setSubSectionService(SubSectionService subSectionService) {
+        this.subSectionService = subSectionService;
     }
 
     public void setBlackListService(BlackListService blackListService) {
@@ -66,6 +90,8 @@ public class PublishTopicAction extends BaseAction {
             return "publish";
         }
         topic.setUserByUserId(user);
+        SubSection subSection = subSectionService.getSubSectionById(subForum);
+        topic.setSubSectionBySectionId(subSection);
         topic.setType(0);  //设置帖子类型，默认为普通帖
         topic.setReplyNum(0);
         topic.setCreateTime(new Timestamp(System.currentTimeMillis()));

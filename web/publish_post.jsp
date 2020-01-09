@@ -68,23 +68,25 @@
                 <td>
                     <div id="change" style="float:left">
                         <!-- <a class="btn-select" id="big_btn_select"> -->
-                        <select id="mainSection" name="topic.subSectionBySectionId.mainSectionId"
-                                onchange="onselected(this)">
-                            <%for (MainSection mainSection : mainSections) {%>
+                        <select id="mainforum" name="mainForum" onchange="onselected(this)">
+
+                            <%
+                                for (MainSection mainSection : mainSections) {
+                            %>
                             <option value=<%=mainSection.getId()%>><%=mainSection.getTitle() %>
                             </option>
-                            <%}%>
+                            <%} %>
                         </select>
-                        <%
-                            int i = 0;
-                            for (MainSection mainSection : mainSections) {  //不做处理的话会使得所有的下拉框都显示出来
+
+                        <% int i = 0;
+                            for (MainSection mainSection : mainSections) {
                                 if (i == 0) {
                         %>
-                        <select name="topic.subSectionBySectionId.id" id="<%=mainSection.getId()%>">
-                                <%}else{%>
+                        <select name="subForum" id="<%=mainSection.getId()%>">
+                                <%}else{ %>
                             <select name="sub" id="<%=mainSection.getId()%>" style="display: none;">
+                                <%} %>
                                 <%
-                                    }
                                     Set<SubSection> subSections = (Set<SubSection>) mainSection.getSubSectionsById();
                                     for (SubSection subSection : subSections) {
                                 %>
@@ -92,7 +94,7 @@
                                 </option>
                                 <%}%>
                             </select>
-                                <%i++;}%>
+                                <% i++;} %>
                     </div>
 
                     <span style="float:right;line-height:35px;">请选择所要发帖的版块</span>
@@ -125,7 +127,8 @@
 </script>
 
 <%--<script type="text/javascript" src="js/jquery.validate.min.js"></script>--%>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
 <script type="text/javascript">
     $(function () {
         $("#signupForm").validate();
@@ -136,7 +139,22 @@
     /*实现动态更新子版块*/
     function onselected(obj) {
 
-        var mainSection = document.getElementById("mainSection");
+        var mainForum = document.getElementById("mainforum");
+        console.log("size:"+mainForum.length);
+        for (var i =0; i<mainForum.length; i++){
+            console.log("main:"+mainForum[i].value);
+            var sub = document.getElementById(mainForum[i].value);
+            sub.style.display = "none";
+            sub.name="sub"
+            console.log("sub value:"+sub.value);
+        }
+        var value = obj.value;
+        console.log("select value:"+value);
+        var subForum = document.getElementById(value);
+        subForum.style.display = "";
+        subForum.name = "subForum"
+
+        /*var mainSection = document.getElementById("mainSection");
         console.log("size:" + mainSection.length);
         for (var i = 0; i < mainSection.length; i++) {
             // console.log("main:" + mainSection[i].value);
@@ -149,7 +167,7 @@
         // console.log("select value:" + value);
         var subSection = document.getElementById(value);
         subSection.style.display = "";
-        subSection.name = "sub";
+        subSection.name = "sub";*/
     }
 </script>
 </body>
