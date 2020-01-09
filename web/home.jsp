@@ -44,7 +44,7 @@
                             </div>
                         </div>
                         <div class="item">
-                            <img src="<%=basePath%>image/2.jpg" alt="...">
+                            <img src="<%=basePath%>img/2.jpg" alt="...">
                             <div class="carousel-caption">
                             </div>
                         </div>
