@@ -121,6 +121,7 @@
     <bean name="userService" class="cn.edu.zjut.serviceImpl.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
         <property name="sensitiveWordDao" ref="sensitiveWordDao"/>
+        <property name="blackListDao" ref="blackListDao"/>
     </bean>
     <bean name="adminService" class="cn.edu.zjut.serviceImpl.AdminServiceImpl">
         <property name="adminDAO" ref="adminDao"/>

@@ -43,7 +43,7 @@
                 <s:iterator value="#request.bestTopics">
                 <s:if test="state==1">
                 <div class="list-group-item">
-                    <a href="topicDetail.action?topicId=<s:property value="topicByTopicId.id"/> &&page=1"
+                    <a href="topicDetail.action?topicId=<s:property value="topicByTopicId.id"/>&&page=1"
                        style="color:grey">
                         <h4 class="list-group-item-heading" style="color:black">
                             [<s:property value="topicByTopicId.subSectionBySectionId.mainSectionByMainSectionId.title"/>

@@ -17,7 +17,8 @@
 <body>
 <%
     //页面每隔5秒自动链接至另一页面
-    response.setHeader("refresh", "5;URL=http://www.baidu.com");
+    String target = basePath + "homePage.action";
+    response.setHeader("refresh", "5;URL=" + target);
 %>
 ${message}
 <br>
