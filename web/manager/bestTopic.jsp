@@ -23,11 +23,11 @@
     <div class="row">
         <div class="col-xs-3">
             <ul class="nav nav-pills nav-stacked">
-                <li role="presentation" ><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
+                <li role="presentation"><a href="<%=path%>/manager/notice.jsp">发布公告</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/change_info.jsp">资料修改</a></li>
-                <li role="presentation" ><a href="more.action?type=-1&&page=1&&isAdmin=1">查看新帖</a></li>
+                <li role="presentation"><a href="more.action?type=-1&&page=1&&isAdmin=1">查看新帖</a></li>
                 <li role="presentation" class="active"><a href="bestTopic.action">精华帖请求</a></li>
-                <li role="presentation" ><a href="getAllLimitUsers.action">封锁用户</a></li>
+                <li role="presentation"><a href="getAllLimitUsers.action">封锁用户</a></li>
                 <li role="presentation"><a href="<%=path%>/manager/create_discuss.jsp">创建讨论区</a></li>
                 <li role="presentation"><a href="getAllSensitiveWords">敏感词管理</a></li>
             </ul>
@@ -54,8 +54,8 @@
                        style="float: right">&nbsp;拒绝</a>&nbsp;
                     <a href="replyapply.action?bestTopic.topicByTopicId.id=<s:property value="topicByTopicId.id"/>&&bestTopic.state=2"
                        style="float: right">&nbsp;同意</a>
-                    <p style="float: right;margin-right: 50px">评论量:<s:property value="topicByTopicId.replyNum"/> &nbsp;发表日期:<s:property
-                            value="topicByTopicId.updateTime"/>
+                    <p style="float: right;margin-right: 50px">评论量:<s:property value="topicByTopicId.replyNum"/> &nbsp;发表日期:<s:date
+                            name="topicByTopicId.updateTime"/>
                     </p>
                 </div>
                 </s:if>

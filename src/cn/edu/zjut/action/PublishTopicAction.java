@@ -118,15 +118,13 @@ public class PublishTopicAction extends BaseAction {
         }
         String title = topic.getTitle();
         String content = topic.getContent();
-        MainSection mainSection = topic.getSubSectionBySectionId().getMainSectionByMainSectionId();
-        SubSection subSection = topic.getSubSectionBySectionId();
+        SubSection subSection = subSectionService.getSubSectionById(subForum);
 
         topic = topicService.getTopicById(topic.getId());
         topic.setTitle(title);
         topic.setContent(content);
 
         topic.setSubSectionBySectionId(subSection);
-        topic.getSubSectionBySectionId().setMainSectionByMainSectionId(mainSection);
         topic.setUpdateTime(new Timestamp(System.currentTimeMillis()));  //更新帖子更新时间
 
         if (topicService.updateTopic(topic))
