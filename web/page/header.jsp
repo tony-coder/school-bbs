@@ -31,7 +31,12 @@
     <link href="css/post-detail.css" rel="stylesheet">
     <script type="text/javascript">
         function spanSubmit() {
-            document.fileForm.submit();
+            var keywords = document.fileForm.keywords;
+            if(keywords.value.length==0) {
+                alert("请输入搜索信息");
+            }else{
+                document.fileForm.submit();
+            }
         }
     </script>
 </head>

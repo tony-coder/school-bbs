@@ -10,8 +10,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html lang="en">
 <head>
     <title>搜索结果</title>
-    <%--<link href="css/bootstrap.min.css" rel="stylesheet">--%>
-    <%--<link href="css/search-result.css" rel="stylesheet"/>--%>
 
 
 </head>
@@ -30,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </s:else>
     </a>
        <s:iterator value="%{#request.topics}" id="topic">
-           <a href="<%=path%>/pages/post.jsp?postId=<s:property value="%{#topic.id}"/>&&page=1" class="list-group-item">
+           <a href="<%=path%>/topicDetail.action?topicId=<s:property value="%{#topic.id}"/>&&pageNum=1" class="list-group-item">
                <h4 class="list-group-item-heading">
                    [<s:property value="%{#topic.subSectionBySectionId.mainSectionByMainSectionId.title}"/>]
 

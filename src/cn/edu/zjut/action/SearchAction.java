@@ -25,6 +25,9 @@ public class SearchAction extends BaseAction{
     public String execute() throws Exception {
         System.out.println(keywords);
         List<Topic> topics = topicService.searchTopics(keywords);
+        if(topics.size()==0){
+            topics=null;
+        }
         getRequest().put("topics", topics);
         return SUCCESS;
     }

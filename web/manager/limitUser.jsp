@@ -71,9 +71,7 @@
                         </a>
                         <s:iterator value="%{#request.users}" var="user">
                             <div class="list-group-item" style="height: 60px;padding-top: 20px;">
-                                <a href="" style="color:grey">
                                     用户名:<s:property value="%{#user.username}"/>&nbsp;邮箱:<s:property value="%{#user.email}" />
-                                </a>
                                 <div class="btn-group" style="float: right;margin-right: 20px;">
                                     <button  type="button" class="btn btn-default dropdown-toggle btn-xs"
                                              data-toggle="dropdown">
@@ -122,9 +120,7 @@
                         </a>
                                 <s:iterator value="%{#request.limitUsers}" var="limitUser">
                                     <div class="list-group-item" style="height: 60px;padding-top: 20px;">
-                                        <a href="" style="color:grey">
                                             用户名:<s:property value="%{#limitUser.userByUserId.username}"/>&nbsp;邮箱:<s:property value="%{#limitUser.userByUserId.email}" />
-                                        </a>
                                         <div class="btn-group" style="float: right;margin-right: 20px;">
                                             <button  type="button" class="btn btn-default dropdown-toggle btn-xs"
                                                      data-toggle="dropdown">
