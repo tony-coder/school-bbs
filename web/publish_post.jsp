@@ -69,7 +69,6 @@
                     <div id="change" style="float:left">
                         <!-- <a class="btn-select" id="big_btn_select"> -->
                         <select id="mainforum" name="mainForum" onchange="onselected(this)">
-
                             <%
                                 for (MainSection mainSection : mainSections) {
                             %>
@@ -77,7 +76,6 @@
                             </option>
                             <%} %>
                         </select>
-
                         <% int i = 0;
                             for (MainSection mainSection : mainSections) {
                                 if (i == 0) {
@@ -96,7 +94,6 @@
                             </select>
                                 <% i++;} %>
                     </div>
-
                     <span style="float:right;line-height:35px;">请选择所要发帖的版块</span>
                 </td>
             </tr>
@@ -153,21 +150,6 @@
         var subForum = document.getElementById(value);
         subForum.style.display = "";
         subForum.name = "subForum"
-
-        /*var mainSection = document.getElementById("mainSection");
-        console.log("size:" + mainSection.length);
-        for (var i = 0; i < mainSection.length; i++) {
-            // console.log("main:" + mainSection[i].value);
-            var sub = document.getElementById(mainSection[i].value);
-            sub.style.display = "none";
-            sub.name = "topic.sectionId"
-            // console.log("sub value:" + sub.value);
-        }
-        var value = obj.value;
-        // console.log("select value:" + value);
-        var subSection = document.getElementById(value);
-        subSection.style.display = "";
-        subSection.name = "sub";*/
     }
 </script>
 </body>

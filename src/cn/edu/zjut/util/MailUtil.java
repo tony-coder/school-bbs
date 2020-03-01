@@ -1,7 +1,5 @@
 package cn.edu.zjut.util;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
-
 import javax.mail.Message;
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -27,7 +25,7 @@ public class MailUtil {
     private static final String MAIL_FROM_PASSWORD = "zjut163";//邮件发送人授权码
     private static final String MAIL_SUBJECT_REGISTER = "ZJUTBBS校园论坛【注册链接】";//邮件主题(注册链接)
     //    private static final String MAIL_SUBJECT_VERIFY_CODE = "testcode【邮箱验证码】";//邮件主题(邮箱验证码)
-    private static final String MAIL_ORGANIZATION = "zjut";//邮件组织
+    private static final String MAIL_ORGANIZATION = "bfx";//邮件组织
 //    private static final String MAIL_WEBSITE = "https://www.xxxx.com/";//组织主页
 //    private static final String MAIL_ORGANIZATION_LOGO = "https://wwwxxxx.com/xxxx/xxxlogo.jpg";//网站logo
 //    private static final String MAIL_ORGANIZATION_QRCODE = "https://www.xxxx.com/xxxx/xxx.jpg";//网站二维码图片
